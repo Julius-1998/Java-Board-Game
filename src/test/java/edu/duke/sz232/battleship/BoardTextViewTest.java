@@ -8,7 +8,7 @@ public class BoardTextViewTest {
 
     @Test
     public void test_display_empty_2by2() {
-        Board b1 = new BattleShipBoard(2, 2);
+        Board<Character> b1 = new BattleShipBoard<Character>(2, 2);
         BoardTextView view = new BoardTextView(b1);
         String expectedHeader = "  0|1\n";
         assertEquals(expectedHeader, view.makeHeader());
@@ -45,7 +45,7 @@ public class BoardTextViewTest {
      * @param expectedBody  the content of the board
      */
     private void emptyBoardHelper(int w, int h, String expectedHeader, String expectedBody) {
-        Board b1 = new BattleShipBoard(w, h);
+        Board<Character> b1 = new BattleShipBoard<Character>(w, h);
         BoardTextView view = new BoardTextView(b1);
         assertEquals(expectedHeader, view.makeHeader());
         String expected = expectedHeader + expectedBody + expectedHeader;

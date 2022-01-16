@@ -1,3 +1,4 @@
+package edu.duke.sz232.battleship;
 /**
  * This interface represents any type of Ship in our Battleship game. It is
  * generic in typename T, which is the type of information the view needs to
