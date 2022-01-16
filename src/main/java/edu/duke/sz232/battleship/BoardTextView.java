@@ -43,22 +43,28 @@ public class BoardTextView {
     /**
      * This makes the display of board
      * 
-     * @return The empty board string
+     * @return The string of board
      */
     public String displayMyOwnBoard() {
         StringBuilder ans = new StringBuilder("");
         ans.append(makeHeader());
-        for (int i = 0; i < toDisplay.getHeight(); i++) {
-            ans.append((char) ('A' + i));
+        for (int row = 0; row < toDisplay.getHeight(); row++) {
+            ans.append((char) ('A' + row));
             ans.append(" ");
-            for (int j = 0; j < toDisplay.getWidth() - 1; j++) {
-                ans.append(" |");
+            ans.append(toDisplay.whatIsAt(new Coordinate(row,0))==null?' ':toDisplay.whatIsAt(new Coordinate(row,0)));
+            for (int col = 1; col < toDisplay.getWidth(); col++) {
+                ans.append("|");
+                if(toDisplay.whatIsAt(new Coordinate(row,col))!=null){
+                    ans.append(toDisplay.whatIsAt(new Coordinate(row,col)));
+                }else{
+                    ans.append(' ');
+                }
             }
-            ans.append("  ");
-            ans.append((char) ('A' + i));
+            ans.append(" ");
+            ans.append((char) ('A' + row));
             ans.append('\n');
         }
         ans.append(makeHeader());
-        return ans.toString(); // this is a placeholder for the moment
+        return ans.toString(); 
     }
 }
