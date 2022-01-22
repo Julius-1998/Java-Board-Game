@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Coordinate.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ece651-sp22-sz232-battleship</a> &gt; <a href="index.source.html" class="el_package">edu.duke.sz232.battleship</a> &gt; <span class="el_source">Coordinate.java</span></div><h1>Coordinate.java</h1><pre class="source lang-java linenums">package edu.duke.sz232.battleship;
+
+public class Coordinate {
+    private final int row;
+    private final int column;
+
+<span class="fc" id="L7">    Coordinate(int row, int column) {</span>
+<span class="fc" id="L8">        this.row = row;</span>
+<span class="fc" id="L9">        this.column = column;</span>
+<span class="fc" id="L10">    }</span>
+
+    public int getRow() {
+<span class="fc" id="L13">        return row;</span>
+    }
+
+    public int getColumn() {
+<span class="fc" id="L17">        return column;</span>
+    }
+
+    /**
+     * @param o //The other Coordinate object to compare to
+     * @return boolean
+     */
+    @Override
+    public boolean equals(Object o) {
+<span class="fc bfc" id="L26" title="All 2 branches covered.">        if (o.getClass().equals(getClass())) {</span>
+<span class="fc" id="L27">            Coordinate c = (Coordinate) o;</span>
+<span class="fc bfc" id="L28" title="All 4 branches covered.">            return row == c.row &amp;&amp; column == c.column;</span>
+        }
+<span class="fc" id="L30">        return false;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L35">        return &quot;(&quot; + row + &quot;, &quot; + column + &quot;)&quot;;</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="fc" id="L40">        return toString().hashCode();</span>
+    }
+
+    /**
+     * Convert a string coordinate to int coordinate
+     * 
+     * @param descr
+     */
+<span class="fc" id="L48">    public Coordinate(String descr) {</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        if (descr.length() != 2) {</span>
+<span class="fc" id="L50">            throw new IllegalArgumentException(&quot;illegal coordinate to transform:&quot; + descr);</span>
+        }
+<span class="pc bpc" id="L52" title="1 of 8 branches missed.">        if (descr.charAt(0) &gt; 'z' || descr.charAt(0) &lt; 'A' || (descr.charAt(0) &gt; 'Z' &amp;&amp; descr.charAt(0) &lt; 'a')</span>
+<span class="fc bfc" id="L53" title="All 4 branches covered.">                || descr.charAt(1) &lt; '0' || descr.charAt(1) &gt; '9') {</span>
+<span class="fc" id="L54">            throw new IllegalArgumentException(&quot;illegal coordinate to transform:&quot; + descr);</span>
+        }
+<span class="pc bpc" id="L56" title="1 of 4 branches missed.">        if (descr.charAt(0) &gt;= 'a' &amp;&amp; descr.charAt(0) &lt;= 'z') {</span>
+<span class="fc" id="L57">            row = descr.charAt(0) - 'a';</span>
+        } else {
+<span class="fc" id="L59">            row = descr.charAt(0) - 'A';</span>
+
+        }
+<span class="fc" id="L62">        column = descr.charAt(1) - '0';</span>
+
+<span class="fc" id="L64">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

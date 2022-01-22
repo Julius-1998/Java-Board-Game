@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BasicShip.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ece651-sp22-sz232-battleship</a> &gt; <a href="index.source.html" class="el_package">edu.duke.sz232.battleship</a> &gt; <span class="el_source">BasicShip.java</span></div><h1>BasicShip.java</h1><pre class="source lang-java linenums">package edu.duke.sz232.battleship;
+
+import java.util.HashMap;
+
+public abstract class BasicShip&lt;T&gt; implements Ship&lt;T&gt;{
+    protected ShipDisplayInfo&lt;T&gt; myDisplayInfo;
+    protected HashMap&lt;Coordinate,Boolean&gt; myPieces;
+    
+
+<span class="fc" id="L10">    public BasicShip(Iterable&lt;Coordinate&gt; where,ShipDisplayInfo&lt;T&gt; myDisplayInfo){</span>
+<span class="fc" id="L11">        myPieces = new HashMap&lt;&gt;();</span>
+<span class="fc bfc" id="L12" title="All 2 branches covered.">        for (Coordinate coordinate : where) {</span>
+<span class="fc" id="L13">            myPieces.put(coordinate, false);</span>
+<span class="fc" id="L14">        }</span>
+<span class="fc" id="L15">        this.myDisplayInfo = myDisplayInfo;</span>
+<span class="fc" id="L16">    }</span>
+    @Override
+    public boolean occupiesCoordinates(Coordinate where) {
+<span class="fc" id="L19">        return myPieces.containsKey(where);</span>
+    }
+
+    @Override
+    public boolean isSunk() {
+        // TODO Auto-generated method stub
+<span class="nc" id="L25">        return false;</span>
+    }
+
+    @Override
+    public void recordHitAt(Coordinate where) {
+        // TODO Auto-generated method stub
+        
+<span class="nc" id="L32">    }</span>
+
+    @Override
+    public boolean wasHitAt(Coordinate where) {
+        // TODO Auto-generated method stub
+<span class="nc" id="L37">        return false;</span>
+    }
+
+    @Override
+    public T getDisplayInfoAt(Coordinate where) {
+        //TODO
+<span class="fc" id="L43">        return myDisplayInfo.getInfo(where, false);</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -49,16 +49,17 @@ public class Coordinate {
         if (descr.length() != 2) {
             throw new IllegalArgumentException("illegal coordinate to transform:" + descr);
         }
-        if (descr.charAt(0) < 'A' || descr.charAt(0) > 'Z' || descr.charAt(1) < '0' || descr.charAt(1) > '9') {
+        if (descr.charAt(0) > 'z' || descr.charAt(0) < 'A' || (descr.charAt(0) > 'Z' && descr.charAt(0) < 'a')
+                || descr.charAt(1) < '0' || descr.charAt(1) > '9') {
             throw new IllegalArgumentException("illegal coordinate to transform:" + descr);
         }
-        try {
-
+        if (descr.charAt(0) >= 'a' && descr.charAt(0) <= 'z') {
+            row = descr.charAt(0) - 'a';
+        } else {
             row = descr.charAt(0) - 'A';
-            column = descr.charAt(1) - '0';
-        } catch (Exception e) {
-            throw new IllegalArgumentException("illegal coordinate to transform:" + descr);
+
         }
+        column = descr.charAt(1) - '0';
 
     }
 

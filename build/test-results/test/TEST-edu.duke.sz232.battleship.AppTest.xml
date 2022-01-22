@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="edu.duke.sz232.battleship.AppTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2022-01-22T20:33:19" hostname="ubuntu" time="0.158">
+  <properties/>
+  <testcase name="test_main()" classname="edu.duke.sz232.battleship.AppTest" time="0.127"/>
+  <testcase name="test_do_one_placement()" classname="edu.duke.sz232.battleship.AppTest" time="0.023"/>
+  <testcase name="test_read_placement()" classname="edu.duke.sz232.battleship.AppTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

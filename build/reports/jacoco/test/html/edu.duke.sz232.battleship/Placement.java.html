@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Placement.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ece651-sp22-sz232-battleship</a> &gt; <a href="index.source.html" class="el_package">edu.duke.sz232.battleship</a> &gt; <span class="el_source">Placement.java</span></div><h1>Placement.java</h1><pre class="source lang-java linenums">package edu.duke.sz232.battleship;
+
+public class Placement {
+    private final Coordinate where;
+    private final char orientation;
+
+<span class="fc" id="L7">    Placement(Coordinate coordinate, char orientationChar) {</span>
+<span class="fc" id="L8">        this.where = coordinate;</span>
+<span class="fc bfc" id="L9" title="All 4 branches covered.">        if (orientationChar == 'V' || orientationChar == 'H') {</span>
+<span class="fc" id="L10">            orientation = orientationChar;</span>
+<span class="fc bfc" id="L11" title="All 4 branches covered.">        } else if (orientationChar == 'v' || orientationChar == 'h') {</span>
+<span class="fc" id="L12">            orientation = Character.toUpperCase(orientationChar);</span>
+        } else {
+<span class="fc" id="L14">            throw new IllegalArgumentException(&quot;Illegal orientation Char: &quot; + orientationChar);</span>
+        }
+<span class="fc" id="L16">    }</span>
+
+    public char getOrientation() {
+<span class="fc" id="L19">        return orientation;</span>
+    }
+
+    public Coordinate getWhere() {
+<span class="fc" id="L23">        return where;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L28">        return where.toString() + orientation;</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="fc" id="L33">        return toString().hashCode();</span>
+    }
+
+    @Override
+    public boolean equals(Object o){
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        if (o.getClass().equals(getClass())) {</span>
+<span class="fc" id="L39">            Placement p = (Placement) o;</span>
+<span class="fc bfc" id="L40" title="All 4 branches covered.">            return getWhere().equals(p.getWhere()) &amp;&amp;  getOrientation()== p.getOrientation();</span>
+        }
+<span class="fc" id="L42">        return false;</span>
+    }
+
+    /**
+     * Construct Placement by string
+     * 
+     * @param s
+     */
+<span class="fc" id="L50">    Placement(String s) {</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">        if (s.length() != 3) {</span>
+<span class="fc" id="L52">            throw new IllegalArgumentException(&quot;Illegal conversion from string to Coordinate: &quot; + s);</span>
+        }
+<span class="fc" id="L54">        where = new Coordinate(s.substring(0, 2));</span>
+<span class="fc" id="L55">        Character orientationChar = s.charAt(2);</span>
+<span class="fc bfc" id="L56" title="All 4 branches covered.">        if (orientationChar == 'V' || orientationChar == 'H') {</span>
+<span class="fc" id="L57">            orientation = orientationChar;</span>
+<span class="fc bfc" id="L58" title="All 4 branches covered.">        } else if (orientationChar == 'v' || orientationChar == 'h') {</span>
+<span class="fc" id="L59">            orientation = Character.toUpperCase(orientationChar);</span>
+        } else {
+<span class="fc" id="L61">            throw new IllegalArgumentException(&quot;Illegal conversion from string to Coordinate: &quot; + s);</span>
+        }
+<span class="fc" id="L63">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

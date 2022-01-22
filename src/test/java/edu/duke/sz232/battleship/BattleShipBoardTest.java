@@ -26,10 +26,10 @@ public class BattleShipBoardTest {
     BattleShipBoard<Character> b1 = new BattleShipBoard<>(20, 10);
     Character[][] board = new Character[10][20];
     checkWhatIsAtBoard(b1, board);
-    b1.tryAddShip(new BasicShip(new Coordinate(3,5)));
+    b1.tryAddShip(new RectangleShip<Character>(new Coordinate(3,5),'s','*'));
     board[3][5] = 's';
     checkWhatIsAtBoard(b1, board);
-    b1.tryAddShip(new BasicShip(new Coordinate(9,19)));
+    b1.tryAddShip(new RectangleShip<Character>(new Coordinate(9,19),'s','*'));
     board[9][19] = 's';
     checkWhatIsAtBoard(b1, board);
 

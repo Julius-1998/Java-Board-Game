@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BoardTextView.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ece651-sp22-sz232-battleship</a> &gt; <a href="index.source.html" class="el_package">edu.duke.sz232.battleship</a> &gt; <span class="el_source">BoardTextView.java</span></div><h1>BoardTextView.java</h1><pre class="source lang-java linenums">package edu.duke.sz232.battleship;
+
+/**
+ * This class handles textual display of
+ * a Board (i.e., converting it to a string to show
+ * to the user).
+ * It supports two ways to display the Board:
+ * one for the player's own board, and one for the
+ * enemy's board.
+ */
+public class BoardTextView {
+    /**
+     * The Board to display
+     */
+    private final Board&lt;Character&gt; toDisplay;
+
+    /**
+     * Constructs a BoardView, given the board it will display.
+     * 
+     * @param toDisplay is the Board to display
+     */
+<span class="fc" id="L22">    public BoardTextView(Board&lt;Character&gt; toDisplay) {</span>
+<span class="fc" id="L23">        this.toDisplay = toDisplay;</span>
+<span class="fc" id="L24">    }</span>
+
+    /**
+     * This makes the header line, e.g. 0|1|2|3|4\n
+     * 
+     * @return the String that is the header line for the given board
+     */
+    String makeHeader() {
+<span class="fc" id="L32">        StringBuilder ans = new StringBuilder(&quot;  &quot;); // README shows two spaces at</span>
+<span class="fc" id="L33">        String sep = &quot;&quot;; // start with nothing to separate, then switch to | to separate</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        for (int i = 0; i &lt; toDisplay.getWidth(); i++) {</span>
+<span class="fc" id="L35">            ans.append(sep);</span>
+<span class="fc" id="L36">            ans.append(i);</span>
+<span class="fc" id="L37">            sep = &quot;|&quot;;</span>
+        }
+<span class="fc" id="L39">        ans.append(&quot;\n&quot;);</span>
+<span class="fc" id="L40">        return ans.toString();</span>
+    }
+
+    /**
+     * This makes the display of board
+     * 
+     * @return The string of board
+     */
+    public String displayMyOwnBoard() {
+<span class="fc" id="L49">        StringBuilder ans = new StringBuilder(&quot;&quot;);</span>
+<span class="fc" id="L50">        ans.append(makeHeader());</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">        for (int row = 0; row &lt; toDisplay.getHeight(); row++) {</span>
+<span class="fc" id="L52">            ans.append((char) ('A' + row));</span>
+<span class="fc" id="L53">            ans.append(&quot; &quot;);</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">            ans.append(toDisplay.whatIsAt(new Coordinate(row,0))==null?' ':toDisplay.whatIsAt(new Coordinate(row,0)));</span>
+<span class="fc bfc" id="L55" title="All 2 branches covered.">            for (int col = 1; col &lt; toDisplay.getWidth(); col++) {</span>
+<span class="fc" id="L56">                ans.append(&quot;|&quot;);</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">                if(toDisplay.whatIsAt(new Coordinate(row,col))!=null){</span>
+<span class="fc" id="L58">                    ans.append(toDisplay.whatIsAt(new Coordinate(row,col)));</span>
+                }else{
+<span class="fc" id="L60">                    ans.append(' ');</span>
+                }
+            }
+<span class="fc" id="L63">            ans.append(&quot; &quot;);</span>
+<span class="fc" id="L64">            ans.append((char) ('A' + row));</span>
+<span class="fc" id="L65">            ans.append('\n');</span>
+        }
+<span class="fc" id="L67">        ans.append(makeHeader());</span>
+<span class="fc" id="L68">        return ans.toString(); </span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

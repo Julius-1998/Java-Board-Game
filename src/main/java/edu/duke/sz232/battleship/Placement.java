@@ -33,6 +33,15 @@ public class Placement {
         return toString().hashCode();
     }
 
+    @Override
+    public boolean equals(Object o){
+        if (o.getClass().equals(getClass())) {
+            Placement p = (Placement) o;
+            return getWhere().equals(p.getWhere()) &&  getOrientation()== p.getOrientation();
+        }
+        return false;
+    }
+
     /**
      * Construct Placement by string
      * 

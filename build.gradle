@@ -1,5 +1,7 @@
 plugins {
 	id 'java'
+	id 'application'
+	id 'jacoco'
 	//id 'eclipse' // optional (to generate Eclipse project files)
 	//id 'idea' // optional (to generate IntelliJ IDEA project files)
 }
@@ -18,5 +20,15 @@ test {
 	testLogging {
 		events "passed", "skipped", "failed"
 	}
+    finalizedBy jacocoTestReport
+
 }
 
+application {
+    // Define the main class for the application.
+    mainClassName = 'edu.duke.sz232.battleship.App'
+}
+
+run{
+	standardInput = System.in
+}

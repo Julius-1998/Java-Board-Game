@@ -1,14 +1,22 @@
 package edu.duke.sz232.battleship;
 
-public class BasicShip implements Ship<Character>{
+import java.util.HashMap;
 
-    private final Coordinate myLocation;
-    BasicShip (Coordinate where){
-        myLocation = where;
+public abstract class BasicShip<T> implements Ship<T>{
+    protected ShipDisplayInfo<T> myDisplayInfo;
+    protected HashMap<Coordinate,Boolean> myPieces;
+    
+
+    public BasicShip(Iterable<Coordinate> where,ShipDisplayInfo<T> myDisplayInfo){
+        myPieces = new HashMap<>();
+        for (Coordinate coordinate : where) {
+            myPieces.put(coordinate, false);
+        }
+        this.myDisplayInfo = myDisplayInfo;
     }
     @Override
     public boolean occupiesCoordinates(Coordinate where) {
-        return where.equals(myLocation);
+        return myPieces.containsKey(where);
     }
 
     @Override
@@ -30,9 +38,9 @@ public class BasicShip implements Ship<Character>{
     }
 
     @Override
-    public Character getDisplayInfoAt(Coordinate where) {
-        // TODO Auto-generated method stub
-        return 's';
+    public T getDisplayInfoAt(Coordinate where) {
+        //TODO
+        return myDisplayInfo.getInfo(where, false);
     }
     
 }

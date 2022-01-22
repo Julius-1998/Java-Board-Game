@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>App.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ece651-sp22-sz232-battleship</a> &gt; <a href="index.source.html" class="el_package">edu.duke.sz232.battleship</a> &gt; <span class="el_source">App.java</span></div><h1>App.java</h1><pre class="source lang-java linenums">package edu.duke.sz232.battleship;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.io.Reader;
+
+/**
+ * App
+ */
+public class App {
+    private final Board&lt;Character&gt; theBoard;
+    private final BoardTextView view;
+    private final BufferedReader inputReader;
+    private final PrintStream out;
+
+
+    public static void main(String[] args) throws IOException{
+<span class="fc" id="L20">        Board&lt;Character&gt; theBoard = new BattleShipBoard&lt;&gt;(10, 20);</span>
+<span class="fc" id="L21">        App app = new App(theBoard, new InputStreamReader(System.in), System.out);</span>
+<span class="fc" id="L22">        app.doOnePlacement();</span>
+        
+<span class="fc" id="L24">    }</span>
+<span class="fc" id="L25">    public App(Board&lt;Character&gt; theBoard, Reader inputSource, PrintStream out) {</span>
+<span class="fc" id="L26">        this.theBoard = theBoard;</span>
+<span class="fc" id="L27">        this.view = new BoardTextView(theBoard);</span>
+<span class="fc" id="L28">        this.inputReader = new BufferedReader(inputSource);</span>
+<span class="fc" id="L29">        this.out =out;</span>
+<span class="fc" id="L30">    }</span>
+
+    
+    /** 
+     * Read one certain replacement with prefix prompt
+     * @param prompt
+     * @return Placement
+     * @throws IOException
+     */ 
+    public Placement readPlacement(String prompt) throws IOException {
+<span class="fc" id="L40">        out.println(prompt);</span>
+<span class="fc" id="L41">        String s = inputReader.readLine();</span>
+<span class="fc" id="L42">        return new Placement(s);</span>
+    }
+
+    
+    /** 
+     * Make one replacement
+     * @throws IOException
+     */
+    public void doOnePlacement() throws IOException{
+<span class="fc" id="L51">        Placement placement = readPlacement(&quot;Where would you like to put your ship?&quot;);</span>
+<span class="fc" id="L52">        RectangleShip&lt;Character&gt; s = new RectangleShip&lt;Character&gt;(placement.getWhere(), 's', '*');</span>
+<span class="fc" id="L53">        theBoard.tryAddShip(s);</span>
+<span class="fc" id="L54">        out.println(view.displayMyOwnBoard());</span>
+<span class="fc" id="L55">    }</span>
+
+    
+    /** 
+     * @return BoardTextView
+     */
+    public BoardTextView getBoardTextView(){
+<span class="fc" id="L62">        return view;</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

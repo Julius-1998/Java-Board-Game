@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.LinkedList;
 
-import javax.swing.plaf.SliderUI;
 
 import org.junit.jupiter.api.Test;
 
@@ -45,8 +44,9 @@ public class BoardTextViewTest {
     @Test
     public void test_dispaly_single_basic_ship_3by5(){
         LinkedList<Ship<Character>> shipList = new LinkedList<>();
-        BasicShip b1 =  new BasicShip(new Coordinate(0, 1));
-        shipList.add(b1);
+
+        RectangleShip<Character> s = new RectangleShip<Character>( new Coordinate(0, 1), 's', '*');
+        shipList.add(s);
         String expectedBody = 
                 "A  |s|  A\n" +
                 "B  | |  B\n" +
@@ -59,9 +59,9 @@ public class BoardTextViewTest {
     @Test
     public void test_dispaly_multiple_basic_ship_3by5(){
         LinkedList<Ship<Character>> shipList = new LinkedList<>();
-        BasicShip b1 =  new BasicShip(new Coordinate(0, 1));
-        BasicShip b2 =  new BasicShip(new Coordinate(0, 0));
-        BasicShip b3 =  new BasicShip(new Coordinate(4, 2));
+        RectangleShip<Character> b1 = new RectangleShip<Character>( new Coordinate(0, 1), 's', '*');
+        RectangleShip<Character> b2 = new RectangleShip<Character>( new Coordinate(0, 0), 's', '*');
+        RectangleShip<Character> b3 = new RectangleShip<Character>( new Coordinate(4, 2), 's', '*');
         shipList.add(b1);
         shipList.add(b2);
         shipList.add(b3);
