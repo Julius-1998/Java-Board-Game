@@ -54,8 +54,8 @@ public class BoardTextView {
 <span class="fc bfc" id="L54" title="All 2 branches covered.">            ans.append(toDisplay.whatIsAt(new Coordinate(row,0))==null?' ':toDisplay.whatIsAt(new Coordinate(row,0)));</span>
 <span class="fc bfc" id="L55" title="All 2 branches covered.">            for (int col = 1; col &lt; toDisplay.getWidth(); col++) {</span>
 <span class="fc" id="L56">                ans.append(&quot;|&quot;);</span>
-<span class="fc bfc" id="L57" title="All 2 branches covered.">                if(toDisplay.whatIsAt(new Coordinate(row,col))!=null){</span>
-<span class="fc" id="L58">                    ans.append(toDisplay.whatIsAt(new Coordinate(row,col)));</span>
+<span class="pc bpc" id="L57" title="1 of 2 branches missed.">                if(toDisplay.whatIsAt(new Coordinate(row,col))!=null){</span>
+<span class="nc" id="L58">                    ans.append(toDisplay.whatIsAt(new Coordinate(row,col)));</span>
                 }else{
 <span class="fc" id="L60">                    ans.append(' ');</span>
                 }

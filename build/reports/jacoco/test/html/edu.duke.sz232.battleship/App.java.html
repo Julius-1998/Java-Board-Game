@@ -19,9 +19,9 @@ public class App {
     public static void main(String[] args) throws IOException{
 <span class="fc" id="L20">        Board&lt;Character&gt; theBoard = new BattleShipBoard&lt;&gt;(10, 20);</span>
 <span class="fc" id="L21">        App app = new App(theBoard, new InputStreamReader(System.in), System.out);</span>
-<span class="fc" id="L22">        app.doOnePlacement();</span>
+<span class="nc" id="L22">        app.doOnePlacement();</span>
         
-<span class="fc" id="L24">    }</span>
+<span class="nc" id="L24">    }</span>
 <span class="fc" id="L25">    public App(Board&lt;Character&gt; theBoard, Reader inputSource, PrintStream out) {</span>
 <span class="fc" id="L26">        this.theBoard = theBoard;</span>
 <span class="fc" id="L27">        this.view = new BoardTextView(theBoard);</span>
@@ -51,15 +51,15 @@ public class App {
 <span class="fc" id="L51">        Placement placement = readPlacement(&quot;Where would you like to put your ship?&quot;);</span>
 <span class="fc" id="L52">        RectangleShip&lt;Character&gt; s = new RectangleShip&lt;Character&gt;(placement.getWhere(), 's', '*');</span>
 <span class="fc" id="L53">        theBoard.tryAddShip(s);</span>
-<span class="fc" id="L54">        out.println(view.displayMyOwnBoard());</span>
-<span class="fc" id="L55">    }</span>
+<span class="nc" id="L54">        out.println(view.displayMyOwnBoard());</span>
+<span class="nc" id="L55">    }</span>
 
     
     /** 
      * @return BoardTextView
      */
     public BoardTextView getBoardTextView(){
-<span class="fc" id="L62">        return view;</span>
+<span class="nc" id="L62">        return view;</span>
     }
     
 }

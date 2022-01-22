@@ -48,10 +48,10 @@ public class BattleShipBoard&lt;T&gt; implements Board&lt;T&gt; {
      */
     public T whatIsAt(Coordinate where) {
 <span class="fc bfc" id="L50" title="All 2 branches covered.">        for (Ship&lt;T&gt; s : myShips) {</span>
-<span class="fc bfc" id="L51" title="All 2 branches covered.">            if (s.occupiesCoordinates(where)) {</span>
+<span class="pc bpc" id="L51" title="1 of 2 branches missed.">            if (s.occupiesCoordinates(where)) {</span>
 <span class="fc" id="L52">                return s.getDisplayInfoAt(where);</span>
             }
-<span class="fc" id="L54">        }</span>
+<span class="nc" id="L54">        }</span>
 <span class="fc" id="L55">        return null;</span>
     }
 }
