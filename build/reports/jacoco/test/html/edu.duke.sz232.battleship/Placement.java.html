@@ -4,42 +4,56 @@ public class Placement {
     private final Coordinate where;
     private final char orientation;
 
-<span class="fc" id="L7">    Placement(Coordinate coordinate, char orientationChar) {</span>
-<span class="fc" id="L8">        this.where = coordinate;</span>
-<span class="fc bfc" id="L9" title="All 4 branches covered.">        if (orientationChar == 'V' || orientationChar == 'H') {</span>
-<span class="fc" id="L10">            orientation = orientationChar;</span>
-<span class="fc bfc" id="L11" title="All 4 branches covered.">        } else if (orientationChar == 'v' || orientationChar == 'h') {</span>
-<span class="fc" id="L12">            orientation = Character.toUpperCase(orientationChar);</span>
+    /**
+     * Constructor for placement
+     * @param coordinate    The upper left coordinate of the placement
+     * @param orientationChar   H or V, indicates the orientation of the ship
+     */
+<span class="fc" id="L12">    Placement(Coordinate coordinate, char orientationChar) {</span>
+<span class="fc" id="L13">        this.where = coordinate;</span>
+<span class="fc bfc" id="L14" title="All 4 branches covered.">        if (orientationChar == 'V' || orientationChar == 'H') {</span>
+<span class="fc" id="L15">            orientation = orientationChar;</span>
+<span class="fc bfc" id="L16" title="All 4 branches covered.">        } else if (orientationChar == 'v' || orientationChar == 'h') {</span>
+<span class="fc" id="L17">            orientation = Character.toUpperCase(orientationChar);</span>
         } else {
-<span class="fc" id="L14">            throw new IllegalArgumentException(&quot;Illegal orientation Char: &quot; + orientationChar);</span>
+<span class="fc" id="L19">            throw new IllegalArgumentException(&quot;Illegal orientation Char: &quot; + orientationChar);</span>
         }
-<span class="fc" id="L16">    }</span>
+<span class="fc" id="L21">    }</span>
 
     public char getOrientation() {
-<span class="fc" id="L19">        return orientation;</span>
+<span class="fc" id="L24">        return orientation;</span>
     }
 
     public Coordinate getWhere() {
-<span class="fc" id="L23">        return where;</span>
+<span class="fc" id="L28">        return where;</span>
     }
 
+    /**
+     * return the coordinate's string and the orientation, like &quot;(1,2)V&quot;
+     */
     @Override
     public String toString() {
-<span class="fc" id="L28">        return where.toString() + orientation;</span>
+<span class="fc" id="L36">        return where.toString() + orientation;</span>
     }
 
+    /**
+     * Calling string's hashCode
+     */
     @Override
     public int hashCode() {
-<span class="fc" id="L33">        return toString().hashCode();</span>
+<span class="fc" id="L44">        return toString().hashCode();</span>
     }
 
+    /**
+     * Override equals method 
+     */
     @Override
     public boolean equals(Object o){
-<span class="fc bfc" id="L38" title="All 2 branches covered.">        if (o.getClass().equals(getClass())) {</span>
-<span class="fc" id="L39">            Placement p = (Placement) o;</span>
-<span class="fc bfc" id="L40" title="All 4 branches covered.">            return getWhere().equals(p.getWhere()) &amp;&amp;  getOrientation()== p.getOrientation();</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">        if (o.getClass().equals(getClass())) {</span>
+<span class="fc" id="L53">            Placement p = (Placement) o;</span>
+<span class="fc bfc" id="L54" title="All 4 branches covered.">            return getWhere().equals(p.getWhere()) &amp;&amp;  getOrientation()== p.getOrientation();</span>
         }
-<span class="fc" id="L42">        return false;</span>
+<span class="fc" id="L56">        return false;</span>
     }
 
     /**
@@ -47,20 +61,20 @@ public class Placement {
      * 
      * @param s
      */
-<span class="fc" id="L50">    Placement(String s) {</span>
-<span class="fc bfc" id="L51" title="All 2 branches covered.">        if (s.length() != 3) {</span>
-<span class="fc" id="L52">            throw new IllegalArgumentException(&quot;Illegal conversion from string to Coordinate: &quot; + s);</span>
+<span class="fc" id="L64">    Placement(String s) {</span>
+<span class="fc bfc" id="L65" title="All 2 branches covered.">        if (s.length() != 3) {</span>
+<span class="fc" id="L66">            throw new IllegalArgumentException(&quot;Illegal conversion from string to Coordinate: &quot; + s);</span>
         }
-<span class="fc" id="L54">        where = new Coordinate(s.substring(0, 2));</span>
-<span class="fc" id="L55">        Character orientationChar = s.charAt(2);</span>
-<span class="fc bfc" id="L56" title="All 4 branches covered.">        if (orientationChar == 'V' || orientationChar == 'H') {</span>
-<span class="fc" id="L57">            orientation = orientationChar;</span>
-<span class="fc bfc" id="L58" title="All 4 branches covered.">        } else if (orientationChar == 'v' || orientationChar == 'h') {</span>
-<span class="fc" id="L59">            orientation = Character.toUpperCase(orientationChar);</span>
+<span class="fc" id="L68">        where = new Coordinate(s.substring(0, 2));</span>
+<span class="fc" id="L69">        Character orientationChar = s.charAt(2);</span>
+<span class="fc bfc" id="L70" title="All 4 branches covered.">        if (orientationChar == 'V' || orientationChar == 'H') {</span>
+<span class="fc" id="L71">            orientation = orientationChar;</span>
+<span class="fc bfc" id="L72" title="All 4 branches covered.">        } else if (orientationChar == 'v' || orientationChar == 'h') {</span>
+<span class="fc" id="L73">            orientation = Character.toUpperCase(orientationChar);</span>
         } else {
-<span class="fc" id="L61">            throw new IllegalArgumentException(&quot;Illegal conversion from string to Coordinate: &quot; + s);</span>
+<span class="fc" id="L75">            throw new IllegalArgumentException(&quot;Illegal conversion from string to Coordinate: &quot; + s);</span>
         }
-<span class="fc" id="L63">    }</span>
+<span class="fc" id="L77">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

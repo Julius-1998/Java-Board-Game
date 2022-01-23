@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.duke.sz232.battleship.BoardTextViewTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2022-01-23T03:36:45" hostname="ubuntu" time="0.021">
+<testsuite name="edu.duke.sz232.battleship.BoardTextViewTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2022-01-23T20:11:18" hostname="ubuntu" time="0.034">
   <properties/>
-  <testcase name="test_dispaly_multiple_basic_ship_3by5()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.007"/>
+  <testcase name="test_dispaly_multiple_basic_ship_3by5()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.013"/>
   <testcase name="test_dispaly_single_basic_ship_3by5()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.001"/>
-  <testcase name="test_display_empty_2by2()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.008"/>
-  <testcase name="test_display_empty_3by2()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.001"/>
-  <testcase name="test_display_empty_3by5()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.0"/>
+  <testcase name="test_display_empty_2by2()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.009"/>
+  <testcase name="test_display_empty_3by2()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.002"/>
+  <testcase name="test_display_empty_3by5()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

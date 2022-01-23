@@ -4,14 +4,25 @@ public class SimpleShipDisplayInfo&lt;T&gt; implements ShipDisplayInfo&lt;T&gt; 
 
     T myData;
     T onHit;
-<span class="fc" id="L7">    public SimpleShipDisplayInfo(T myData,T onHit){</span>
-<span class="fc" id="L8">        this.myData = myData;</span>
-<span class="fc" id="L9">        this.onHit = onHit;</span>
-<span class="fc" id="L10">    }</span>
+
+    /**
+     * Initialize the display info for ship
+     * @param myData
+     * @param onHit
+     */
+<span class="fc" id="L13">    public SimpleShipDisplayInfo(T myData,T onHit){</span>
+<span class="fc" id="L14">        this.myData = myData;</span>
+<span class="fc" id="L15">        this.onHit = onHit;</span>
+<span class="fc" id="L16">    }</span>
     
+    /**
+     * Return the display info for a certain block
+     * @param where 
+     * @param hit True if the block is hit
+     */
     @Override
     public T getInfo(Coordinate where, boolean hit) {
-<span class="fc bfc" id="L14" title="All 2 branches covered.">        return hit?onHit:myData;</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        return hit?onHit:myData;</span>
     }
 
 }

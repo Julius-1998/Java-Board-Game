@@ -53,4 +53,5 @@ public class RectangleShipTest {
         rectangleShip.recordHitAt(c1);
         assertEquals(rectangleShip.wasHitAt(new Coordinate(4,4)),true);
     }
+
 }

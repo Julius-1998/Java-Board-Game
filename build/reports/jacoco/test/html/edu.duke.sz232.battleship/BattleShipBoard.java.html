@@ -6,53 +6,66 @@ public class BattleShipBoard&lt;T&gt; implements Board&lt;T&gt; {
     private final int width;
     private final int height;
     private final ArrayList&lt;Ship&lt;T&gt;&gt; myShips;
+    private final PlacementRuleChecker&lt;T&gt; placementChecker;
+
+    /**
+     * chain to the other constructor
+     * 
+     * @param w
+     * @param h
+     */
+    public BattleShipBoard(int w, int h) {
+<span class="fc" id="L18">        this(w, h, new InBoundsRuleChecker&lt;&gt;(null));</span>
+<span class="fc" id="L19">    }</span>
 
     /**
      * Constructs a BattleShipBoard with the specified width
      * and height
      * 
-     * @param w is the width of the newly constructed board.
-     * @param h is the height of the newly constructed board.
+     * @param w       is the width of the newly constructed board.
+     * @param h       is the height of the newly constructed board.
+     * @param checker is the placement rule checker
      * @throws IllegalArgumentException if the width or height are less than or
      *                                  equal to zero.
      */
-<span class="fc" id="L19">    public BattleShipBoard(int w, int h) {</span>
-<span class="fc bfc" id="L20" title="All 2 branches covered.">        if (w &lt;= 0) {</span>
-<span class="fc" id="L21">            throw new IllegalArgumentException(&quot;BattleShipBoard's width must be positive but is &quot; + w);</span>
+<span class="fc" id="L31">    public BattleShipBoard(int w, int h, PlacementRuleChecker&lt;T&gt; checker) {</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        if (w &lt;= 0) {</span>
+<span class="fc" id="L33">            throw new IllegalArgumentException(&quot;BattleShipBoard's width must be positive but is &quot; + w);</span>
         }
-<span class="fc bfc" id="L23" title="All 2 branches covered.">        if (h &lt;= 0) {</span>
-<span class="fc" id="L24">            throw new IllegalArgumentException(&quot;BattleShipBoard's height must be positive but is &quot; + h);</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        if (h &lt;= 0) {</span>
+<span class="fc" id="L36">            throw new IllegalArgumentException(&quot;BattleShipBoard's height must be positive but is &quot; + h);</span>
         }
-<span class="fc" id="L26">        this.width = w;</span>
-<span class="fc" id="L27">        this.height = h;</span>
-<span class="fc" id="L28">        this.myShips = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L29">    }</span>
+<span class="fc" id="L38">        this.width = w;</span>
+<span class="fc" id="L39">        this.height = h;</span>
+<span class="fc" id="L40">        this.myShips = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L41">        this.placementChecker = checker;</span>
+<span class="fc" id="L42">    }</span>
 
     public int getHeight() {
-<span class="fc" id="L32">        return height;</span>
+<span class="fc" id="L45">        return height;</span>
     }
 
     public int getWidth() {
-<span class="fc" id="L36">        return width;</span>
+<span class="fc" id="L49">        return width;</span>
     }
-    
+
     public boolean tryAddShip(Ship&lt;T&gt; toAdd) {
-<span class="fc" id="L40">        myShips.add(toAdd);</span>
-<span class="fc" id="L41">        return true;</span>
+<span class="fc" id="L53">        myShips.add(toAdd);</span>
+<span class="fc" id="L54">        return true;</span>
     }
-    
 
     /**
      * Figure out what is at where.
+     * 
      * @param where the place to be figured
      */
     public T whatIsAt(Coordinate where) {
-<span class="fc bfc" id="L50" title="All 2 branches covered.">        for (Ship&lt;T&gt; s : myShips) {</span>
-<span class="fc bfc" id="L51" title="All 2 branches covered.">            if (s.occupiesCoordinates(where)) {</span>
-<span class="fc" id="L52">                return s.getDisplayInfoAt(where);</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        for (Ship&lt;T&gt; s : myShips) {</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">            if (s.occupiesCoordinates(where)) {</span>
+<span class="fc" id="L65">                return s.getDisplayInfoAt(where);</span>
             }
-<span class="fc" id="L54">        }</span>
-<span class="fc" id="L55">        return null;</span>
+<span class="fc" id="L67">        }</span>
+<span class="fc" id="L68">        return null;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
