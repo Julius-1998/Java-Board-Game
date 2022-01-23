@@ -52,7 +52,7 @@ public class CoordinateTest {
       Coordinate c2 = new Coordinate("D5");
       assertEquals(3, c2.getRow());
       assertEquals(5, c2.getColumn());
-      Coordinate c3 = new Coordinate("A9");
+      Coordinate c3 = new Coordinate("a9");
       assertEquals(0, c3.getRow());
       assertEquals(9, c3.getColumn());
       Coordinate c4 = new Coordinate("Z0");
@@ -70,6 +70,8 @@ public class CoordinateTest {
       assertThrows(IllegalArgumentException.class, () -> new Coordinate("A:"));
       assertThrows(IllegalArgumentException.class, () -> new Coordinate("A"));
       assertThrows(IllegalArgumentException.class, () -> new Coordinate("A12"));
+      assertThrows(IllegalArgumentException.class, () -> new Coordinate("{{"));
+
     }
   
 }

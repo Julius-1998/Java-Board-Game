@@ -49,7 +49,7 @@ public class Coordinate {
 <span class="fc bfc" id="L49" title="All 2 branches covered.">        if (descr.length() != 2) {</span>
 <span class="fc" id="L50">            throw new IllegalArgumentException(&quot;illegal coordinate to transform:&quot; + descr);</span>
         }
-<span class="pc bpc" id="L52" title="1 of 8 branches missed.">        if (descr.charAt(0) &gt; 'z' || descr.charAt(0) &lt; 'A' || (descr.charAt(0) &gt; 'Z' &amp;&amp; descr.charAt(0) &lt; 'a')</span>
+<span class="fc bfc" id="L52" title="All 8 branches covered.">        if (descr.charAt(0) &gt; 'z' || descr.charAt(0) &lt; 'A' || (descr.charAt(0) &gt; 'Z' &amp;&amp; descr.charAt(0) &lt; 'a')</span>
 <span class="fc bfc" id="L53" title="All 4 branches covered.">                || descr.charAt(1) &lt; '0' || descr.charAt(1) &gt; '9') {</span>
 <span class="fc" id="L54">            throw new IllegalArgumentException(&quot;illegal coordinate to transform:&quot; + descr);</span>
         }

@@ -21,7 +21,7 @@ public class RectangleShipTest {
 
     @Test
     void testCheckCoordinateInThisShip(){
-        RectangleShip<Integer> rectangleShip = new RectangleShip<>(new Coordinate(3,4),1 ,5 , 1, 0);
+        RectangleShip<Integer> rectangleShip = new RectangleShip<>("testship",new Coordinate(3,4),1 ,5 , 1, 0);
         Coordinate c1 = new Coordinate(4,4);
         assertDoesNotThrow(()->rectangleShip.checkCoordinateInThisShip(c1));
         Coordinate c2 = new Coordinate(2,4);
@@ -30,7 +30,7 @@ public class RectangleShipTest {
 
     @Test
     void testIsSunk(){
-        RectangleShip<Integer> rectangleShip = new RectangleShip<>(new Coordinate(3,4),1 ,3 , 1, 0);
+        RectangleShip<Integer> rectangleShip = new RectangleShip<>("testship",new Coordinate(3,4),1 ,3 , 1, 0);
         rectangleShip.recordHitAt(new Coordinate(3,4));
         rectangleShip.recordHitAt(new Coordinate(4,4));
         assertEquals(rectangleShip.isSunk(), false);
@@ -39,11 +39,18 @@ public class RectangleShipTest {
     }
     @Test
     void testRecordHitAt(){
-        RectangleShip<Integer> rectangleShip = new RectangleShip<>(new Coordinate(3,4),1 ,5 , 1, 0);
+        RectangleShip<Integer> rectangleShip = new RectangleShip<>("testship",new Coordinate(3,4),1 ,5 , 1, 0);
         Coordinate c1 = new Coordinate(4,4);
         rectangleShip.recordHitAt(c1);
         assertEquals(rectangleShip.getDisplayInfoAt(c1), 0);
         Coordinate c2 = new Coordinate(3,4);
         assertEquals(rectangleShip.getDisplayInfoAt(c2), 1);
+    }
+    @Test
+    void testIsHitAt(){
+        RectangleShip<Integer> rectangleShip = new RectangleShip<>("testship",new Coordinate(3,4),1 ,5 , 1, 0);
+        Coordinate c1 = new Coordinate(4,4);
+        rectangleShip.recordHitAt(c1);
+        assertEquals(rectangleShip.wasHitAt(new Coordinate(4,4)),true);
     }
 }
