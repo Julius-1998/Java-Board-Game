@@ -4,6 +4,11 @@ public class Placement {
     private final Coordinate where;
     private final char orientation;
 
+    /**
+     * Constructor for placement
+     * @param coordinate    The upper left coordinate of the placement
+     * @param orientationChar   H or V, indicates the orientation of the ship
+     */
     Placement(Coordinate coordinate, char orientationChar) {
         this.where = coordinate;
         if (orientationChar == 'V' || orientationChar == 'H') {
@@ -23,16 +28,25 @@ public class Placement {
         return where;
     }
 
+    /**
+     * return the coordinate's string and the orientation, like "(1,2)V"
+     */
     @Override
     public String toString() {
         return where.toString() + orientation;
     }
 
+    /**
+     * Calling string's hashCode
+     */
     @Override
     public int hashCode() {
         return toString().hashCode();
     }
 
+    /**
+     * Override equals method 
+     */
     @Override
     public boolean equals(Object o){
         if (o.getClass().equals(getClass())) {

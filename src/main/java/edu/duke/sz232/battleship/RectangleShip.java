@@ -3,6 +3,8 @@ package edu.duke.sz232.battleship;
 import java.util.HashSet;
 
 public class RectangleShip<T> extends BasicShip<T> {
+    final String name;
+
     /**
      * Generate the coordinates of the ship by using the coordinate of upper left
      * corner
@@ -21,16 +23,33 @@ public class RectangleShip<T> extends BasicShip<T> {
         }
         return set;
     }
-
-    public RectangleShip(Coordinate upperLeft, int width, int height, ShipDisplayInfo<T> shipDisplayInfo) {
-        super(makeCoords(upperLeft, width, height), shipDisplayInfo);
+    /**
+     * Constructor for rectangleShip, calling super methods
+     * @param name  The name of the ship
+     * @param upperLeft The upperLeft coordinate of the ship
+     * @param width  ship's width
+     * @param height  ship's height
+     * @param myDisplayInfo Display info of the ship
+     */
+    public RectangleShip(String name, Coordinate upperLeft, int width, int height, ShipDisplayInfo<T> myDisplayInfo) {
+        super(makeCoords(upperLeft, width, height), myDisplayInfo);
+        this.name = name;
     }
 
-    public RectangleShip(Coordinate upperLeft, int width, int height, T data, T onHit) {
-        this(upperLeft, width, height, new SimpleShipDisplayInfo<T>(data, onHit));
+    /**
+     * Constructor for rectangleShip, calling other constructor
+     * 
+     */
+    public RectangleShip(String name, Coordinate upperLeft, int width, int height, T data, T onHit) {
+        this(name, upperLeft, width, height, new SimpleShipDisplayInfo<T>(data, onHit));
     }
 
     public RectangleShip(Coordinate upperLeft, T data, T onHit) {
-        this(upperLeft, 1, 1, data, onHit);
+        this("testship", upperLeft, 1, 1, data, onHit);
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
     }
 }
