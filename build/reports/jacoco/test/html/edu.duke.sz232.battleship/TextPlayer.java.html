@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TextPlayer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ece651-sp22-sz232-battleship</a> &gt; <a href="index.source.html" class="el_package">edu.duke.sz232.battleship</a> &gt; <span class="el_source">TextPlayer.java</span></div><h1>TextPlayer.java</h1><pre class="source lang-java linenums">package edu.duke.sz232.battleship;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.io.Reader;
+
+public class TextPlayer {
+    private final Board&lt;Character&gt; theBoard;
+    private final BoardTextView view;
+    private final BufferedReader inputReader;
+    private final PrintStream out;
+    private final AbstractShipFactory&lt;Character&gt; shipFactory;
+    String name;
+
+ 
+
+<span class="fc" id="L18">     public TextPlayer(String name, Board&lt;Character&gt; theBoard, Reader inputSource, PrintStream out, V1ShipFactory factory) {</span>
+<span class="fc" id="L19">        this.theBoard = theBoard;</span>
+<span class="fc" id="L20">        this.view = new BoardTextView(theBoard);</span>
+<span class="fc" id="L21">        this.inputReader = new BufferedReader(inputSource);</span>
+<span class="fc" id="L22">        this.out = out;</span>
+<span class="fc" id="L23">        this.name = name;</span>
+<span class="fc" id="L24">        this.shipFactory = factory;</span>
+<span class="fc" id="L25">    }</span>
+
+    /**
+     * Read one certain replacement with prefix prompt
+     * 
+     * @param prompt
+     * @return Placement
+     * @throws IOException
+     */
+    public Placement readPlacement(String prompt) throws IOException {
+<span class="fc" id="L35">        out.println(prompt);</span>
+<span class="fc" id="L36">        String s = inputReader.readLine();</span>
+<span class="fc" id="L37">        return new Placement(s);</span>
+    }
+
+    /**
+     * Make one replacement
+     * 
+     * @throws IOException
+     */
+    public void doOnePlacement() throws IOException {
+<span class="fc" id="L46">        Placement placement = readPlacement(&quot;Player &quot; + name + &quot; Where do you want to place a destroyer?&quot;);</span>
+<span class="fc" id="L47">        Ship&lt;Character&gt; s = shipFactory.makeDestroyer(placement);</span>
+<span class="fc" id="L48">        theBoard.tryAddShip(s);</span>
+<span class="fc" id="L49">        out.println(view.displayMyOwnBoard());</span>
+<span class="fc" id="L50">    }</span>
+
+    /**
+     * get the view of player
+     * @return the view of the board
+     */
+    public BoardTextView getBoardTextView(){
+<span class="fc" id="L57">        return view;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

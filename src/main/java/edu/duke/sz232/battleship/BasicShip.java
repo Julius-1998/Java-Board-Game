@@ -2,6 +2,10 @@ package edu.duke.sz232.battleship;
 
 import java.util.HashMap;
 
+/**
+ * This is the abstract class for all kinds of ships
+ * Realizing basic methods of ships
+ */
 public abstract class BasicShip<T> implements Ship<T> {
     protected ShipDisplayInfo<T> myDisplayInfo;
     protected HashMap<Coordinate, Boolean> myPieces;// false means not hit

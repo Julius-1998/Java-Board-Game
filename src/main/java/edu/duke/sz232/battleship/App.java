@@ -7,60 +7,32 @@ import java.io.PrintStream;
 import java.io.Reader;
 
 /**
- * App
+ * App where the program starts
  */
 public class App {
-    private final Board<Character> theBoard;
-    private final BoardTextView view;
-    private final BufferedReader inputReader;
-    private final PrintStream out;
-    private final AbstractShipFactory<Character> shipFactory;
-
+   
+    static TextPlayer player1;
+    static TextPlayer player2;
     public static void main(String[] args) throws IOException {
-        Board<Character> theBoard = new BattleShipBoard<>(10, 20);
-        App app = new App(theBoard, new InputStreamReader(System.in), System.out);
-        app.doOnePlacement();
-
+        Board<Character> b1 = new BattleShipBoard<Character>(10, 20);
+        Board<Character> b2 = new BattleShipBoard<Character>(10, 20);
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        V1ShipFactory factory = new V1ShipFactory();
+        player1 = new TextPlayer("A", b1, input, System.out, factory);
+        player2 = new TextPlayer("B", b2, input, System.out, factory);
+        doPlacementPhase();
     }
 
-    public App(Board<Character> theBoard, Reader inputSource, PrintStream out) {
-        this.theBoard = theBoard;
-        this.view = new BoardTextView(theBoard);
-        this.inputReader = new BufferedReader(inputSource);
-        this.out = out;
-        this.shipFactory = new V1ShipFactory();
+    public App(TextPlayer player1, TextPlayer player2){
+        App.player1 = player1;
+        App.player2 = player2;
     }
 
-    /**
-     * Read one certain replacement with prefix prompt
-     * 
-     * @param prompt
-     * @return Placement
-     * @throws IOException
-     */
-    public Placement readPlacement(String prompt) throws IOException {
-        out.println(prompt);
-        String s = inputReader.readLine();
-        return new Placement(s);
+    public static void doPlacementPhase()throws IOException{
+        player1.doPlacementPhase();
+        player2.doPlacementPhase();
     }
-
-    /**
-     * Make one replacement
-     * 
-     * @throws IOException
-     */
-    public void doOnePlacement() throws IOException {
-        Placement placement = readPlacement("Where would you like to put your ship?");
-        Ship<Character> s = shipFactory.makeDestroyer(placement);
-        theBoard.tryAddShip(s);
-        out.println(view.displayMyOwnBoard());
-    }
-
-    /**
-     * @return BoardTextView
-     */
-    public BoardTextView getBoardTextView() {
-        return view;
-    }
+   
+   
 
 }

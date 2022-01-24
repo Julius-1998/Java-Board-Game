@@ -1,5 +1,8 @@
 package edu.duke.sz232.battleship;
 
+/**
+ * This class represents te coordinate on the board
+ */
 public class Coordinate {
     private final int row;
     private final int column;
@@ -53,7 +56,7 @@ public class Coordinate {
                 || descr.charAt(1) < '0' || descr.charAt(1) > '9') {
             throw new IllegalArgumentException("illegal coordinate to transform:" + descr);
         }
-        if (descr.charAt(0) >= 'a' && descr.charAt(0) <= 'z') {
+        if (descr.charAt(0) >= 'a') {
             row = descr.charAt(0) - 'a';
         } else {
             row = descr.charAt(0) - 'A';

@@ -1,8 +1,6 @@
 package edu.duke.sz232.battleship;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +14,7 @@ public class InBoundsRuleCheckerTest {
         assertEquals(inBoundsRuleChecker.checkPlacement(s1,battleShipBoard),false);
         Ship<Character> s2 =  v1ShipFactory.makeBattleship(new Placement("A4H"));
         assertEquals(inBoundsRuleChecker.checkPlacement(s2,battleShipBoard),true);
-        Ship<Character> s3=  v1ShipFactory.makeDestroyer(new Placement("E5V"));
+        Ship<Character> s3=  v1ShipFactory.makeDestroyer(new Placement("F5V"));
         assertEquals(inBoundsRuleChecker.checkPlacement(s3,battleShipBoard),false);
 
 

@@ -56,7 +56,7 @@ public class V1ShipFactory implements AbstractShipFactory<Character> {
      */
     protected Ship<Character> createShip(Placement where, int w, int h, char letter, String name) {
         char c = where.getOrientation();
-        if (c == 'h' || c == 'H') {
+        if (c == 'H') {
             int temp = h;
             h = w;
             w = temp;

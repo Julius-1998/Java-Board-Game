@@ -7,61 +7,34 @@ import java.io.PrintStream;
 import java.io.Reader;
 
 /**
- * App
+ * App where the program starts
  */
 public class App {
-    private final Board&lt;Character&gt; theBoard;
-    private final BoardTextView view;
-    private final BufferedReader inputReader;
-    private final PrintStream out;
-    private final AbstractShipFactory&lt;Character&gt; shipFactory;
-
+   
+    static TextPlayer player1;
+    static TextPlayer player2;
     public static void main(String[] args) throws IOException {
-<span class="fc" id="L20">        Board&lt;Character&gt; theBoard = new BattleShipBoard&lt;&gt;(10, 20);</span>
-<span class="fc" id="L21">        App app = new App(theBoard, new InputStreamReader(System.in), System.out);</span>
-<span class="fc" id="L22">        app.doOnePlacement();</span>
+<span class="fc" id="L17">        Board&lt;Character&gt; b1 = new BattleShipBoard&lt;Character&gt;(10, 20);</span>
+<span class="fc" id="L18">        Board&lt;Character&gt; b2 = new BattleShipBoard&lt;Character&gt;(10, 20);</span>
+<span class="fc" id="L19">        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));</span>
+<span class="fc" id="L20">        V1ShipFactory factory = new V1ShipFactory();</span>
+<span class="fc" id="L21">        TextPlayer p1 = new TextPlayer(&quot;A&quot;, b1, input, System.out, factory);</span>
+<span class="fc" id="L22">        TextPlayer p2 = new TextPlayer(&quot;B&quot;, b2, input, System.out, factory);</span>
+<span class="fc" id="L23">        p1.doOnePlacement();</span>
+<span class="nc" id="L24">        p2.doOnePlacement();</span>
+<span class="nc" id="L25">    }</span>
 
-<span class="fc" id="L24">    }</span>
+<span class="nc" id="L27">    public App(TextPlayer player1, TextPlayer player2){</span>
+<span class="nc" id="L28">        App.player1 = player1;</span>
+<span class="nc" id="L29">        App.player2 = player2;</span>
+<span class="nc" id="L30">    }</span>
 
-<span class="fc" id="L26">    public App(Board&lt;Character&gt; theBoard, Reader inputSource, PrintStream out) {</span>
-<span class="fc" id="L27">        this.theBoard = theBoard;</span>
-<span class="fc" id="L28">        this.view = new BoardTextView(theBoard);</span>
-<span class="fc" id="L29">        this.inputReader = new BufferedReader(inputSource);</span>
-<span class="fc" id="L30">        this.out = out;</span>
-<span class="fc" id="L31">        this.shipFactory = new V1ShipFactory();</span>
-<span class="fc" id="L32">    }</span>
+    static void doOnePlacementPhase()throws IOException{
+<span class="nc" id="L33">        player1.doOnePlacement();</span>
+<span class="nc" id="L34">    }</span>
 
-    /**
-     * Read one certain replacement with prefix prompt
-     * 
-     * @param prompt
-     * @return Placement
-     * @throws IOException
-     */
-    public Placement readPlacement(String prompt) throws IOException {
-<span class="fc" id="L42">        out.println(prompt);</span>
-<span class="fc" id="L43">        String s = inputReader.readLine();</span>
-<span class="fc" id="L44">        return new Placement(s);</span>
-    }
-
-    /**
-     * Make one replacement
-     * 
-     * @throws IOException
-     */
-    public void doOnePlacement() throws IOException {
-<span class="fc" id="L53">        Placement placement = readPlacement(&quot;Where would you like to put your ship?&quot;);</span>
-<span class="fc" id="L54">        Ship&lt;Character&gt; s = shipFactory.makeDestroyer(placement);</span>
-<span class="fc" id="L55">        theBoard.tryAddShip(s);</span>
-<span class="fc" id="L56">        out.println(view.displayMyOwnBoard());</span>
-<span class="fc" id="L57">    }</span>
-
-    /**
-     * @return BoardTextView
-     */
-    public BoardTextView getBoardTextView() {
-<span class="fc" id="L63">        return view;</span>
-    }
+   
+   
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

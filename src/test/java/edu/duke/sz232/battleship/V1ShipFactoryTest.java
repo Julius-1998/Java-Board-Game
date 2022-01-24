@@ -1,7 +1,6 @@
 package edu.duke.sz232.battleship;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -38,9 +37,9 @@ public class V1ShipFactoryTest {
     @Test
     void testMakeSubmarine() {
         V1ShipFactory factory = new V1ShipFactory();
-        Placement v1_2 = new Placement(new Coordinate(1, 2), 'v');
-        Ship<Character> dst = factory.makeSubmarine(v1_2);
-        checkShip(dst, "Submarine", 's', new Coordinate(1, 2), new Coordinate(2, 2));
+        Placement h1_2 = new Placement(new Coordinate(1, 2), 'h');
+        Ship<Character> dst = factory.makeSubmarine(h1_2);
+        checkShip(dst, "Submarine", 's', new Coordinate(1, 2), new Coordinate(1, 3));
 
     }
 

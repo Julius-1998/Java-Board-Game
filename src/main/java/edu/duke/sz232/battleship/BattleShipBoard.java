@@ -2,6 +2,9 @@ package edu.duke.sz232.battleship;
 
 import java.util.ArrayList;
 
+/**
+ * Representing the board
+ */
 public class BattleShipBoard<T> implements Board<T> {
     private final int width;
     private final int height;
@@ -10,12 +13,12 @@ public class BattleShipBoard<T> implements Board<T> {
 
     /**
      * chain to the other constructor
-     * 
+     * initiate placementchecker as chained InBoundsRuleChecker and NoCollisionRuleChecker
      * @param w
      * @param h
      */
     public BattleShipBoard(int w, int h) {
-        this(w, h, new InBoundsRuleChecker<>(null));
+        this(w, h, new InBoundsRuleChecker<>(new NoCollisionRuleChecker<>(null)));
     }
 
     /**
@@ -48,10 +51,18 @@ public class BattleShipBoard<T> implements Board<T> {
     public int getWidth() {
         return width;
     }
-
+    /**
+     * Try adding a ship to the ship list
+     * Using the checker to determine there's no overlapping or outofboundry
+     * 
+     * @param toAdd the ship to be added
+     */
     public boolean tryAddShip(Ship<T> toAdd) {
-        myShips.add(toAdd);
-        return true;
+        if(placementChecker.checkPlacement(toAdd, this)){
+            myShips.add(toAdd);
+            return true;
+        }
+        return false;
     }
 
     /**
