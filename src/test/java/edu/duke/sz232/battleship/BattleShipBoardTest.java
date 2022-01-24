@@ -35,6 +35,15 @@ public class BattleShipBoardTest {
 
   }
 
+  @Test
+  public void test_invalid_add_ship(){
+    BattleShipBoard<Character> b1 = new BattleShipBoard<>(20, 10);
+    Character[][] board = new Character[10][20];
+    assertEquals(false,b1.tryAddShip(new RectangleShip<Character>("Testship",new Coordinate(3,5),10,10,'s','x')));
+    
+
+  }
+
   
   private <T> void checkWhatIsAtBoard(BattleShipBoard<T> b, T[][] expected){
     for(int i = 0;i < b.getWidth();i++){

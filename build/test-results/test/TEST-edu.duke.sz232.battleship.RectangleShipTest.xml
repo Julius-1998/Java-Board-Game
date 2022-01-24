@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.duke.sz232.battleship.RectangleShipTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2022-01-24T18:46:13" hostname="ubuntu" time="0.055">
+<testsuite name="edu.duke.sz232.battleship.RectangleShipTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2022-01-24T21:39:42" hostname="ubuntu" time="0.026">
   <properties/>
   <testcase name="testMakeCoords()" classname="edu.duke.sz232.battleship.RectangleShipTest" time="0.002"/>
-  <testcase name="testCheckCoordinateInThisShip()" classname="edu.duke.sz232.battleship.RectangleShipTest" time="0.024"/>
-  <testcase name="testRecordHitAt()" classname="edu.duke.sz232.battleship.RectangleShipTest" time="0.008"/>
+  <testcase name="testCheckCoordinateInThisShip()" classname="edu.duke.sz232.battleship.RectangleShipTest" time="0.009"/>
+  <testcase name="testRecordHitAt()" classname="edu.duke.sz232.battleship.RectangleShipTest" time="0.002"/>
   <testcase name="testIsSunk()" classname="edu.duke.sz232.battleship.RectangleShipTest" time="0.002"/>
-  <testcase name="testIsHitAt()" classname="edu.duke.sz232.battleship.RectangleShipTest" time="0.002"/>
+  <testcase name="testIsHitAt()" classname="edu.duke.sz232.battleship.RectangleShipTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

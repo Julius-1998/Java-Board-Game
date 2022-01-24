@@ -58,11 +58,11 @@ public class BattleShipBoard&lt;T&gt; implements Board&lt;T&gt; {
      * @param toAdd the ship to be added
      */
     public boolean tryAddShip(Ship&lt;T&gt; toAdd) {
-<span class="pc bpc" id="L61" title="1 of 2 branches missed.">        if(placementChecker.checkPlacement(toAdd, this)){</span>
+<span class="fc bfc" id="L61" title="All 2 branches covered.">        if(placementChecker.checkPlacement(toAdd, this)){</span>
 <span class="fc" id="L62">            myShips.add(toAdd);</span>
 <span class="fc" id="L63">            return true;</span>
         }
-<span class="nc" id="L65">        return false;</span>
+<span class="fc" id="L65">        return false;</span>
     }
 
     /**
