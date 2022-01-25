@@ -57,12 +57,13 @@ public class BattleShipBoard&lt;T&gt; implements Board&lt;T&gt; {
      * 
      * @param toAdd the ship to be added
      */
-    public boolean tryAddShip(Ship&lt;T&gt; toAdd) {
-<span class="fc bfc" id="L61" title="All 2 branches covered.">        if(placementChecker.checkPlacement(toAdd, this)){</span>
-<span class="fc" id="L62">            myShips.add(toAdd);</span>
-<span class="fc" id="L63">            return true;</span>
+    public String tryAddShip(Ship&lt;T&gt; toAdd) {
+<span class="fc" id="L61">        String err = placementChecker.checkPlacement(toAdd, this);</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">        if(err == null){</span>
+<span class="fc" id="L63">            myShips.add(toAdd);</span>
+<span class="fc" id="L64">            return null;</span>
         }
-<span class="fc" id="L65">        return false;</span>
+<span class="fc" id="L66">        return err;</span>
     }
 
     /**
@@ -71,12 +72,12 @@ public class BattleShipBoard&lt;T&gt; implements Board&lt;T&gt; {
      * @param where the place to be figured
      */
     public T whatIsAt(Coordinate where) {
-<span class="fc bfc" id="L74" title="All 2 branches covered.">        for (Ship&lt;T&gt; s : myShips) {</span>
-<span class="fc bfc" id="L75" title="All 2 branches covered.">            if (s.occupiesCoordinates(where)) {</span>
-<span class="fc" id="L76">                return s.getDisplayInfoAt(where);</span>
+<span class="fc bfc" id="L75" title="All 2 branches covered.">        for (Ship&lt;T&gt; s : myShips) {</span>
+<span class="fc bfc" id="L76" title="All 2 branches covered.">            if (s.occupiesCoordinates(where)) {</span>
+<span class="fc" id="L77">                return s.getDisplayInfoAt(where);</span>
             }
-<span class="fc" id="L78">        }</span>
-<span class="fc" id="L79">        return null;</span>
+<span class="fc" id="L79">        }</span>
+<span class="fc" id="L80">        return null;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

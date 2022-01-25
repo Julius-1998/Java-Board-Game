@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TextPlayer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ece651-sp22-sz232-battleship</a> &gt; <a href="index.source.html" class="el_package">edu.duke.sz232.battleship</a> &gt; <span class="el_source">TextPlayer.java</span></div><h1>TextPlayer.java</h1><pre class="source lang-java linenums">package edu.duke.sz232.battleship;
 
 import java.io.BufferedReader;
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -20,34 +21,34 @@ public class TextPlayer {
     final HashMap&lt;String, Function&lt;Placement, Ship&lt;Character&gt;&gt;&gt; shipCreationFns;
 
     public TextPlayer(String name, Board&lt;Character&gt; theBoard, BufferedReader inputSource, PrintStream out,
-<span class="fc" id="L23">            V1ShipFactory factory) {</span>
-<span class="fc" id="L24">        this.theBoard = theBoard;</span>
-<span class="fc" id="L25">        this.view = new BoardTextView(theBoard);</span>
-<span class="fc" id="L26">        this.inputReader = inputSource;</span>
-<span class="fc" id="L27">        this.out = out;</span>
-<span class="fc" id="L28">        this.name = name;</span>
-<span class="fc" id="L29">        this.shipFactory = factory;</span>
-<span class="fc" id="L30">        shipsToPlace = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L31">        shipCreationFns = new HashMap&lt;&gt;();</span>
-<span class="fc" id="L32">        setupShipCreationMap();</span>
-<span class="fc" id="L33">        setupShipCreationList();</span>
-<span class="fc" id="L34">    }</span>
+<span class="fc" id="L24">            V1ShipFactory factory) {</span>
+<span class="fc" id="L25">        this.theBoard = theBoard;</span>
+<span class="fc" id="L26">        this.view = new BoardTextView(theBoard);</span>
+<span class="fc" id="L27">        this.inputReader = inputSource;</span>
+<span class="fc" id="L28">        this.out = out;</span>
+<span class="fc" id="L29">        this.name = name;</span>
+<span class="fc" id="L30">        this.shipFactory = factory;</span>
+<span class="fc" id="L31">        shipsToPlace = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L32">        shipCreationFns = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L33">        setupShipCreationMap();</span>
+<span class="fc" id="L34">        setupShipCreationList();</span>
+<span class="fc" id="L35">    }</span>
 
     protected void setupShipCreationMap() {
-<span class="fc" id="L37">        shipCreationFns.put(&quot;Submarine&quot;, (p) -&gt; shipFactory.makeSubmarine(p));</span>
-<span class="fc" id="L38">        shipCreationFns.put(&quot;Destroyer&quot;, (p) -&gt; shipFactory.makeDestroyer(p));</span>
-<span class="fc" id="L39">        shipCreationFns.put(&quot;Battleship&quot;, (p) -&gt; shipFactory.makeBattleship(p));</span>
-<span class="fc" id="L40">        shipCreationFns.put(&quot;Carrier&quot;, (p) -&gt; shipFactory.makeCarrier(p));</span>
+<span class="fc" id="L38">        shipCreationFns.put(&quot;Submarine&quot;, (p) -&gt; shipFactory.makeSubmarine(p));</span>
+<span class="fc" id="L39">        shipCreationFns.put(&quot;Destroyer&quot;, (p) -&gt; shipFactory.makeDestroyer(p));</span>
+<span class="fc" id="L40">        shipCreationFns.put(&quot;Battleship&quot;, (p) -&gt; shipFactory.makeBattleship(p));</span>
+<span class="fc" id="L41">        shipCreationFns.put(&quot;Carrier&quot;, (p) -&gt; shipFactory.makeCarrier(p));</span>
 
-<span class="fc" id="L42">    }</span>
+<span class="fc" id="L43">    }</span>
 
     protected void setupShipCreationList() {
-<span class="fc" id="L45">        shipsToPlace.addAll(Collections.nCopies(2, &quot;Submarine&quot;));</span>
-<span class="fc" id="L46">        shipsToPlace.addAll(Collections.nCopies(3, &quot;Destroyer&quot;));</span>
-<span class="fc" id="L47">        shipsToPlace.addAll(Collections.nCopies(3, &quot;Battleship&quot;));</span>
-<span class="fc" id="L48">        shipsToPlace.addAll(Collections.nCopies(2, &quot;Carrier&quot;));</span>
+<span class="fc" id="L46">        shipsToPlace.addAll(Collections.nCopies(2, &quot;Submarine&quot;));</span>
+<span class="fc" id="L47">        shipsToPlace.addAll(Collections.nCopies(3, &quot;Destroyer&quot;));</span>
+<span class="fc" id="L48">        shipsToPlace.addAll(Collections.nCopies(3, &quot;Battleship&quot;));</span>
+<span class="fc" id="L49">        shipsToPlace.addAll(Collections.nCopies(2, &quot;Carrier&quot;));</span>
 
-<span class="fc" id="L50">    }</span>
+<span class="fc" id="L51">    }</span>
 
     /**
      * Read one certain replacement with prefix prompt
@@ -57,9 +58,12 @@ public class TextPlayer {
      * @throws IOException
      */
     public Placement readPlacement(String prompt) throws IOException {
-<span class="fc" id="L60">        out.println(prompt);</span>
-<span class="fc" id="L61">        String s = inputReader.readLine();</span>
-<span class="fc" id="L62">        return new Placement(s);</span>
+<span class="fc" id="L61">        out.println(prompt);</span>
+<span class="fc" id="L62">        String s = inputReader.readLine();</span>
+<span class="pc bpc" id="L63" title="1 of 2 branches missed.">        if (s == null) {</span>
+<span class="nc" id="L64">            throw new EOFException();</span>
+        }
+<span class="fc" id="L66">        return new Placement(s);</span>
     }
 
     /**
@@ -70,11 +74,11 @@ public class TextPlayer {
      * @throws IOException
      */
     public void doOnePlacement(String shipName, Function&lt;Placement, Ship&lt;Character&gt;&gt; createFn) throws IOException {
-<span class="fc" id="L73">        Placement p = readPlacement(&quot;Player &quot; + name + &quot; where do you want to place a &quot; + shipName + &quot;?&quot;);</span>
-<span class="fc" id="L74">        Ship&lt;Character&gt; s = createFn.apply(p);</span>
-<span class="fc" id="L75">        theBoard.tryAddShip(s);</span>
-<span class="fc" id="L76">        out.print(view.displayMyOwnBoard());</span>
-<span class="fc" id="L77">    }</span>
+<span class="fc" id="L77">        Placement p = readPlacement(&quot;Player &quot; + name + &quot; where do you want to place a &quot; + shipName + &quot;?&quot;);</span>
+<span class="fc" id="L78">        Ship&lt;Character&gt; s = createFn.apply(p);</span>
+<span class="fc" id="L79">        theBoard.tryAddShip(s);</span>
+<span class="fc" id="L80">        out.print(view.displayMyOwnBoard());</span>
+<span class="fc" id="L81">    }</span>
 
     /**
      * get the view of player
@@ -82,12 +86,12 @@ public class TextPlayer {
      * @return the view of the board
      */
     public BoardTextView getBoardTextView() {
-<span class="fc" id="L85">        return view;</span>
+<span class="fc" id="L89">        return view;</span>
     }
 
     public void doPlacementPhase() throws IOException {
-<span class="fc" id="L89">        view.displayMyOwnBoard();</span>
-<span class="fc" id="L90">        out.print(</span>
+<span class="fc" id="L93">        view.displayMyOwnBoard();</span>
+<span class="fc" id="L94">        out.print(</span>
                 &quot;--------------------------------------------------------------------------------\n&quot; +
                         &quot;Player A: you are going to place the following ships (which are all\n&quot; +
                         &quot;rectangular). For each ship, type the coordinate of the upper left\n&quot; +
@@ -100,12 +104,12 @@ public class TextPlayer {
                         &quot;3 \&quot;Battleships\&quot; that are 1x4\n&quot; +
                         &quot;2 \&quot;Carriers\&quot; that are 1x6\n&quot; +
                         &quot;--------------------------------------------------------------------------------\n&quot;);
-<span class="fc bfc" id="L103" title="All 2 branches covered.">        for (String shipName : shipsToPlace) {</span>
-<span class="fc" id="L104">            Function&lt;Placement, Ship&lt;Character&gt;&gt; f = shipCreationFns.get(shipName);</span>
-<span class="fc" id="L105">            doOnePlacement(shipName, f);</span>
-<span class="fc" id="L106">        }</span>
+<span class="fc bfc" id="L107" title="All 2 branches covered.">        for (String shipName : shipsToPlace) {</span>
+<span class="fc" id="L108">            Function&lt;Placement, Ship&lt;Character&gt;&gt; f = shipCreationFns.get(shipName);</span>
+<span class="fc" id="L109">            doOnePlacement(shipName, f);</span>
+<span class="fc" id="L110">        }</span>
 
-<span class="fc" id="L108">    }</span>
+<span class="fc" id="L112">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

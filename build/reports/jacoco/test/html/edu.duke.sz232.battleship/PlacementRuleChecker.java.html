@@ -5,27 +5,29 @@ public abstract class PlacementRuleChecker&lt;T&gt; {
 
     /**
      * To be checked in the subclasses
-     * @param theShip   The ship to be checked
-     * @param theBoard  The board to be checked
+     * 
+     * @param theShip  The ship to be checked
+     * @param theBoard The board to be checked
      * @return
      */
-    protected abstract boolean checkMyRule(Ship&lt;T&gt; theShip, Board&lt;T&gt; theBoard);
+    protected abstract String checkMyRule(Ship&lt;T&gt; theShip, Board&lt;T&gt; theBoard);
 
-<span class="fc" id="L14">    public PlacementRuleChecker(PlacementRuleChecker&lt;T&gt; next) {</span>
-<span class="fc" id="L15">        this.next = next;</span>
-<span class="fc" id="L16">    }</span>
+<span class="fc" id="L15">    public PlacementRuleChecker(PlacementRuleChecker&lt;T&gt; next) {</span>
+<span class="fc" id="L16">        this.next = next;</span>
+<span class="fc" id="L17">    }</span>
 
-    public boolean checkPlacement(Ship&lt;T&gt; theShip, Board&lt;T&gt; theBoard) {
+    public String checkPlacement(Ship&lt;T&gt; theShip, Board&lt;T&gt; theBoard) {
         // if we fail our own rule: stop the placement is not legal
-<span class="fc bfc" id="L20" title="All 2 branches covered.">        if (!checkMyRule(theShip, theBoard)) {</span>
-<span class="fc" id="L21">            return false;</span>
+<span class="fc" id="L21">        String err = checkMyRule(theShip, theBoard);</span>
+<span class="fc bfc" id="L22" title="All 2 branches covered.">        if (err != null) {</span>
+<span class="fc" id="L23">            return err;</span>
         }
         // other wise, ask the rest of the chain.
-<span class="fc bfc" id="L24" title="All 2 branches covered.">        if (next != null) {</span>
-<span class="fc" id="L25">            return next.checkPlacement(theShip, theBoard);</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">        if (next != null) {</span>
+<span class="fc" id="L27">            return next.checkPlacement(theShip, theBoard);</span>
         }
         // if there are no more rules, then the placement is legal
-<span class="fc" id="L28">        return true;</span>
+<span class="fc" id="L30">        return null;</span>
     }
 
 }

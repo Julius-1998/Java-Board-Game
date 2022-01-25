@@ -39,7 +39,7 @@ public class BattleShipBoardTest {
   public void test_invalid_add_ship(){
     BattleShipBoard<Character> b1 = new BattleShipBoard<>(20, 10);
     Character[][] board = new Character[10][20];
-    assertEquals(false,b1.tryAddShip(new RectangleShip<Character>("Testship",new Coordinate(3,5),10,10,'s','x')));
+    assertEquals("That placement is invalid: the ship goes off the bottom of the board.",b1.tryAddShip(new RectangleShip<Character>("Testship",new Coordinate(3,5),10,10,'s','x')));
     
 
   }

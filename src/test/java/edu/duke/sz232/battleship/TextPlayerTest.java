@@ -1,9 +1,11 @@
 package edu.duke.sz232.battleship;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.StringReader;
@@ -44,6 +46,22 @@ public class TextPlayerTest {
 
     }
 
+    @Test
+    void test_read_EOF() throws IOException {
+        StringReader sr = new StringReader("");
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(bytes, true);
+        Board<Character> b = new BattleShipBoard<Character>(10, 20);
+        TextPlayer player = new TextPlayer("A", b, new BufferedReader(sr), ps, new V1ShipFactory());
+        String prompt = "Please enter a location for a ship:";
+        Placement[] expected = new Placement[3];
+        expected[0] = new Placement(new Coordinate(1, 2), 'V');
+        expected[1] = new Placement(new Coordinate(2, 8), 'H');
+        expected[2] = new Placement(new Coordinate(0, 4), 'V');
+        for (int i = 0; i < expected.length; i++) {
+            assertThrows(EOFException.class, ()->player.readPlacement(prompt)) ;
+        }
+    }
     private TextPlayer createTextPlayer(int w, int h, String inputData, ByteArrayOutputStream bytes) {
         BufferedReader input = new BufferedReader(new StringReader(inputData));
         PrintStream output = new PrintStream(bytes, true);
