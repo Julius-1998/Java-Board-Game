@@ -18,7 +18,7 @@ public class NoCollisionRuleChecker<T> extends PlacementRuleChecker<T> {
     protected String checkMyRule(Ship<T> theShip, Board<T> theBoard) {
         Iterable<Coordinate> set = theShip.getCoordinates();
         for (Coordinate coordinate : set) {
-            if (theBoard.whatIsAt(coordinate) != null) {
+            if (theBoard.whatIsAtForSelf(coordinate) != null) {
                 return "That placement is invalide: the ship overlaps another ship";
             }
         }

@@ -42,9 +42,11 @@ public class RectangleShipTest {
         RectangleShip<Integer> rectangleShip = new RectangleShip<>("testship",new Coordinate(3,4),1 ,5 , 1, 0);
         Coordinate c1 = new Coordinate(4,4);
         rectangleShip.recordHitAt(c1);
-        assertEquals(rectangleShip.getDisplayInfoAt(c1), 0);
+        assertEquals(rectangleShip.getDisplayInfoAt(c1,true), 0);
+        assertEquals(rectangleShip.getDisplayInfoAt(c1,false), 1);
         Coordinate c2 = new Coordinate(3,4);
-        assertEquals(rectangleShip.getDisplayInfoAt(c2), 1);
+        assertEquals(rectangleShip.getDisplayInfoAt(c2,true), 1);
+        assertEquals(rectangleShip.getDisplayInfoAt(c2,false), null);
     }
     @Test
     void testIsHitAt(){

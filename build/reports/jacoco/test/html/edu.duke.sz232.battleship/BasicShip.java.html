@@ -9,6 +9,7 @@ import java.util.HashMap;
 public abstract class BasicShip&lt;T&gt; implements Ship&lt;T&gt; {
     protected ShipDisplayInfo&lt;T&gt; myDisplayInfo;
     protected HashMap&lt;Coordinate, Boolean&gt; myPieces;// false means not hit
+    protected ShipDisplayInfo&lt;T&gt; enemyDisplayInfo;
 
     /**
      * Constructor for BasicShip
@@ -16,13 +17,15 @@ public abstract class BasicShip&lt;T&gt; implements Ship&lt;T&gt; {
      * @param where         The set of coordinates of the ship
      * @param myDisplayInfo The display info of ship
      */
-<span class="fc" id="L19">    public BasicShip(Iterable&lt;Coordinate&gt; where, ShipDisplayInfo&lt;T&gt; myDisplayInfo) {</span>
-<span class="fc" id="L20">        myPieces = new HashMap&lt;&gt;();</span>
-<span class="fc bfc" id="L21" title="All 2 branches covered.">        for (Coordinate coordinate : where) {</span>
-<span class="fc" id="L22">            myPieces.put(coordinate, false);</span>
-<span class="fc" id="L23">        }</span>
-<span class="fc" id="L24">        this.myDisplayInfo = myDisplayInfo;</span>
-<span class="fc" id="L25">    }</span>
+    public BasicShip(Iterable&lt;Coordinate&gt; where, ShipDisplayInfo&lt;T&gt; myDisplayInfo,
+<span class="fc" id="L21">            ShipDisplayInfo&lt;T&gt; enemyDisplayInfo) {</span>
+<span class="fc" id="L22">        myPieces = new HashMap&lt;&gt;();</span>
+<span class="fc bfc" id="L23" title="All 2 branches covered.">        for (Coordinate coordinate : where) {</span>
+<span class="fc" id="L24">            myPieces.put(coordinate, false);</span>
+<span class="fc" id="L25">        }</span>
+<span class="fc" id="L26">        this.myDisplayInfo = myDisplayInfo;</span>
+<span class="fc" id="L27">        this.enemyDisplayInfo = enemyDisplayInfo;</span>
+<span class="fc" id="L28">    }</span>
 
     /**
      * Check if the coordinate is within the range of ship's coordinates
@@ -30,10 +33,10 @@ public abstract class BasicShip&lt;T&gt; implements Ship&lt;T&gt; {
      * @param c The coordiate to be determined
      */
     protected void checkCoordinateInThisShip(Coordinate c) {
-<span class="fc bfc" id="L33" title="All 2 branches covered.">        if (!myPieces.containsKey(c)) {</span>
-<span class="fc" id="L34">            throw new IllegalArgumentException(&quot;Accessing coordinate out of the ship&quot;);</span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        if (!myPieces.containsKey(c)) {</span>
+<span class="fc" id="L37">            throw new IllegalArgumentException(&quot;Accessing coordinate out of the ship&quot;);</span>
         }
-<span class="fc" id="L36">    }</span>
+<span class="fc" id="L39">    }</span>
 
     /**
      * Check if the ship contains certain coordinate
@@ -42,7 +45,7 @@ public abstract class BasicShip&lt;T&gt; implements Ship&lt;T&gt; {
      */
     @Override
     public boolean occupiesCoordinates(Coordinate where) {
-<span class="fc" id="L45">        return myPieces.containsKey(where);</span>
+<span class="fc" id="L48">        return myPieces.containsKey(where);</span>
     }
 
     /**
@@ -52,11 +55,11 @@ public abstract class BasicShip&lt;T&gt; implements Ship&lt;T&gt; {
      */
     @Override
     public boolean isSunk() {
-<span class="fc" id="L55">        boolean isSunk = true;</span>
-<span class="fc bfc" id="L56" title="All 2 branches covered.">        for (boolean b : myPieces.values()) {</span>
-<span class="fc" id="L57">            isSunk = isSunk &amp; b;</span>
-<span class="fc" id="L58">        }</span>
-<span class="fc" id="L59">        return isSunk;</span>
+<span class="fc" id="L58">        boolean isSunk = true;</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">        for (boolean b : myPieces.values()) {</span>
+<span class="fc" id="L60">            isSunk = isSunk &amp; b;</span>
+<span class="fc" id="L61">        }</span>
+<span class="fc" id="L62">        return isSunk;</span>
     }
 
     /**
@@ -66,9 +69,9 @@ public abstract class BasicShip&lt;T&gt; implements Ship&lt;T&gt; {
      */
     @Override
     public void recordHitAt(Coordinate where) {
-<span class="fc" id="L69">        checkCoordinateInThisShip(where);</span>
-<span class="fc" id="L70">        myPieces.put(where, true);</span>
-<span class="fc" id="L71">    }</span>
+<span class="fc" id="L72">        checkCoordinateInThisShip(where);</span>
+<span class="fc" id="L73">        myPieces.put(where, true);</span>
+<span class="fc" id="L74">    }</span>
 
     /**
      * Check if the ship's hit at coordinate
@@ -77,17 +80,21 @@ public abstract class BasicShip&lt;T&gt; implements Ship&lt;T&gt; {
      */
     @Override
     public boolean wasHitAt(Coordinate where) {
-<span class="fc" id="L80">        checkCoordinateInThisShip(where);</span>
-<span class="fc" id="L81">        return myPieces.get(where);</span>
+<span class="fc" id="L83">        checkCoordinateInThisShip(where);</span>
+<span class="fc" id="L84">        return myPieces.get(where);</span>
     }
 
     /**
      * Get the display info at certain coordinate
      */
     @Override
-    public T getDisplayInfoAt(Coordinate where) {
-<span class="fc" id="L89">        checkCoordinateInThisShip(where);</span>
-<span class="fc" id="L90">        return myDisplayInfo.getInfo(where, myPieces.get(where));</span>
+    public T getDisplayInfoAt(Coordinate where, boolean myShip) {
+<span class="fc" id="L92">        checkCoordinateInThisShip(where);</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">        if (myShip) {</span>
+<span class="fc" id="L94">            return myDisplayInfo.getInfo(where, myPieces.get(where));</span>
+        } else {
+<span class="fc" id="L96">            return enemyDisplayInfo.getInfo(where, myPieces.get(where));</span>
+        }
     }
 
     /**
@@ -97,7 +104,7 @@ public abstract class BasicShip&lt;T&gt; implements Ship&lt;T&gt; {
      */
     @Override
     public Iterable&lt;Coordinate&gt; getCoordinates() {
-<span class="fc" id="L100">        return myPieces.keySet();</span>
+<span class="fc" id="L107">        return myPieces.keySet();</span>
     }
 
 }

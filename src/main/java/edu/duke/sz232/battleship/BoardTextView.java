@@ -1,5 +1,7 @@
 package edu.duke.sz232.battleship;
 
+import java.util.function.Function;
+
 /**
  * This class handles textual display of
  * a Board (i.e., converting it to a string to show
@@ -45,17 +47,17 @@ public class BoardTextView {
      * 
      * @return The string of board
      */
-    public String displayMyOwnBoard() {
+    public String displayAnyBoard(Function<Coordinate, Character> getSquareFn) {
         StringBuilder ans = new StringBuilder("");
         ans.append(makeHeader());
         for (int row = 0; row < toDisplay.getHeight(); row++) {
             ans.append((char) ('A' + row));
             ans.append(" ");
-            ans.append(toDisplay.whatIsAt(new Coordinate(row,0))==null?' ':toDisplay.whatIsAt(new Coordinate(row,0)));
+            ans.append(getSquareFn.apply(new Coordinate(row,0))==null?' ':getSquareFn.apply(new Coordinate(row,0)));
             for (int col = 1; col < toDisplay.getWidth(); col++) {
                 ans.append("|");
-                if(toDisplay.whatIsAt(new Coordinate(row,col))!=null){
-                    ans.append(toDisplay.whatIsAt(new Coordinate(row,col)));
+                if(getSquareFn.apply(new Coordinate(row,col))!=null){
+                    ans.append(getSquareFn.apply(new Coordinate(row,col)));
                 }else{
                     ans.append(' ');
                 }
@@ -67,4 +69,13 @@ public class BoardTextView {
         ans.append(makeHeader());
         return ans.toString(); 
     }
+
+    public String displayMyOwnBoard() {
+        return displayAnyBoard((c)->toDisplay.whatIsAtForSelf(c));
+      }
+
+  public String displayEnemyBoard(){
+    return displayAnyBoard((c)->toDisplay.whatIsAtForEnemy(c));
+
+  }
 }

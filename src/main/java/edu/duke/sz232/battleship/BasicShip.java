@@ -9,6 +9,7 @@ import java.util.HashMap;
 public abstract class BasicShip<T> implements Ship<T> {
     protected ShipDisplayInfo<T> myDisplayInfo;
     protected HashMap<Coordinate, Boolean> myPieces;// false means not hit
+    protected ShipDisplayInfo<T> enemyDisplayInfo;
 
     /**
      * Constructor for BasicShip
@@ -16,12 +17,14 @@ public abstract class BasicShip<T> implements Ship<T> {
      * @param where         The set of coordinates of the ship
      * @param myDisplayInfo The display info of ship
      */
-    public BasicShip(Iterable<Coordinate> where, ShipDisplayInfo<T> myDisplayInfo) {
+    public BasicShip(Iterable<Coordinate> where, ShipDisplayInfo<T> myDisplayInfo,
+            ShipDisplayInfo<T> enemyDisplayInfo) {
         myPieces = new HashMap<>();
         for (Coordinate coordinate : where) {
             myPieces.put(coordinate, false);
         }
         this.myDisplayInfo = myDisplayInfo;
+        this.enemyDisplayInfo = enemyDisplayInfo;
     }
 
     /**
@@ -85,9 +88,13 @@ public abstract class BasicShip<T> implements Ship<T> {
      * Get the display info at certain coordinate
      */
     @Override
-    public T getDisplayInfoAt(Coordinate where) {
+    public T getDisplayInfoAt(Coordinate where, boolean myShip) {
         checkCoordinateInThisShip(where);
-        return myDisplayInfo.getInfo(where, myPieces.get(where));
+        if (myShip) {
+            return myDisplayInfo.getInfo(where, myPieces.get(where));
+        } else {
+            return enemyDisplayInfo.getInfo(where, myPieces.get(where));
+        }
     }
 
     /**

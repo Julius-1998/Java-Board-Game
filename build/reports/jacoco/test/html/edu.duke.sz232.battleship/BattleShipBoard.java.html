@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BattleShipBoard.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ece651-sp22-sz232-battleship</a> &gt; <a href="index.source.html" class="el_package">edu.duke.sz232.battleship</a> &gt; <span class="el_source">BattleShipBoard.java</span></div><h1>BattleShipBoard.java</h1><pre class="source lang-java linenums">package edu.duke.sz232.battleship;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * Representing the board
@@ -10,16 +11,19 @@ public class BattleShipBoard&lt;T&gt; implements Board&lt;T&gt; {
     private final int height;
     private final ArrayList&lt;Ship&lt;T&gt;&gt; myShips;
     private final PlacementRuleChecker&lt;T&gt; placementChecker;
+    private final HashSet&lt;Coordinate&gt; enemyMisses;
 
     /**
      * chain to the other constructor
-     * initiate placementchecker as chained InBoundsRuleChecker and NoCollisionRuleChecker
+     * initiate placementchecker as chained InBoundsRuleChecker and
+     * NoCollisionRuleChecker
+     * 
      * @param w
      * @param h
      */
     public BattleShipBoard(int w, int h) {
-<span class="fc" id="L21">        this(w, h, new InBoundsRuleChecker&lt;&gt;(new NoCollisionRuleChecker&lt;&gt;(null)));</span>
-<span class="fc" id="L22">    }</span>
+<span class="fc" id="L25">        this(w, h, new InBoundsRuleChecker&lt;&gt;(new NoCollisionRuleChecker&lt;&gt;(null)));</span>
+<span class="fc" id="L26">    }</span>
 
     /**
      * Constructs a BattleShipBoard with the specified width
@@ -31,26 +35,28 @@ public class BattleShipBoard&lt;T&gt; implements Board&lt;T&gt; {
      * @throws IllegalArgumentException if the width or height are less than or
      *                                  equal to zero.
      */
-<span class="fc" id="L34">    public BattleShipBoard(int w, int h, PlacementRuleChecker&lt;T&gt; checker) {</span>
-<span class="fc bfc" id="L35" title="All 2 branches covered.">        if (w &lt;= 0) {</span>
-<span class="fc" id="L36">            throw new IllegalArgumentException(&quot;BattleShipBoard's width must be positive but is &quot; + w);</span>
+<span class="fc" id="L38">    public BattleShipBoard(int w, int h, PlacementRuleChecker&lt;T&gt; checker) {</span>
+<span class="fc bfc" id="L39" title="All 2 branches covered.">        if (w &lt;= 0) {</span>
+<span class="fc" id="L40">            throw new IllegalArgumentException(&quot;BattleShipBoard's width must be positive but is &quot; + w);</span>
         }
-<span class="fc bfc" id="L38" title="All 2 branches covered.">        if (h &lt;= 0) {</span>
-<span class="fc" id="L39">            throw new IllegalArgumentException(&quot;BattleShipBoard's height must be positive but is &quot; + h);</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">        if (h &lt;= 0) {</span>
+<span class="fc" id="L43">            throw new IllegalArgumentException(&quot;BattleShipBoard's height must be positive but is &quot; + h);</span>
         }
-<span class="fc" id="L41">        this.width = w;</span>
-<span class="fc" id="L42">        this.height = h;</span>
-<span class="fc" id="L43">        this.myShips = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L44">        this.placementChecker = checker;</span>
-<span class="fc" id="L45">    }</span>
+<span class="fc" id="L45">        this.width = w;</span>
+<span class="fc" id="L46">        this.height = h;</span>
+<span class="fc" id="L47">        this.myShips = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L48">        this.placementChecker = checker;</span>
+<span class="fc" id="L49">        this.enemyMisses = new HashSet&lt;&gt;();</span>
+<span class="fc" id="L50">    }</span>
 
     public int getHeight() {
-<span class="fc" id="L48">        return height;</span>
+<span class="fc" id="L53">        return height;</span>
     }
 
     public int getWidth() {
-<span class="fc" id="L52">        return width;</span>
+<span class="fc" id="L57">        return width;</span>
     }
+
     /**
      * Try adding a ship to the ship list
      * Using the checker to determine there's no overlapping or outofboundry
@@ -58,12 +64,12 @@ public class BattleShipBoard&lt;T&gt; implements Board&lt;T&gt; {
      * @param toAdd the ship to be added
      */
     public String tryAddShip(Ship&lt;T&gt; toAdd) {
-<span class="fc" id="L61">        String err = placementChecker.checkPlacement(toAdd, this);</span>
-<span class="fc bfc" id="L62" title="All 2 branches covered.">        if(err == null){</span>
-<span class="fc" id="L63">            myShips.add(toAdd);</span>
-<span class="fc" id="L64">            return null;</span>
+<span class="fc" id="L67">        String err = placementChecker.checkPlacement(toAdd, this);</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">        if (err == null) {</span>
+<span class="fc" id="L69">            myShips.add(toAdd);</span>
+<span class="fc" id="L70">            return null;</span>
         }
-<span class="fc" id="L66">        return err;</span>
+<span class="fc" id="L72">        return err;</span>
     }
 
     /**
@@ -71,13 +77,52 @@ public class BattleShipBoard&lt;T&gt; implements Board&lt;T&gt; {
      * 
      * @param where the place to be figured
      */
-    public T whatIsAt(Coordinate where) {
-<span class="fc bfc" id="L75" title="All 2 branches covered.">        for (Ship&lt;T&gt; s : myShips) {</span>
-<span class="fc bfc" id="L76" title="All 2 branches covered.">            if (s.occupiesCoordinates(where)) {</span>
-<span class="fc" id="L77">                return s.getDisplayInfoAt(where);</span>
+    public T whatIsAtForSelf(Coordinate where) {
+<span class="fc" id="L81">        return whatIsAt(where, true);</span>
+    }
+
+    /**
+     * Figure out what is at
+     * 
+     * @param where
+     * @return
+     */
+    public T whatIsAtForEnemy(Coordinate where) {
+<span class="fc" id="L91">        return whatIsAt(where, false);</span>
+    }
+
+    /**
+     * Figure out what is at where.
+     * 
+     * @param where the place to be figured
+     */
+    protected T whatIsAt(Coordinate where, boolean isSelf) {
+<span class="fc bfc" id="L100" title="All 2 branches covered.">        for (Ship&lt;T&gt; s : myShips) {</span>
+<span class="fc bfc" id="L101" title="All 2 branches covered.">            if (s.occupiesCoordinates(where)) {</span>
+<span class="fc" id="L102">                return s.getDisplayInfoAt(where, isSelf);</span>
             }
-<span class="fc" id="L79">        }</span>
-<span class="fc" id="L80">        return null;</span>
+<span class="fc" id="L104">        }</span>
+<span class="fc" id="L105">        return null;</span>
+    }
+
+    /**
+     * Got fire at a certain coordinate
+     * 
+     * @param c The coordinate to be fired at
+     * @return the ship got fired at or null if it's a miss
+     */
+    public Ship&lt;T&gt; fireAt(Coordinate c) {
+<span class="pc bpc" id="L115" title="1 of 2 branches missed.">        for (Ship&lt;T&gt; ship : myShips) {</span>
+<span class="fc" id="L116">            Iterable&lt;Coordinate&gt; coordinates = ship.getCoordinates();</span>
+<span class="pc bpc" id="L117" title="1 of 2 branches missed.">            for (Coordinate coordinate : coordinates) {</span>
+<span class="fc bfc" id="L118" title="All 2 branches covered.">                if (coordinate.equals(c)) {</span>
+<span class="fc" id="L119">                    ship.recordHitAt(c);</span>
+<span class="fc" id="L120">                    return ship;</span>
+                }
+<span class="fc" id="L122">            }</span>
+<span class="nc" id="L123">        }</span>
+<span class="nc" id="L124">        enemyMisses.add(c);</span>
+<span class="nc" id="L125">        return null;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

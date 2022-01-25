@@ -8,22 +8,22 @@ public class BattleShipBoardTest {
 
   @Test
   public void test_width_and_height() {
-    Board<Character> b1 = new BattleShipBoard<Character>(20, 10);
+    Board<Character> b1 = new BattleShipBoard<Character>(20, 10,'X');
     assertEquals(10, b1.getHeight());
     assertEquals(20, b1.getWidth());
   }
 
   @Test
   public void test_invalid_dimensions() {
-    assertThrows(IllegalArgumentException.class, () -> new BattleShipBoard<Character>(10, 0));
-    assertThrows(IllegalArgumentException.class, () -> new BattleShipBoard<Character>(0, 20));
-    assertThrows(IllegalArgumentException.class, () -> new BattleShipBoard<Character>(10, -5));
-    assertThrows(IllegalArgumentException.class, () -> new BattleShipBoard<Character>(-8, 20));
+    assertThrows(IllegalArgumentException.class, () -> new BattleShipBoard<Character>(10, 0,'X'));
+    assertThrows(IllegalArgumentException.class, () -> new BattleShipBoard<Character>(0, 20,'X'));
+    assertThrows(IllegalArgumentException.class, () -> new BattleShipBoard<Character>(10, -5,'X'));
+    assertThrows(IllegalArgumentException.class, () -> new BattleShipBoard<Character>(-8, 20,'X'));
   }
 
   @Test
   public void test_add_ship(){
-    BattleShipBoard<Character> b1 = new BattleShipBoard<>(20, 10);
+    BattleShipBoard<Character> b1 = new BattleShipBoard<>(20, 10,'X');
     Character[][] board = new Character[10][20];
     checkWhatIsAtBoard(b1, board);
     b1.tryAddShip(new RectangleShip<Character>(new Coordinate(3,5),'s','*'));
@@ -37,18 +37,44 @@ public class BattleShipBoardTest {
 
   @Test
   public void test_invalid_add_ship(){
-    BattleShipBoard<Character> b1 = new BattleShipBoard<>(20, 10);
+    BattleShipBoard<Character> b1 = new BattleShipBoard<>(20, 10,'X');
     Character[][] board = new Character[10][20];
     assertEquals("That placement is invalid: the ship goes off the bottom of the board.",b1.tryAddShip(new RectangleShip<Character>("Testship",new Coordinate(3,5),10,10,'s','x')));
     
 
   }
 
+  @Test
+  public void test_fire_at(){
+    BattleShipBoard<Character> b1 = new BattleShipBoard<>(20, 10,'X');
+    V1ShipFactory shipFactory = new V1ShipFactory();
+    Ship<Character> s1 = shipFactory.makeBattleship(new Placement("A4V"));
+    b1.tryAddShip(s1);
+    assertEquals('b', b1.whatIsAtForSelf(new Coordinate(0,4)));
+    assertEquals(null, b1.whatIsAtForEnemy(new Coordinate(0,4)));
+    assertSame(s1, b1.fireAt(new Coordinate(0,4)));
+    assertEquals('x', b1.whatIsAtForSelf(new Coordinate(0,4)));
+    assertEquals('b', b1.whatIsAtForEnemy(new Coordinate(0,4)));
+    assertSame(s1, b1.fireAt(new Coordinate(1,4)));
+    assertEquals(false, s1.isSunk());
+    assertSame(s1, b1.fireAt(new Coordinate(2,4)));
+    assertEquals(true, s1.isSunk());
+
+  }
+  @Test
+  public void test_fire_miss(){
+    BattleShipBoard<Character> b1 = new BattleShipBoard<>(20, 10,'X');
+    V1ShipFactory shipFactory = new V1ShipFactory();
+    Ship<Character> s1 = shipFactory.makeBattleship(new Placement("A4V"));
+    b1.tryAddShip(s1);
+    assertSame(null, b1.fireAt(new Coordinate(0,0)));
+
+  }
   
   private <T> void checkWhatIsAtBoard(BattleShipBoard<T> b, T[][] expected){
     for(int i = 0;i < b.getWidth();i++){
       for(int j = 0;j < b.getHeight();j++){
-        assertEquals(expected[j][i], b.whatIsAt(new Coordinate(j,i)));
+        assertEquals(expected[j][i], b.whatIsAtForSelf(new Coordinate(j,i)));
       }
     }
   }

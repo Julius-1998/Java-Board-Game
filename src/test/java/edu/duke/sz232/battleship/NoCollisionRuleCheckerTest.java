@@ -2,8 +2,6 @@ package edu.duke.sz232.battleship;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import javax.print.attribute.standard.NumberUp;
-
 import org.junit.jupiter.api.Test;
 
 public class NoCollisionRuleCheckerTest {
@@ -11,7 +9,7 @@ public class NoCollisionRuleCheckerTest {
     @Test
     public void testNoCollisionRuleChecker(){
         NoCollisionRuleChecker<Character> noCollisionRuleChecker = new NoCollisionRuleChecker<>(null);
-        BattleShipBoard<Character> battleShipBoard = new BattleShipBoard<>(10, 10,noCollisionRuleChecker);
+        BattleShipBoard<Character> battleShipBoard = new BattleShipBoard<>(10, 10,noCollisionRuleChecker,'X');
         V1ShipFactory v1ShipFactory = new V1ShipFactory();
         Ship<Character> s1 =  v1ShipFactory.makeDestroyer(new Placement("A4H"));
         battleShipBoard.tryAddShip(s1);
@@ -26,7 +24,7 @@ public class NoCollisionRuleCheckerTest {
         NoCollisionRuleChecker<Character> noCollisionRuleChecker = new NoCollisionRuleChecker<>(
             new InBoundsRuleChecker<>(null)
         );
-        BattleShipBoard<Character> battleShipBoard = new BattleShipBoard<>(10, 10,noCollisionRuleChecker);
+        BattleShipBoard<Character> battleShipBoard = new BattleShipBoard<>(10, 10,noCollisionRuleChecker,'X');
         V1ShipFactory v1ShipFactory = new V1ShipFactory();
         Ship<Character> s1 =  v1ShipFactory.makeDestroyer(new Placement("A4H"));
         battleShipBoard.tryAddShip(s1);

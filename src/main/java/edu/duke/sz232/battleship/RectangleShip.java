@@ -23,16 +23,19 @@ public class RectangleShip<T> extends BasicShip<T> {
         }
         return set;
     }
+
     /**
      * Constructor for rectangleShip, calling super methods
-     * @param name  The name of the ship
-     * @param upperLeft The upperLeft coordinate of the ship
-     * @param width  ship's width
-     * @param height  ship's height
+     * 
+     * @param name          The name of the ship
+     * @param upperLeft     The upperLeft coordinate of the ship
+     * @param width         ship's width
+     * @param height        ship's height
      * @param myDisplayInfo Display info of the ship
      */
-    public RectangleShip(String name, Coordinate upperLeft, int width, int height, ShipDisplayInfo<T> myDisplayInfo) {
-        super(makeCoords(upperLeft, width, height), myDisplayInfo);
+    public RectangleShip(String name, Coordinate upperLeft, int width, int height, ShipDisplayInfo<T> myDisplayInfo,
+            ShipDisplayInfo<T> enemyDisplayInfo) {
+        super(makeCoords(upperLeft, width, height), myDisplayInfo, enemyDisplayInfo);
         this.name = name;
     }
 
@@ -41,7 +44,8 @@ public class RectangleShip<T> extends BasicShip<T> {
      * 
      */
     public RectangleShip(String name, Coordinate upperLeft, int width, int height, T data, T onHit) {
-        this(name, upperLeft, width, height, new SimpleShipDisplayInfo<T>(data, onHit));
+        this(name, upperLeft, width, height, new SimpleShipDisplayInfo<T>(data, onHit),
+                new SimpleShipDisplayInfo<T>(null, data));
     }
 
     public RectangleShip(Coordinate upperLeft, T data, T onHit) {

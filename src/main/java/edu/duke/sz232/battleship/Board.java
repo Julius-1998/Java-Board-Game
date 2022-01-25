@@ -5,7 +5,11 @@ public interface Board<T> {
 
   public int getHeight();
 
-  public T whatIsAt(Coordinate where);
+  public T whatIsAtForSelf(Coordinate where);
+
+  public T whatIsAtForEnemy(Coordinate where);
 
   public String tryAddShip(Ship<T> toAdd);
+
+  public Ship<T> fireAt(Coordinate where);
 }

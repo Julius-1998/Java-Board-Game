@@ -18,7 +18,7 @@ public class NoCollisionRuleChecker&lt;T&gt; extends PlacementRuleChecker&lt;T&g
     protected String checkMyRule(Ship&lt;T&gt; theShip, Board&lt;T&gt; theBoard) {
 <span class="fc" id="L19">        Iterable&lt;Coordinate&gt; set = theShip.getCoordinates();</span>
 <span class="fc bfc" id="L20" title="All 2 branches covered.">        for (Coordinate coordinate : set) {</span>
-<span class="fc bfc" id="L21" title="All 2 branches covered.">            if (theBoard.whatIsAt(coordinate) != null) {</span>
+<span class="fc bfc" id="L21" title="All 2 branches covered.">            if (theBoard.whatIsAtForSelf(coordinate) != null) {</span>
 <span class="fc" id="L22">                return &quot;That placement is invalide: the ship overlaps another ship&quot;;</span>
             }
 <span class="fc" id="L24">        }</span>
