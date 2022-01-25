@@ -98,4 +98,33 @@ public class BoardTextViewTest {
         String expected = expectedHeader + expectedBody + expectedHeader;
         assertEquals(expected, view.displayMyOwnBoard());
     }
+
+ 
+    @Test
+    public void test_fire_enemy_display(){
+        LinkedList<Ship<Character>> shipList = new LinkedList<>();
+        RectangleShip<Character> b1 = new RectangleShip<Character>( new Coordinate(0, 1), 's', '*');
+        RectangleShip<Character> b2 = new RectangleShip<Character>( new Coordinate(0, 0), 's', '*');
+        RectangleShip<Character> b3 = new RectangleShip<Character>( new Coordinate(4, 2), 's', '*');
+        shipList.add(b1);
+        shipList.add(b2);
+        shipList.add(b3);
+       
+        Board<Character> board = new BattleShipBoard<Character>(3, 5,'X');
+        for (Ship<Character> ship : shipList) {
+            board.tryAddShip(ship); 
+        }
+        board.fireAt(new Coordinate(0,1));
+        BoardTextView view = new BoardTextView(board);
+        String expectedHeader = view.makeHeader();
+         String expectedBody = 
+                "A  |s|  A\n" +
+                "B  | |  B\n" +
+                "C  | |  C\n" +
+                "D  | |  D\n" +
+                "E  | |  E\n";
+        String expected = expectedHeader + expectedBody + expectedHeader;
+        assertEquals(expected, view.displayEnemyBoard());
+        
+    }
 }

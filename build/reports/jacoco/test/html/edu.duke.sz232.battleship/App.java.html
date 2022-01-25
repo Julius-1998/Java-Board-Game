@@ -14,8 +14,8 @@ public class App {
     static TextPlayer player1;
     static TextPlayer player2;
     public static void main(String[] args) throws IOException {
-<span class="fc" id="L17">        Board&lt;Character&gt; b1 = new BattleShipBoard&lt;Character&gt;(10, 20);</span>
-<span class="fc" id="L18">        Board&lt;Character&gt; b2 = new BattleShipBoard&lt;Character&gt;(10, 20);</span>
+<span class="fc" id="L17">        Board&lt;Character&gt; b1 = new BattleShipBoard&lt;Character&gt;(10, 20,'X');</span>
+<span class="fc" id="L18">        Board&lt;Character&gt; b2 = new BattleShipBoard&lt;Character&gt;(10, 20,'X');</span>
 <span class="fc" id="L19">        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));</span>
 <span class="fc" id="L20">        V1ShipFactory factory = new V1ShipFactory();</span>
 <span class="fc" id="L21">        player1 = new TextPlayer(&quot;A&quot;, b1, input, System.out, factory);</span>
