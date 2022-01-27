@@ -127,4 +127,20 @@ public class BoardTextViewTest {
         assertEquals(expected, view.displayEnemyBoard());
         
     }
+
+    @Test
+    public void test_display_my_board_with_enemy_board(){
+        Board<Character> myBoard = new BattleShipBoard<Character>(10, 20,'X');
+        Board<Character> enemyBoard = new BattleShipBoard<Character>(10, 20,'X');
+        BoardTextView myView = new BoardTextView(myBoard);
+        BoardTextView enemyView = new BoardTextView(enemyBoard);
+        System.out.print(myView.displayMyBoardWithEnemyNextToIt(enemyView, "myHeader", "enemyHeader"));
+        String expectedHeader = myView.makeHeader();
+         String expectedBody = 
+                "A  |s|  A\n" +
+                "B  | |  B\n" +
+                "C  | |  C\n" +
+                "D  | |  D\n" +
+                "E  | |  E\n";
+    }
 }

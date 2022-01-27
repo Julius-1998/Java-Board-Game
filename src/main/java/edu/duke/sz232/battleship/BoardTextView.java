@@ -53,12 +53,13 @@ public class BoardTextView {
         for (int row = 0; row < toDisplay.getHeight(); row++) {
             ans.append((char) ('A' + row));
             ans.append(" ");
-            ans.append(getSquareFn.apply(new Coordinate(row,0))==null?' ':getSquareFn.apply(new Coordinate(row,0)));
+            ans.append(getSquareFn.apply(new Coordinate(row, 0)) == null ? ' '
+                    : getSquareFn.apply(new Coordinate(row, 0)));
             for (int col = 1; col < toDisplay.getWidth(); col++) {
                 ans.append("|");
-                if(getSquareFn.apply(new Coordinate(row,col))!=null){
-                    ans.append(getSquareFn.apply(new Coordinate(row,col)));
-                }else{
+                if (getSquareFn.apply(new Coordinate(row, col)) != null) {
+                    ans.append(getSquareFn.apply(new Coordinate(row, col)));
+                } else {
                     ans.append(' ');
                 }
             }
@@ -67,15 +68,49 @@ public class BoardTextView {
             ans.append('\n');
         }
         ans.append(makeHeader());
-        return ans.toString(); 
+        return ans.toString();
     }
 
     public String displayMyOwnBoard() {
-        return displayAnyBoard((c)->toDisplay.whatIsAtForSelf(c));
-      }
+        return displayAnyBoard((c) -> toDisplay.whatIsAtForSelf(c));
+    }
 
-  public String displayEnemyBoard(){
-    return displayAnyBoard((c)->toDisplay.whatIsAtForEnemy(c));
+    public String displayEnemyBoard() {
+        return displayAnyBoard((c) -> toDisplay.whatIsAtForEnemy(c));
 
-  }
+    }
+
+    public String displayMyBoardWithEnemyNextToIt(BoardTextView enemyView, String myHeader, String enemyHeader) {
+        StringBuilder sb = new StringBuilder();
+        String[] myLines = displayMyOwnBoard().split("\n");
+        String[] enemyLines = enemyView.displayEnemyBoard().split("\n");
+        int space = 16;
+        String commonHeader = generateHeaders(myHeader, enemyHeader, space);
+        sb.append(commonHeader);
+        for (int i = 0; i < myLines.length; i++) {
+            sb.append(myLines[i]);
+            for (int j = 0; j < space; j++) {
+                sb.append(" ");
+            }
+            if (i == 0 || i == myLines.length - 1) {
+                sb.append("  ");
+            }
+            sb.append(enemyLines[i]);
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+
+    public String generateHeaders(String myHeader, String enemyHeader, int space) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(myHeader);
+        for (int i = 0; i < toDisplay.getWidth()*2+space + 3 -myHeader.length();i++) {
+            sb.append(" ");
+        }
+        sb.append(enemyHeader);
+        sb.append("\n");
+        return sb.toString();
+
+    }
+
 }
