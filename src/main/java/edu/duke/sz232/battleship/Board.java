@@ -21,5 +21,5 @@ public interface Board<T> {
 
   public Ship<T> removeShip(Coordinate where);
 
-  public HashMap<Ship<T>,Integer> sonar(Coordinate where);
+  public HashMap<String,Integer> sonar(Coordinate where);
 }

@@ -40,12 +40,16 @@ public class TextPlayerTest {
     public void move_ship_test() {
         LinkedList<Ship<Character>> shipList = new LinkedList<>();
         V2ShipFactory v2ShipFactory = new V2ShipFactory();
-        Ship<Character> s = v2ShipFactory.createIrregularShip(new Placement("A0l"), 'c', "Carrier");
-        shipList.add(s);
-        String expectedBody = "A  | |c|c|c A\n" +
+        Ship<Character> s1 = v2ShipFactory.createIrregularShip(new Placement("A0l"), 'c', "Carrier");
+        Ship<Character> s2 = v2ShipFactory.createRectangleShip(new Placement("c0v"), 1,2,'s', "Submarines");
+
+        shipList.add(s1);
+        shipList.add(s2);
+        String expectedBody = 
+                "A  | |c|c|c A\n" +
                 "B c|c|c|c|  B\n" +
-                "C  | | | |  C\n" +
-                "D  | | | |  D\n" +
+                "C s| | | |  C\n" +
+                "D s| | | |  D\n" +
                 "E  | | | |  E\n";
         Board<Character> b1 = new BattleShipBoard<Character>(5, 5, 'X');
         for (Ship<Character> ship : shipList) {
@@ -56,12 +60,12 @@ public class TextPlayerTest {
         String expected = expectedHeader + expectedBody + expectedHeader;
         assertEquals(expected, view.displayMyOwnBoard());
 
-        StringReader sr = new StringReader("");
+        StringReader sr = new StringReader("A0\n");
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(bytes, true);
         TextPlayer player = new TextPlayer("A", b1, new BufferedReader(sr), ps, new V2ShipFactory());
         try {
-            player.doOneMovement();
+            player.doSonarScan(b1);
         } catch (IOException e) {
         
         }

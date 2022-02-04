@@ -257,7 +257,7 @@ public class TextPlayer {
         }else{
             sonarUsage--;
         }
-        HashMap<Ship<Character>,Integer> map;
+        HashMap<String,Integer> map;
         while (true) {
             try {
                 Coordinate c = readCoordinate("Please Select the coordinate to scan");
@@ -267,8 +267,8 @@ public class TextPlayer {
                 out.print("Invalid input coordinate!");
             }
         }
-        for (Map.Entry<Ship<Character>,Integer> entry : map.entrySet()) {
-            out.println(entry.getKey().getName()+"s occupy "+entry.getValue().toString()+"squares");
+        for (Map.Entry<String,Integer> entry : map.entrySet()) {
+            out.println(entry.getKey()+"s occupy "+entry.getValue().toString()+"squares");
         }
     }
     

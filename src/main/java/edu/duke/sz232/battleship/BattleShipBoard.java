@@ -3,7 +3,6 @@ package edu.duke.sz232.battleship;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 
 /**
  * Representing the board
@@ -154,7 +153,7 @@ public class BattleShipBoard<T> implements Board<T> {
      * Determine if the coordinate is within range of the board
      */
     public boolean isValid(Coordinate where) {
-        if (where.getRow() >= width || where.getColumn() >= height) {
+        if (where.getRow() >= width || where.getColumn() >= height || where.getRow() < 0 || where.getColumn() < 0) {
             return false;
         }
         return true;
@@ -194,19 +193,21 @@ public class BattleShipBoard<T> implements Board<T> {
         return null;
     }
 
-    public HashMap<Ship<T>, Integer> sonar(Coordinate where) throws IllegalArgumentException {
+    public HashMap<String, Integer> sonar(Coordinate where) throws IllegalArgumentException {
         if (!isValid(where)) {
             throw new IllegalArgumentException("The coordinate is not on the board!");
         }
-        HashMap<Ship<T>,Integer> map = new HashMap<>();
+        HashMap<String, Integer> map = new HashMap<>();
         for (int i = -3; i < 4; i++) {
             for (int j = -3; j < 4; j++) {
-                Coordinate detectPoint = new Coordinate(where.getRow()+i,where.getColumn()+j);
-                int bias = Math.abs(i)+Math.abs(j);
-                if (isValid(detectPoint)&&bias<=3) {
+                Coordinate detectPoint = new Coordinate(where.getRow() + i, where.getColumn() + j);
+                int bias = Math.abs(i) + Math.abs(j);
+                if (isValid(detectPoint) && bias <= 3) {
                     Ship<T> ship = getShipAtCoordinate(detectPoint);
-                    Integer currentCount = map.get(ship);
-                    map.put(ship,currentCount+1);
+                    if (ship != null) {
+                        Integer currentCount = map.getOrDefault(ship.getName(),0);
+                        map.put(ship.getName(), currentCount + 1);
+                    }
                 }
             }
         }
