@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.duke.sz232.battleship.AppTest" tests="1" skipped="1" failures="0" errors="0" timestamp="2022-02-04T17:44:02" hostname="ubuntu" time="0.002">
+<testsuite name="edu.duke.sz232.battleship.AppTest" tests="1" skipped="1" failures="0" errors="0" timestamp="2022-02-04T22:04:57" hostname="ubuntu" time="0.009">
   <properties/>
-  <testcase name="test_main()" classname="edu.duke.sz232.battleship.AppTest" time="0.002">
+  <testcase name="test_main()" classname="edu.duke.sz232.battleship.AppTest" time="0.009">
     <skipped/>
   </testcase>
   <system-out><![CDATA[]]></system-out>

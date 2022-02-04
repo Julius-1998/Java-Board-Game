@@ -1,7 +1,9 @@
 package edu.duke.sz232.battleship;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 /**
  * Representing the board
@@ -13,6 +15,7 @@ public class BattleShipBoard<T> implements Board<T> {
     private final PlacementRuleChecker<T> placementChecker;
     private final HashSet<Coordinate> enemyMisses;
     private final T missInfo;
+
     /**
      * chain to the other constructor
      * initiate placementchecker as chained InBoundsRuleChecker and
@@ -21,7 +24,7 @@ public class BattleShipBoard<T> implements Board<T> {
      * @param w
      * @param h
      */
-    public BattleShipBoard(int w, int h,T missInfo) {
+    public BattleShipBoard(int w, int h, T missInfo) {
         this(w, h, new InBoundsRuleChecker<>(new NoCollisionRuleChecker<>(null)), missInfo);
     }
 
@@ -89,7 +92,7 @@ public class BattleShipBoard<T> implements Board<T> {
      * @return
      */
     public T whatIsAtForEnemy(Coordinate where) {
-        if(enemyMisses.contains(where)){
+        if (enemyMisses.contains(where)) {
             return missInfo;
         }
         return whatIsAt(where, false);
@@ -116,8 +119,8 @@ public class BattleShipBoard<T> implements Board<T> {
      * @return the ship got fired at or null if it's a miss
      */
     public Ship<T> fireAt(Coordinate c) {
-        //determine if c is within range of the board
-        if(!isValid(c)){
+        // determine if c is within range of the board
+        if (!isValid(c)) {
             throw new IllegalArgumentException("The coordinate is not on the board!");
         }
         for (Ship<T> ship : myShips) {
@@ -135,11 +138,12 @@ public class BattleShipBoard<T> implements Board<T> {
 
     /**
      * Determine if all ships owned by the board is sunk
+     * 
      * @return true if it's all sunk
      */
-    public boolean hasAllSunk(){
-        for(Ship<T> ship: myShips){
-            if(!ship.isSunk()){
+    public boolean hasAllSunk() {
+        for (Ship<T> ship : myShips) {
+            if (!ship.isSunk()) {
                 return false;
             }
         }
@@ -149,11 +153,63 @@ public class BattleShipBoard<T> implements Board<T> {
     /**
      * Determine if the coordinate is within range of the board
      */
-    public boolean isValid(Coordinate where){
-        if(where.getRow()>=width||where.getColumn()>=height){
+    public boolean isValid(Coordinate where) {
+        if (where.getRow() >= width || where.getColumn() >= height) {
             return false;
         }
         return true;
     }
-    
+
+    /**
+     * get the ship at specific place, if there's no ship, return err string.
+     * 
+     * @param where         the old space of the ship
+     * @param newCoordinate
+     * @return
+     */
+    public Ship<T> removeShip(Coordinate where) throws IllegalArgumentException {
+        if (!isValid(where)) {
+            throw new IllegalArgumentException("The coordinate is not on the board!");
+        }
+        Ship<T> ship = getShipAtCoordinate(where);
+        if (ship == null) {
+            throw new IllegalArgumentException("The ship is not valid");
+        }
+        myShips.remove(ship);
+        return ship;
+    }
+
+    /**
+     * Check if the place has ship;
+     * 
+     * @param where
+     * @return null if the place is not a ship
+     */
+    public Ship<T> getShipAtCoordinate(Coordinate where) {
+        for (Ship<T> ship : myShips) {
+            if (ship.occupiesCoordinates(where)) {
+                return ship;
+            }
+        }
+        return null;
+    }
+
+    public HashMap<Ship<T>, Integer> sonar(Coordinate where) throws IllegalArgumentException {
+        if (!isValid(where)) {
+            throw new IllegalArgumentException("The coordinate is not on the board!");
+        }
+        HashMap<Ship<T>,Integer> map = new HashMap<>();
+        for (int i = -3; i < 4; i++) {
+            for (int j = -3; j < 4; j++) {
+                Coordinate detectPoint = new Coordinate(where.getRow()+i,where.getColumn()+j);
+                int bias = Math.abs(i)+Math.abs(j);
+                if (isValid(detectPoint)&&bias<=3) {
+                    Ship<T> ship = getShipAtCoordinate(detectPoint);
+                    Integer currentCount = map.get(ship);
+                    map.put(ship,currentCount+1);
+                }
+            }
+        }
+        return map;
+    }
 }

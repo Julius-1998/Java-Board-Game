@@ -96,30 +96,6 @@ public class IrregularShip<T> extends BasicShip<T> {
             }        
         }
 
-        if (name == "Submarine") {
-            if (orientation == 'H') {
-                coords.add(new Coordinate(r, c));
-                coords.add(new Coordinate(r, c+1));
-            }
-            if (orientation == 'V') {
-                coords.add(new Coordinate(r, c));
-                coords.add(new Coordinate(r+1, c));
-            }
-        }
-
-        if (name == "Destroyer") {
-            if (orientation == 'H') {
-                coords.add(new Coordinate(r, c));
-                coords.add(new Coordinate(r, c+1));
-                coords.add(new Coordinate(r, c+2));
-            }
-            if (orientation == 'V') {
-                coords.add(new Coordinate(r, c));
-                coords.add(new Coordinate(r+1, c));
-                coords.add(new Coordinate(r+2, c));
-            }
-        }
-
         return coords;
     }
 

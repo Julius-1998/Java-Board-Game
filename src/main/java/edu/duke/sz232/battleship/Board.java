@@ -1,5 +1,7 @@
 package edu.duke.sz232.battleship;
 
+import java.util.HashMap;
+
 public interface Board<T> {
   public int getWidth();
 
@@ -16,4 +18,8 @@ public interface Board<T> {
   public boolean hasAllSunk();
 
   public boolean isValid(Coordinate where);
+
+  public Ship<T> removeShip(Coordinate where);
+
+  public HashMap<Ship<T>,Integer> sonar(Coordinate where);
 }
