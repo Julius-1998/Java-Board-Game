@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>IrregularShip.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ece651-sp22-sz232-battleship</a> &gt; <a href="index.source.html" class="el_package">edu.duke.sz232.battleship</a> &gt; <span class="el_source">IrregularShip.java</span></div><h1>IrregularShip.java</h1><pre class="source lang-java linenums">package edu.duke.sz232.battleship;
+
+import java.util.HashSet;
+
+public class IrregularShip&lt;T&gt; extends BasicShip&lt;T&gt; {
+    
+    final String name;
+    @Override
+    public String getName() {
+<span class="nc" id="L10">        return this.name;</span>
+    }
+
+    public IrregularShip(String name, Coordinate upperLeft, char orientation, 
+    ShipDisplayInfo&lt;T&gt; myDisplayInfo, ShipDisplayInfo&lt;T&gt; enemyDisplayInfo) {      
+<span class="fc" id="L15">        super(makeCoords(upperLeft, name, orientation), myDisplayInfo, enemyDisplayInfo);</span>
+<span class="fc" id="L16">        this.name = name;</span>
+<span class="fc" id="L17">    }</span>
+
+    public IrregularShip(String name,Coordinate upperLeft, char orientation,T data,T onHit){
+<span class="fc" id="L20">        this(name,upperLeft,orientation,new SimpleShipDisplayInfo&lt;T&gt;(data,onHit),new SimpleShipDisplayInfo&lt;&gt;(null, data));</span>
+<span class="fc" id="L21">    }</span>
+    /**
+     * Add all coordinates of ship
+     * @param upperLeft the upperleft corner of the ship
+     * @param name the ship's name
+     * @param orientation the ship's orientation
+     * @return
+     */
+    static HashSet&lt;Coordinate&gt; makeCoords(Coordinate upperLeft, String name, char orientation) {
+<span class="fc" id="L30">        HashSet&lt;Coordinate&gt; ans = new HashSet&lt;&gt;();</span>
+<span class="fc" id="L31">        int startRow = upperLeft.getRow();</span>
+<span class="fc" id="L32">        int startColumn = upperLeft.getColumn();</span>
+        
+<span class="pc bpc" id="L34" title="1 of 2 branches missed.">        if (name == &quot;Battleship&quot;) {  </span>
+<span class="pc bpc" id="L35" title="1 of 2 branches missed.">            if (orientation == 'U') {</span>
+<span class="nc" id="L36">                ans.add(new Coordinate(startRow, startColumn+1));</span>
+<span class="nc bnc" id="L37" title="All 2 branches missed.">                for (int i=0; i&lt;3; i++) {</span>
+<span class="nc" id="L38">                    ans.add(new Coordinate(startRow+1, startColumn+i));</span>
+                }
+            }
+
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">            if (orientation == 'R') {</span>
+<span class="fc" id="L43">                ans.add(new Coordinate(startRow+1, startColumn+1));</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">                for (int i=0; i&lt;3; i++) {</span>
+<span class="fc" id="L45">                    ans.add(new Coordinate(startRow+i, startColumn));</span>
+                }
+            }
+
+<span class="pc bpc" id="L49" title="1 of 2 branches missed.">            if (orientation == 'D') {</span>
+<span class="nc" id="L50">                ans.add(new Coordinate(startRow+1, startColumn+1));</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">                for (int i=0; i&lt;3; i++) {</span>
+<span class="nc" id="L52">                    ans.add(new Coordinate(startRow, startColumn+2-i));</span>
+                }
+            }
+
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">            if (orientation == 'L') {</span>
+<span class="nc" id="L57">                ans.add(new Coordinate(startRow+1, startColumn));</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">                for (int i=0; i&lt;3; i++) {</span>
+<span class="nc" id="L59">                    ans.add(new Coordinate(startRow+2-i, startColumn+1));</span>
+                }
+            }
+        }
+
+<span class="pc bpc" id="L64" title="1 of 2 branches missed.">        if (name == &quot;Carrier&quot;) {</span>
+<span class="nc bnc" id="L65" title="All 2 branches missed.">            if (orientation == 'U') {</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">                for (int i=0; i&lt;3; i++) {</span>
+<span class="nc" id="L67">                    ans.add(new Coordinate(startRow+i, startColumn));</span>
+                }
+<span class="nc bnc" id="L69" title="All 2 branches missed.">                for (int j=2; j&lt;5; j++) {</span>
+<span class="nc" id="L70">                    ans.add(new Coordinate(startRow+j, startColumn+1));</span>
+                }
+            }
+
+<span class="nc bnc" id="L74" title="All 2 branches missed.">            if (orientation == 'R') {</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">                for (int i=0; i&lt;3; i++) {</span>
+<span class="nc" id="L76">                    ans.add(new Coordinate(startRow+1, startColumn+i));</span>
+                }
+<span class="nc bnc" id="L78" title="All 2 branches missed.">                for (int j=2; j&lt;5; j++) {</span>
+<span class="nc" id="L79">                    ans.add(new Coordinate(startRow, startColumn+j));</span>
+                }
+            }
+
+<span class="nc bnc" id="L83" title="All 2 branches missed.">            if (orientation == 'D') {</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">                for (int i=0; i&lt;3; i++) {</span>
+<span class="nc" id="L85">                    ans.add(new Coordinate(startRow+4-i, startColumn));</span>
+                }
+<span class="nc bnc" id="L87" title="All 2 branches missed.">                for (int j=0; j&lt;3; j++) {</span>
+<span class="nc" id="L88">                    ans.add(new Coordinate(startRow+2-j, startColumn+1));</span>
+                }
+            }
+
+<span class="nc bnc" id="L92" title="All 2 branches missed.">            if (orientation == 'L') {</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">                for (int i=0; i&lt;3; i++) {</span>
+<span class="nc" id="L94">                    ans.add(new Coordinate(startRow+1, startColumn+4-i));</span>
+                }
+<span class="nc bnc" id="L96" title="All 2 branches missed.">                for (int j=0; j&lt;3; j++) {</span>
+<span class="nc" id="L97">                    ans.add(new Coordinate(startRow, startColumn+2-j));</span>
+                }
+            }        
+        }
+
+<span class="pc bpc" id="L102" title="1 of 2 branches missed.">        if (name == &quot;Submarine&quot;) {</span>
+<span class="nc bnc" id="L103" title="All 2 branches missed.">            if (orientation == 'H') {</span>
+<span class="nc" id="L104">                ans.add(new Coordinate(startRow, startColumn));</span>
+<span class="nc" id="L105">                ans.add(new Coordinate(startRow, startColumn+1));</span>
+            }
+<span class="nc bnc" id="L107" title="All 2 branches missed.">            if (orientation == 'V') {</span>
+<span class="nc" id="L108">                ans.add(new Coordinate(startRow, startColumn));</span>
+<span class="nc" id="L109">                ans.add(new Coordinate(startRow+1, startColumn));</span>
+            }
+        }
+
+<span class="pc bpc" id="L113" title="1 of 2 branches missed.">        if (name == &quot;Destroyer&quot;) {</span>
+<span class="nc bnc" id="L114" title="All 2 branches missed.">            if (orientation == 'H') {</span>
+<span class="nc" id="L115">                ans.add(new Coordinate(startRow, startColumn));</span>
+<span class="nc" id="L116">                ans.add(new Coordinate(startRow, startColumn+1));</span>
+<span class="nc" id="L117">                ans.add(new Coordinate(startRow, startColumn+2));</span>
+            }
+<span class="nc bnc" id="L119" title="All 2 branches missed.">            if (orientation == 'V') {</span>
+<span class="nc" id="L120">                ans.add(new Coordinate(startRow, startColumn));</span>
+<span class="nc" id="L121">                ans.add(new Coordinate(startRow+1, startColumn));</span>
+<span class="nc" id="L122">                ans.add(new Coordinate(startRow+2, startColumn));</span>
+            }
+        }
+
+<span class="fc" id="L126">        return ans;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

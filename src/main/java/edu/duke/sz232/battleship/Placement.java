@@ -67,9 +67,9 @@ public class Placement {
         }
         where = new Coordinate(s.substring(0, 2));
         Character orientationChar = s.charAt(2);
-        if (orientationChar == 'V' || orientationChar == 'H') {
+        if (orientationChar == 'U' || orientationChar == 'R'||orientationChar=='D'||orientationChar=='L'||orientationChar=='H'||orientationChar=='V') {
             orientation = orientationChar;
-        } else if (orientationChar == 'v' || orientationChar == 'h') {
+        } else if (orientationChar == 'u' || orientationChar == 'r'||orientationChar=='d'||orientationChar=='l'||orientationChar=='h'||orientationChar=='v') {
             orientation = Character.toUpperCase(orientationChar);
         } else {
             throw new IllegalArgumentException("Illegal conversion from string to Coordinate: " + s);

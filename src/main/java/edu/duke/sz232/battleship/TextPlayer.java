@@ -21,7 +21,7 @@ public class TextPlayer {
     final HashMap<String, Function<Placement, Ship<Character>>> shipCreationFns;
 
     public TextPlayer(String name, Board<Character> theBoard, BufferedReader inputSource, PrintStream out,
-            V1ShipFactory factory) {
+            AbstractShipFactory<Character> factory) {
         this.theBoard = theBoard;
         this.view = new BoardTextView(theBoard);
         this.inputReader = inputSource;

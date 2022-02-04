@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="edu.duke.sz232.battleship.IrregularShipTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-02-04T17:44:03" hostname="ubuntu" time="0.008">
+  <properties/>
+  <testcase name="place_ship_test()" classname="edu.duke.sz232.battleship.IrregularShipTest" time="0.008"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

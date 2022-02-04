@@ -8,7 +8,7 @@ public class V1ShipFactory implements AbstractShipFactory<Character> {
      */
     @Override
     public Ship<Character> makeSubmarine(Placement where) {
-        return createShip(where, 1, 2, 's', "Submarine");
+        return createRectangleShip(where, 1, 2, 's', "Submarine");
     }
 
     /**
@@ -18,7 +18,7 @@ public class V1ShipFactory implements AbstractShipFactory<Character> {
      */
     @Override
     public Ship<Character> makeBattleship(Placement where) {
-        return createShip(where, 1, 3, 'b', "Battleship");
+        return createRectangleShip(where, 1, 3, 'b', "Battleship");
 
     }
 
@@ -29,7 +29,7 @@ public class V1ShipFactory implements AbstractShipFactory<Character> {
      */
     @Override
     public Ship<Character> makeCarrier(Placement where) {
-        return createShip(where, 1, 4, 'c', "Carrier");
+        return createRectangleShip(where, 1, 4, 'c', "Carrier");
 
     }
 
@@ -40,7 +40,7 @@ public class V1ShipFactory implements AbstractShipFactory<Character> {
      */
     @Override
     public Ship<Character> makeDestroyer(Placement where) {
-        return createShip(where, 1, 6, 'd', "Destroyer");
+        return createRectangleShip(where, 1, 6, 'd', "Destroyer");
 
     }
 
@@ -54,8 +54,11 @@ public class V1ShipFactory implements AbstractShipFactory<Character> {
      * @param name   ship's name
      * @return
      */
-    protected Ship<Character> createShip(Placement where, int w, int h, char letter, String name) {
+    protected Ship<Character> createRectangleShip(Placement where, int w, int h, char letter, String name) {
         char c = where.getOrientation();
+        if (c != 'H' && c != 'V') {
+            throw new IllegalArgumentException();
+        } 
         if (c == 'H') {
             int temp = h;
             h = w;

@@ -14,22 +14,24 @@ import java.io.Reader;
     static TextPlayer player1;
     static TextPlayer player2;
     public static void main(String[] args) throws IOException {
-<span class="fc" id="L17">        Board&lt;Character&gt; b1 = new BattleShipBoard&lt;Character&gt;(10, 20,'X');</span>
-<span class="fc" id="L18">        Board&lt;Character&gt; b2 = new BattleShipBoard&lt;Character&gt;(10, 20,'X');</span>
-<span class="fc" id="L19">        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));</span>
-<span class="fc" id="L20">        V1ShipFactory factory = new V1ShipFactory();</span>
-<span class="fc" id="L21">        player1 = new TextPlayer(&quot;A&quot;, b1, input, System.out, factory);</span>
-<span class="fc" id="L22">        player2 = new TextPlayer(&quot;B&quot;, b2, input, System.out, factory);</span>
-<span class="fc" id="L23">        doPlacementPhase();</span>
+<span class="nc" id="L17">        Board&lt;Character&gt; b1 = new BattleShipBoard&lt;Character&gt;(10, 20,'X');</span>
+<span class="nc" id="L18">        Board&lt;Character&gt; b2 = new BattleShipBoard&lt;Character&gt;(10, 20,'X');</span>
+<span class="nc" id="L19">        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));</span>
+<span class="nc" id="L20">        V2ShipFactory factory = new V2ShipFactory();</span>
+<span class="nc" id="L21">        player1 = new TextPlayer(&quot;A&quot;, b1, input, System.out, factory);</span>
+<span class="nc" id="L22">        player2 = new TextPlayer(&quot;B&quot;, b2, input, System.out, factory);</span>
+<span class="nc" id="L23">        doPlacementPhase();</span>
+        //While neither of the players has won, continue
         while(true){
-<span class="fc bfc" id="L25" title="All 2 branches covered.">            if(!player1.doAttackingPhase(player2.getBoardTextView(), b2, player2)){return;};</span>
-<span class="pc bpc" id="L26" title="1 of 2 branches missed.">            if(!player2.doAttackingPhase(player1.getBoardTextView(), b1, player1)){return;};</span>
+<span class="nc bnc" id="L26" title="All 2 branches missed.">            if(!player1.doAttackingPhase(player2.getBoardTextView(), b2, player2)){return;};</span>
+<span class="nc bnc" id="L27" title="All 2 branches missed.">            if(!player2.doAttackingPhase(player1.getBoardTextView(), b1, player1)){return;};</span>
         }
     }
+    //When doing placementPhase, do then one by one
     public static void doPlacementPhase()throws IOException{
-<span class="fc" id="L30">        player1.doPlacementPhase();</span>
-<span class="fc" id="L31">        player2.doPlacementPhase();</span>
-<span class="fc" id="L32">    }</span>
+<span class="nc" id="L32">        player1.doPlacementPhase();</span>
+<span class="nc" id="L33">        player2.doPlacementPhase();</span>
+<span class="nc" id="L34">    }</span>
 
 
    

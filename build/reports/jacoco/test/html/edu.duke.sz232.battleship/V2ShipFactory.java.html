@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>V2ShipFactory.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ece651-sp22-sz232-battleship</a> &gt; <a href="index.source.html" class="el_package">edu.duke.sz232.battleship</a> &gt; <span class="el_source">V2ShipFactory.java</span></div><h1>V2ShipFactory.java</h1><pre class="source lang-java linenums">package edu.duke.sz232.battleship;
+
+<span class="fc" id="L3">public class V2ShipFactory implements AbstractShipFactory&lt;Character&gt; {</span>
+
+    @Override
+    public Ship&lt;Character&gt; makeSubmarine(Placement where) {
+<span class="nc" id="L7">        return createRectangleShip(where, 1, 2, 's', &quot;Submarine&quot;);</span>
+    }
+
+    @Override
+    public Ship&lt;Character&gt; makeBattleship(Placement where) {
+<span class="nc" id="L12">        return createIrregularShip(where, 'b', &quot;Battleship&quot;);</span>
+    }
+
+    @Override
+    public Ship&lt;Character&gt; makeCarrier(Placement where) {
+<span class="nc" id="L17">        return createIrregularShip(where, 'c', &quot;Carrier&quot;);</span>
+    }
+
+    @Override
+    public Ship&lt;Character&gt; makeDestroyer(Placement where) {
+<span class="nc" id="L22">        return createRectangleShip(where, 1, 3, 'd', &quot;Destroyer&quot;);</span>
+    }
+    
+    protected Ship&lt;Character&gt; createIrregularShip(Placement where, char letter, String name) {
+<span class="fc" id="L26">        char c = where.getOrientation();</span>
+<span class="pc bpc" id="L27" title="6 of 8 branches missed.">        if (c != 'U' &amp;&amp; c != 'R' &amp;&amp; c != 'D' &amp;&amp; c != 'L'){</span>
+<span class="nc" id="L28">            throw new IllegalArgumentException();</span>
+        } 
+<span class="fc" id="L30">        return new IrregularShip&lt;Character&gt;(name, where.getWhere(),c, letter, 'x');</span>
+
+    }
+
+    protected Ship&lt;Character&gt; createRectangleShip(Placement where, int w, int h, char letter, String name) {
+<span class="nc" id="L35">        char c = where.getOrientation();</span>
+<span class="nc bnc" id="L36" title="All 4 branches missed.">        if (c != 'H' &amp;&amp; c != 'V') {</span>
+<span class="nc" id="L37">            throw new IllegalArgumentException();</span>
+        } 
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        if (c == 'H') {</span>
+<span class="nc" id="L40">            int temp = h;</span>
+<span class="nc" id="L41">            h = w;</span>
+<span class="nc" id="L42">            w = temp;</span>
+        }
+<span class="nc" id="L44">        return new RectangleShip&lt;Character&gt;(name, where.getWhere(), w, h, letter, 'x');</span>
+
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
