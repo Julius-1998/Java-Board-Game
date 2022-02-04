@@ -20,6 +20,7 @@ public class IrregularShipTest {
                 "E  | |  E\n";
         notEmptyBoardHelper(3, 5, expectedBody, shipList);
     }
+
     @Test
     public void place_battleship_test_left() {
         LinkedList<Ship<Character>> shipList = new LinkedList<>();
@@ -33,6 +34,7 @@ public class IrregularShipTest {
                 "E  | |  E\n";
         notEmptyBoardHelper(3, 5, expectedBody, shipList);
     }
+
     @Test
     public void place_battleship_test_up() {
         LinkedList<Ship<Character>> shipList = new LinkedList<>();
@@ -45,7 +47,9 @@ public class IrregularShipTest {
                 "D  | |  D\n" +
                 "E  | |  E\n";
         notEmptyBoardHelper(3, 5, expectedBody, shipList);
-    }@Test
+    }
+
+    @Test
     public void place_battleship_test_down() {
         LinkedList<Ship<Character>> shipList = new LinkedList<>();
         V2ShipFactory v2ShipFactory = new V2ShipFactory();
@@ -65,12 +69,11 @@ public class IrregularShipTest {
         V2ShipFactory v2ShipFactory = new V2ShipFactory();
         Ship<Character> b1 = v2ShipFactory.createIrregularShip(new Placement("A0d"), 'c', "Carrier");
         shipList.add(b1);
-        String expectedBody = 
-        "A c| |  A\n" +
-        "B c|c|  B\n" +
-        "C c|c|  C\n" +
-        "D  |c|  D\n" +
-        "E  |c|  E\n";
+        String expectedBody = "A c| |  A\n" +
+                "B c|c|  B\n" +
+                "C c|c|  C\n" +
+                "D  |c|  D\n" +
+                "E  |c|  E\n";
         notEmptyBoardHelper(3, 5, expectedBody, shipList);
     }
 
@@ -80,8 +83,7 @@ public class IrregularShipTest {
         V2ShipFactory v2ShipFactory = new V2ShipFactory();
         Ship<Character> b1 = v2ShipFactory.createIrregularShip(new Placement("A0u"), 'c', "Carrier");
         shipList.add(b1);
-        String expectedBody = 
-                "A c| |  A\n" +
+        String expectedBody = "A c| |  A\n" +
                 "B c| |  B\n" +
                 "C c|c|  C\n" +
                 "D c|c|  D\n" +
@@ -95,28 +97,29 @@ public class IrregularShipTest {
         V2ShipFactory v2ShipFactory = new V2ShipFactory();
         Ship<Character> b1 = v2ShipFactory.createIrregularShip(new Placement("A0r"), 'c', "Carrier");
         shipList.add(b1);
-        String expectedBody = 
-                "A  |c|c|c|c A\n" +
+        String expectedBody = "A  |c|c|c|c A\n" +
                 "B c|c|c| |  B\n" +
                 "C  | | | |  C\n" +
                 "D  | | | |  D\n" +
                 "E  | | | |  E\n";
         notEmptyBoardHelper(5, 5, expectedBody, shipList);
     }
+
     @Test
     public void place_carrier_test_left() {
         LinkedList<Ship<Character>> shipList = new LinkedList<>();
         V2ShipFactory v2ShipFactory = new V2ShipFactory();
         Ship<Character> b1 = v2ShipFactory.createIrregularShip(new Placement("A0l"), 'c', "Carrier");
         shipList.add(b1);
-        String expectedBody = 
-                "A  | |c|c|c A\n" +
+        String expectedBody = "A  | |c|c|c A\n" +
                 "B c|c|c|c|  B\n" +
                 "C  | | | |  C\n" +
                 "D  | | | |  D\n" +
                 "E  | | | |  E\n";
         notEmptyBoardHelper(5, 5, expectedBody, shipList);
     }
+
+    
 
     private void notEmptyBoardHelper(int w, int h, String expectedBody, LinkedList<Ship<Character>> list) {
         Board<Character> b1 = new BattleShipBoard<Character>(w, h, 'X');
