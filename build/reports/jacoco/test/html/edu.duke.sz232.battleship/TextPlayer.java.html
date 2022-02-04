@@ -67,6 +67,22 @@ public class TextPlayer {
     }
 
     /**
+     * Read one coordinate from input
+     * 
+     * @param prompt
+     * @return Coordinate from input
+     * @throws IOException
+     */
+    public Coordinate readCoordinate(String prompt) throws IOException {
+<span class="fc" id="L77">        out.println(prompt);</span>
+<span class="fc" id="L78">        String s = inputReader.readLine();</span>
+<span class="pc bpc" id="L79" title="1 of 2 branches missed.">        if (s == null) {</span>
+<span class="nc" id="L80">            throw new EOFException();</span>
+        }
+<span class="fc" id="L82">        return new Coordinate(s);</span>
+    }
+
+    /**
      * Make one replacement
      * 
      * @param shipName is the ship's name
@@ -74,11 +90,22 @@ public class TextPlayer {
      * @throws IOException
      */
     public void doOnePlacement(String shipName, Function&lt;Placement, Ship&lt;Character&gt;&gt; createFn) throws IOException {
-<span class="fc" id="L77">        Placement p = readPlacement(&quot;Player &quot; + name + &quot; where do you want to place a &quot; + shipName + &quot;?&quot;);</span>
-<span class="fc" id="L78">        Ship&lt;Character&gt; s = createFn.apply(p);</span>
-<span class="fc" id="L79">        theBoard.tryAddShip(s);</span>
-<span class="fc" id="L80">        out.print(view.displayMyOwnBoard());</span>
-<span class="fc" id="L81">    }</span>
+        while (true) {
+            try {
+<span class="fc" id="L95">                Placement p = readPlacement(&quot;Player &quot; + name + &quot; where do you want to place a &quot; + shipName + &quot;?&quot;);</span>
+<span class="fc" id="L96">                Ship&lt;Character&gt; s = createFn.apply(p);</span>
+<span class="fc" id="L97">                String err = theBoard.tryAddShip(s);</span>
+<span class="fc bfc" id="L98" title="All 2 branches covered.">                if (err != null) {</span>
+<span class="fc" id="L99">                    out.println(err);</span>
+                } else {
+<span class="fc" id="L101">                    out.print(view.displayMyOwnBoard());</span>
+<span class="fc" id="L102">                    break;</span>
+                }
+<span class="fc" id="L104">            } catch (IllegalArgumentException e) {</span>
+<span class="fc" id="L105">                out.println(&quot;Invalid placement String&quot;);</span>
+<span class="fc" id="L106">            }</span>
+        }
+<span class="fc" id="L108">    }</span>
 
     /**
      * get the view of player
@@ -86,14 +113,19 @@ public class TextPlayer {
      * @return the view of the board
      */
     public BoardTextView getBoardTextView() {
-<span class="fc" id="L89">        return view;</span>
+<span class="fc" id="L116">        return view;</span>
     }
 
+    /**
+     * Do one place ment for player
+     * 
+     * @throws IOException
+     */
     public void doPlacementPhase() throws IOException {
-<span class="fc" id="L93">        view.displayMyOwnBoard();</span>
-<span class="fc" id="L94">        out.print(</span>
+<span class="fc" id="L125">        out.print(view.displayMyOwnBoard());</span>
+<span class="fc" id="L126">        out.print(</span>
                 &quot;--------------------------------------------------------------------------------\n&quot; +
-                        &quot;Player A: you are going to place the following ships (which are all\n&quot; +
+                        &quot;Player &quot; + name + &quot;: you are going to place the following ships (which are all\n&quot; +
                         &quot;rectangular). For each ship, type the coordinate of the upper left\n&quot; +
                         &quot;side of the ship, followed by either H (for horizontal) or V (for\n&quot; +
                         &quot;vertical).  For example M4H would place a ship horizontally starting\n&quot; +
@@ -104,12 +136,54 @@ public class TextPlayer {
                         &quot;3 \&quot;Battleships\&quot; that are 1x4\n&quot; +
                         &quot;2 \&quot;Carriers\&quot; that are 1x6\n&quot; +
                         &quot;--------------------------------------------------------------------------------\n&quot;);
-<span class="fc bfc" id="L107" title="All 2 branches covered.">        for (String shipName : shipsToPlace) {</span>
-<span class="fc" id="L108">            Function&lt;Placement, Ship&lt;Character&gt;&gt; f = shipCreationFns.get(shipName);</span>
-<span class="fc" id="L109">            doOnePlacement(shipName, f);</span>
-<span class="fc" id="L110">        }</span>
+<span class="fc bfc" id="L139" title="All 2 branches covered.">        for (String shipName : shipsToPlace) {</span>
+<span class="fc" id="L140">            Function&lt;Placement, Ship&lt;Character&gt;&gt; f = shipCreationFns.get(shipName);</span>
+<span class="fc" id="L141">            doOnePlacement(shipName, f);</span>
+<span class="fc" id="L142">        }</span>
 
-<span class="fc" id="L112">    }</span>
+<span class="fc" id="L144">    }</span>
+
+    /**
+     * A player loses when all ships on the board is sunk
+     * 
+     * @return
+     */
+    public boolean hasLost() {
+<span class="fc" id="L152">        return theBoard.hasAllSunk();</span>
+    }
+
+    public void playOneTurn(BoardTextView enemyView, Board&lt;Character&gt; enemyBoard) throws IOException {
+<span class="fc" id="L156">        String myHeader = &quot;Your ocean&quot;;</span>
+<span class="fc" id="L157">        String enemyHeader = &quot;Enemy's ocean&quot;;</span>
+<span class="fc" id="L158">        out.print(view.displayMyBoardWithEnemyNextToIt(enemyView, myHeader, enemyHeader));</span>
+<span class="fc" id="L159">        out.print(promptAttack(enemyBoard));</span>
+<span class="fc" id="L160">    }</span>
+
+    public String promptAttack(Board&lt;Character&gt; enemyBoard) throws IOException {
+<span class="fc" id="L163">        String prompt = &quot;Player &quot; + name + &quot;,Please enter your coordinate to attack:&quot;;</span>
+        while (true) {
+            try {
+<span class="fc" id="L166">                Coordinate c = readCoordinate(prompt);</span>
+<span class="fc" id="L167">                Ship&lt;Character&gt; s = enemyBoard.fireAt(c);</span>
+<span class="fc bfc" id="L168" title="All 2 branches covered.">                if (s == null) {</span>
+<span class="fc" id="L169">                    return &quot;You missed!\n&quot;;</span>
+                }
+<span class="fc" id="L171">                return &quot;You hit a &quot; + s.getName() + &quot;!\n&quot;;</span>
+<span class="fc" id="L172">            } catch (IllegalArgumentException e) {</span>
+<span class="fc" id="L173">                out.println(&quot;Invalid input coordinate!&quot;);</span>
+<span class="fc" id="L174">            }</span>
+        }
+    }
+
+    public boolean doAttackingPhase(BoardTextView enemyView, Board&lt;Character&gt; enemyBoard, TextPlayer enemyPlayer)
+            throws IOException {
+<span class="fc" id="L180">        playOneTurn(enemyView, enemyBoard);</span>
+<span class="fc bfc" id="L181" title="All 2 branches covered.">        if (enemyPlayer.hasLost()) {</span>
+<span class="fc" id="L182">            out.println(&quot;Player &quot; + name + &quot; has won!&quot;);</span>
+<span class="fc" id="L183">            return false;</span>
+        }
+<span class="fc" id="L185">        return true;</span>
+    }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

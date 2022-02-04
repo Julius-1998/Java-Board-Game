@@ -79,7 +79,13 @@ public class BoardTextView {
         return displayAnyBoard((c) -> toDisplay.whatIsAtForEnemy(c));
 
     }
-
+    /**
+     * Return the board and enemy's board at the sasme time
+     * @param enemyView enemy's view
+     * @param myHeader my head line
+     * @param enemyHeader enemy's head line
+     * @return
+     */
     public String displayMyBoardWithEnemyNextToIt(BoardTextView enemyView, String myHeader, String enemyHeader) {
         StringBuilder sb = new StringBuilder();
         String[] myLines = displayMyOwnBoard().split("\n");
@@ -100,7 +106,13 @@ public class BoardTextView {
         }
         return sb.toString();
     }
-
+    /**
+     * Generate the head line for player and it's enemy
+     * @param myHeader
+     * @param enemyHeader
+     * @param space
+     * @return
+     */
     public String generateHeaders(String myHeader, String enemyHeader, int space) {
         StringBuilder sb = new StringBuilder();
         sb.append(myHeader);

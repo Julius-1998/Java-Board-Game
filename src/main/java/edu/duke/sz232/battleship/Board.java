@@ -12,4 +12,8 @@ public interface Board<T> {
   public String tryAddShip(Ship<T> toAdd);
 
   public Ship<T> fireAt(Coordinate where);
+
+  public boolean hasAllSunk();
+
+  public boolean isValid(Coordinate where);
 }

@@ -115,11 +115,14 @@ public class BoardTextViewTest {
             board.tryAddShip(ship); 
         }
         board.fireAt(new Coordinate(0,1));
+
+        board.fireAt(new Coordinate(1,1));
+
         BoardTextView view = new BoardTextView(board);
         String expectedHeader = view.makeHeader();
          String expectedBody = 
                 "A  |s|  A\n" +
-                "B  | |  B\n" +
+                "B  |X|  B\n" +
                 "C  | |  C\n" +
                 "D  | |  D\n" +
                 "E  | |  E\n";
@@ -135,12 +138,6 @@ public class BoardTextViewTest {
         BoardTextView myView = new BoardTextView(myBoard);
         BoardTextView enemyView = new BoardTextView(enemyBoard);
         System.out.print(myView.displayMyBoardWithEnemyNextToIt(enemyView, "myHeader", "enemyHeader"));
-        String expectedHeader = myView.makeHeader();
-         String expectedBody = 
-                "A  |s|  A\n" +
-                "B  | |  B\n" +
-                "C  | |  C\n" +
-                "D  | |  D\n" +
-                "E  | |  E\n";
+        
     }
 }

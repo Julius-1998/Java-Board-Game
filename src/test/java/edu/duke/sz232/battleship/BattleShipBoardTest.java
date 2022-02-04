@@ -70,6 +70,30 @@ public class BattleShipBoardTest {
     assertSame(null, b1.fireAt(new Coordinate(0,0)));
 
   }
+
+  @Test
+  public void test_has_all_sunk(){
+    BattleShipBoard<Character> b1 = new BattleShipBoard<>(20, 10,'X');
+    V1ShipFactory shipFactory = new V1ShipFactory();
+    Ship<Character> s1 = shipFactory.makeSubmarine(new Placement("A4V"));
+    b1.tryAddShip(s1);
+    b1.fireAt(new Coordinate("A4"));
+    assertEquals(b1.hasAllSunk(), false);
+    b1.fireAt(new Coordinate("B4"));
+    assertEquals(b1.hasAllSunk(), true);
+  }
+  
+  @Test
+  public void test_out_of_boundry(){
+    BattleShipBoard<Character> b1 = new BattleShipBoard<>(20, 9,'X');
+    V1ShipFactory shipFactory = new V1ShipFactory();
+    Ship<Character> s1 = shipFactory.makeSubmarine(new Placement("A4V"));
+    b1.tryAddShip(s1);
+    b1.fireAt(new Coordinate("A4"));
+    assertEquals(b1.hasAllSunk(), false);
+    assertThrows(IllegalArgumentException.class, ()->b1.fireAt(new Coordinate("U4")));
+    assertThrows(IllegalArgumentException.class, ()->b1.fireAt(new Coordinate("A9")));    
+  }
   
   private <T> void checkWhatIsAtBoard(BattleShipBoard<T> b, T[][] expected){
     for(int i = 0;i < b.getWidth();i++){

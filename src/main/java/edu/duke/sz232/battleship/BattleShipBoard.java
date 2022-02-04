@@ -89,6 +89,9 @@ public class BattleShipBoard<T> implements Board<T> {
      * @return
      */
     public T whatIsAtForEnemy(Coordinate where) {
+        if(enemyMisses.contains(where)){
+            return missInfo;
+        }
         return whatIsAt(where, false);
     }
 
@@ -113,6 +116,10 @@ public class BattleShipBoard<T> implements Board<T> {
      * @return the ship got fired at or null if it's a miss
      */
     public Ship<T> fireAt(Coordinate c) {
+        //determine if c is within range of the board
+        if(!isValid(c)){
+            throw new IllegalArgumentException("The coordinate is not on the board!");
+        }
         for (Ship<T> ship : myShips) {
             Iterable<Coordinate> coordinates = ship.getCoordinates();
             for (Coordinate coordinate : coordinates) {
@@ -124,6 +131,29 @@ public class BattleShipBoard<T> implements Board<T> {
         }
         enemyMisses.add(c);
         return null;
+    }
+
+    /**
+     * Determine if all ships owned by the board is sunk
+     * @return true if it's all sunk
+     */
+    public boolean hasAllSunk(){
+        for(Ship<T> ship: myShips){
+            if(!ship.isSunk()){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Determine if the coordinate is within range of the board
+     */
+    public boolean isValid(Coordinate where){
+        if(where.getRow()>=width||where.getColumn()>=height){
+            return false;
+        }
+        return true;
     }
     
 }

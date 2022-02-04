@@ -67,6 +67,22 @@ public class TextPlayer {
     }
 
     /**
+     * Read one coordinate from input
+     * 
+     * @param prompt
+     * @return Coordinate from input
+     * @throws IOException
+     */
+    public Coordinate readCoordinate(String prompt) throws IOException {
+        out.println(prompt);
+        String s = inputReader.readLine();
+        if (s == null) {
+            throw new EOFException();
+        }
+        return new Coordinate(s);
+    }
+
+    /**
      * Make one replacement
      * 
      * @param shipName is the ship's name
@@ -74,10 +90,21 @@ public class TextPlayer {
      * @throws IOException
      */
     public void doOnePlacement(String shipName, Function<Placement, Ship<Character>> createFn) throws IOException {
-        Placement p = readPlacement("Player " + name + " where do you want to place a " + shipName + "?");
-        Ship<Character> s = createFn.apply(p);
-        theBoard.tryAddShip(s);
-        out.print(view.displayMyOwnBoard());
+        while (true) {
+            try {
+                Placement p = readPlacement("Player " + name + " where do you want to place a " + shipName + "?");
+                Ship<Character> s = createFn.apply(p);
+                String err = theBoard.tryAddShip(s);
+                if (err != null) {
+                    out.println(err);
+                } else {
+                    out.print(view.displayMyOwnBoard());
+                    break;
+                }
+            } catch (IllegalArgumentException e) {
+                out.println("Invalid placement String");
+            }
+        }
     }
 
     /**
@@ -89,11 +116,16 @@ public class TextPlayer {
         return view;
     }
 
+    /**
+     * Do one place ment for player
+     * 
+     * @throws IOException
+     */
     public void doPlacementPhase() throws IOException {
-        view.displayMyOwnBoard();
+        out.print(view.displayMyOwnBoard());
         out.print(
                 "--------------------------------------------------------------------------------\n" +
-                        "Player " +name+": you are going to place the following ships (which are all\n" +
+                        "Player " + name + ": you are going to place the following ships (which are all\n" +
                         "rectangular). For each ship, type the coordinate of the upper left\n" +
                         "side of the ship, followed by either H (for horizontal) or V (for\n" +
                         "vertical).  For example M4H would place a ship horizontally starting\n" +
@@ -109,6 +141,48 @@ public class TextPlayer {
             doOnePlacement(shipName, f);
         }
 
+    }
+
+    /**
+     * A player loses when all ships on the board is sunk
+     * 
+     * @return
+     */
+    public boolean hasLost() {
+        return theBoard.hasAllSunk();
+    }
+
+    public void playOneTurn(BoardTextView enemyView, Board<Character> enemyBoard) throws IOException {
+        String myHeader = "Your ocean";
+        String enemyHeader = "Enemy's ocean";
+        out.print(view.displayMyBoardWithEnemyNextToIt(enemyView, myHeader, enemyHeader));
+        out.print(promptAttack(enemyBoard));
+    }
+
+    public String promptAttack(Board<Character> enemyBoard) throws IOException {
+        String prompt = "Player " + name + ",Please enter your coordinate to attack:";
+        while (true) {
+            try {
+                Coordinate c = readCoordinate(prompt);
+                Ship<Character> s = enemyBoard.fireAt(c);
+                if (s == null) {
+                    return "You missed!\n";
+                }
+                return "You hit a " + s.getName() + "!\n";
+            } catch (IllegalArgumentException e) {
+                out.println("Invalid input coordinate!");
+            }
+        }
+    }
+
+    public boolean doAttackingPhase(BoardTextView enemyView, Board<Character> enemyBoard, TextPlayer enemyPlayer)
+            throws IOException {
+        playOneTurn(enemyView, enemyBoard);
+        if (enemyPlayer.hasLost()) {
+            out.println("Player " + name + " has won!");
+            return false;
+        }
+        return true;
     }
 
 }
