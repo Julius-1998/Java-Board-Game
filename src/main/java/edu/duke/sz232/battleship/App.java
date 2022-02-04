@@ -21,17 +21,19 @@ public class App {
         player1 = new TextPlayer("A", b1, input, System.out, factory);
         player2 = new TextPlayer("B", b2, input, System.out, factory);
         doPlacementPhase();
+        //While neither of the players has won, continue
+        while(true){
+            if(!player1.doAttackingPhase(player2.getBoardTextView(), b2, player2)){return;};
+            if(!player2.doAttackingPhase(player1.getBoardTextView(), b1, player1)){return;};
+        }
     }
-
-    public App(TextPlayer player1, TextPlayer player2){
-        App.player1 = player1;
-        App.player2 = player2;
-    }
-
+    //When doing placementPhase, do then one by one
     public static void doPlacementPhase()throws IOException{
         player1.doPlacementPhase();
         player2.doPlacementPhase();
     }
+
+
    
    
 
