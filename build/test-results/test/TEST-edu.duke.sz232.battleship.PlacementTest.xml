@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.duke.sz232.battleship.PlacementTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-02-04T22:04:58" hostname="ubuntu" time="0.108">
+<testsuite name="edu.duke.sz232.battleship.PlacementTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-02-05T05:43:15" hostname="ubuntu" time="0.073">
   <properties/>
   <testcase name="test_to_string()" classname="edu.duke.sz232.battleship.PlacementTest" time="0.001"/>
   <testcase name="test_string_constructor_valid_cases()" classname="edu.duke.sz232.battleship.PlacementTest" time="0.001"/>
-  <testcase name="test_hashCode()" classname="edu.duke.sz232.battleship.PlacementTest" time="0.072"/>
-  <testcase name="test_string_constructor_error_cases()" classname="edu.duke.sz232.battleship.PlacementTest" time="0.006"/>
-  <testcase name="test_equals()" classname="edu.duke.sz232.battleship.PlacementTest" time="0.008"/>
+  <testcase name="test_hashCode()" classname="edu.duke.sz232.battleship.PlacementTest" time="0.047"/>
+  <testcase name="test_string_constructor_error_cases()" classname="edu.duke.sz232.battleship.PlacementTest" time="0.015"/>
+  <testcase name="test_equals()" classname="edu.duke.sz232.battleship.PlacementTest" time="0.001"/>
   <testcase name="invalid_to_string()" classname="edu.duke.sz232.battleship.PlacementTest" time="0.003"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

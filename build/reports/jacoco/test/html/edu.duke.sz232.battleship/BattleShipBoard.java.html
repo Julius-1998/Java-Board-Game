@@ -3,7 +3,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 
 /**
  * Representing the board
@@ -25,8 +24,8 @@ public class BattleShipBoard&lt;T&gt; implements Board&lt;T&gt; {
      * @param h
      */
     public BattleShipBoard(int w, int h, T missInfo) {
-<span class="fc" id="L28">        this(w, h, new InBoundsRuleChecker&lt;&gt;(new NoCollisionRuleChecker&lt;&gt;(null)), missInfo);</span>
-<span class="fc" id="L29">    }</span>
+<span class="fc" id="L27">        this(w, h, new InBoundsRuleChecker&lt;&gt;(new NoCollisionRuleChecker&lt;&gt;(null)), missInfo);</span>
+<span class="fc" id="L28">    }</span>
 
     /**
      * Constructs a BattleShipBoard with the specified width
@@ -38,27 +37,27 @@ public class BattleShipBoard&lt;T&gt; implements Board&lt;T&gt; {
      * @throws IllegalArgumentException if the width or height are less than or
      *                                  equal to zero.
      */
-<span class="fc" id="L41">    public BattleShipBoard(int w, int h, PlacementRuleChecker&lt;T&gt; checker, T missInfo) {</span>
-<span class="fc bfc" id="L42" title="All 2 branches covered.">        if (w &lt;= 0) {</span>
-<span class="fc" id="L43">            throw new IllegalArgumentException(&quot;BattleShipBoard's width must be positive but is &quot; + w);</span>
+<span class="fc" id="L40">    public BattleShipBoard(int w, int h, PlacementRuleChecker&lt;T&gt; checker, T missInfo) {</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        if (w &lt;= 0) {</span>
+<span class="fc" id="L42">            throw new IllegalArgumentException(&quot;BattleShipBoard's width must be positive but is &quot; + w);</span>
         }
-<span class="fc bfc" id="L45" title="All 2 branches covered.">        if (h &lt;= 0) {</span>
-<span class="fc" id="L46">            throw new IllegalArgumentException(&quot;BattleShipBoard's height must be positive but is &quot; + h);</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">        if (h &lt;= 0) {</span>
+<span class="fc" id="L45">            throw new IllegalArgumentException(&quot;BattleShipBoard's height must be positive but is &quot; + h);</span>
         }
-<span class="fc" id="L48">        this.width = w;</span>
-<span class="fc" id="L49">        this.height = h;</span>
-<span class="fc" id="L50">        this.myShips = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L51">        this.placementChecker = checker;</span>
-<span class="fc" id="L52">        this.enemyMisses = new HashSet&lt;&gt;();</span>
-<span class="fc" id="L53">        this.missInfo = missInfo;</span>
-<span class="fc" id="L54">    }</span>
+<span class="fc" id="L47">        this.width = w;</span>
+<span class="fc" id="L48">        this.height = h;</span>
+<span class="fc" id="L49">        this.myShips = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L50">        this.placementChecker = checker;</span>
+<span class="fc" id="L51">        this.enemyMisses = new HashSet&lt;&gt;();</span>
+<span class="fc" id="L52">        this.missInfo = missInfo;</span>
+<span class="fc" id="L53">    }</span>
 
     public int getHeight() {
-<span class="fc" id="L57">        return height;</span>
+<span class="fc" id="L56">        return height;</span>
     }
 
     public int getWidth() {
-<span class="fc" id="L61">        return width;</span>
+<span class="fc" id="L60">        return width;</span>
     }
 
     /**
@@ -68,12 +67,12 @@ public class BattleShipBoard&lt;T&gt; implements Board&lt;T&gt; {
      * @param toAdd the ship to be added
      */
     public String tryAddShip(Ship&lt;T&gt; toAdd) {
-<span class="fc" id="L71">        String err = placementChecker.checkPlacement(toAdd, this);</span>
-<span class="fc bfc" id="L72" title="All 2 branches covered.">        if (err == null) {</span>
-<span class="fc" id="L73">            myShips.add(toAdd);</span>
-<span class="fc" id="L74">            return null;</span>
+<span class="fc" id="L70">        String err = placementChecker.checkPlacement(toAdd, this);</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">        if (err == null) {</span>
+<span class="fc" id="L72">            myShips.add(toAdd);</span>
+<span class="fc" id="L73">            return null;</span>
         }
-<span class="fc" id="L76">        return err;</span>
+<span class="fc" id="L75">        return err;</span>
     }
 
     /**
@@ -82,7 +81,7 @@ public class BattleShipBoard&lt;T&gt; implements Board&lt;T&gt; {
      * @param where the place to be figured
      */
     public T whatIsAtForSelf(Coordinate where) {
-<span class="fc" id="L85">        return whatIsAt(where, true);</span>
+<span class="fc" id="L84">        return whatIsAt(where, true);</span>
     }
 
     /**
@@ -92,10 +91,10 @@ public class BattleShipBoard&lt;T&gt; implements Board&lt;T&gt; {
      * @return
      */
     public T whatIsAtForEnemy(Coordinate where) {
-<span class="fc bfc" id="L95" title="All 2 branches covered.">        if (enemyMisses.contains(where)) {</span>
-<span class="fc" id="L96">            return missInfo;</span>
+<span class="fc bfc" id="L94" title="All 2 branches covered.">        if (enemyMisses.contains(where)) {</span>
+<span class="fc" id="L95">            return missInfo;</span>
         }
-<span class="fc" id="L98">        return whatIsAt(where, false);</span>
+<span class="fc" id="L97">        return whatIsAt(where, false);</span>
     }
 
     /**
@@ -104,12 +103,12 @@ public class BattleShipBoard&lt;T&gt; implements Board&lt;T&gt; {
      * @param where the place to be figured
      */
     protected T whatIsAt(Coordinate where, boolean isSelf) {
-<span class="fc bfc" id="L107" title="All 2 branches covered.">        for (Ship&lt;T&gt; s : myShips) {</span>
-<span class="fc bfc" id="L108" title="All 2 branches covered.">            if (s.occupiesCoordinates(where)) {</span>
-<span class="fc" id="L109">                return s.getDisplayInfoAt(where, isSelf);</span>
+<span class="fc bfc" id="L106" title="All 2 branches covered.">        for (Ship&lt;T&gt; s : myShips) {</span>
+<span class="fc bfc" id="L107" title="All 2 branches covered.">            if (s.occupiesCoordinates(where)) {</span>
+<span class="fc" id="L108">                return s.getDisplayInfoAt(where, isSelf);</span>
             }
-<span class="fc" id="L111">        }</span>
-<span class="fc" id="L112">        return null;</span>
+<span class="fc" id="L110">        }</span>
+<span class="fc" id="L111">        return null;</span>
     }
 
     /**
@@ -120,20 +119,20 @@ public class BattleShipBoard&lt;T&gt; implements Board&lt;T&gt; {
      */
     public Ship&lt;T&gt; fireAt(Coordinate c) {
         // determine if c is within range of the board
-<span class="fc bfc" id="L123" title="All 2 branches covered.">        if (!isValid(c)) {</span>
-<span class="fc" id="L124">            throw new IllegalArgumentException(&quot;The coordinate is not on the board!&quot;);</span>
+<span class="fc bfc" id="L122" title="All 2 branches covered.">        if (!isValid(c)) {</span>
+<span class="fc" id="L123">            throw new IllegalArgumentException(&quot;The coordinate is not on the board!&quot;);</span>
         }
-<span class="fc bfc" id="L126" title="All 2 branches covered.">        for (Ship&lt;T&gt; ship : myShips) {</span>
-<span class="fc" id="L127">            Iterable&lt;Coordinate&gt; coordinates = ship.getCoordinates();</span>
-<span class="fc bfc" id="L128" title="All 2 branches covered.">            for (Coordinate coordinate : coordinates) {</span>
-<span class="fc bfc" id="L129" title="All 2 branches covered.">                if (coordinate.equals(c)) {</span>
-<span class="fc" id="L130">                    ship.recordHitAt(c);</span>
-<span class="fc" id="L131">                    return ship;</span>
+<span class="fc bfc" id="L125" title="All 2 branches covered.">        for (Ship&lt;T&gt; ship : myShips) {</span>
+<span class="fc" id="L126">            Iterable&lt;Coordinate&gt; coordinates = ship.getCoordinates();</span>
+<span class="fc bfc" id="L127" title="All 2 branches covered.">            for (Coordinate coordinate : coordinates) {</span>
+<span class="fc bfc" id="L128" title="All 2 branches covered.">                if (coordinate.equals(c)) {</span>
+<span class="fc" id="L129">                    ship.recordHitAt(c);</span>
+<span class="fc" id="L130">                    return ship;</span>
                 }
-<span class="fc" id="L133">            }</span>
-<span class="fc" id="L134">        }</span>
-<span class="fc" id="L135">        enemyMisses.add(c);</span>
-<span class="fc" id="L136">        return null;</span>
+<span class="fc" id="L132">            }</span>
+<span class="fc" id="L133">        }</span>
+<span class="fc" id="L134">        enemyMisses.add(c);</span>
+<span class="fc" id="L135">        return null;</span>
     }
 
     /**
@@ -142,22 +141,22 @@ public class BattleShipBoard&lt;T&gt; implements Board&lt;T&gt; {
      * @return true if it's all sunk
      */
     public boolean hasAllSunk() {
-<span class="fc bfc" id="L145" title="All 2 branches covered.">        for (Ship&lt;T&gt; ship : myShips) {</span>
-<span class="fc bfc" id="L146" title="All 2 branches covered.">            if (!ship.isSunk()) {</span>
-<span class="fc" id="L147">                return false;</span>
+<span class="fc bfc" id="L144" title="All 2 branches covered.">        for (Ship&lt;T&gt; ship : myShips) {</span>
+<span class="fc bfc" id="L145" title="All 2 branches covered.">            if (!ship.isSunk()) {</span>
+<span class="fc" id="L146">                return false;</span>
             }
-<span class="fc" id="L149">        }</span>
-<span class="fc" id="L150">        return true;</span>
+<span class="fc" id="L148">        }</span>
+<span class="fc" id="L149">        return true;</span>
     }
 
     /**
      * Determine if the coordinate is within range of the board
      */
     public boolean isValid(Coordinate where) {
-<span class="fc bfc" id="L157" title="All 4 branches covered.">        if (where.getRow() &gt;= width || where.getColumn() &gt;= height) {</span>
-<span class="fc" id="L158">            return false;</span>
+<span class="fc bfc" id="L156" title="All 8 branches covered.">        if (where.getRow() &gt;= width || where.getColumn() &gt;= height || where.getRow() &lt; 0 || where.getColumn() &lt; 0) {</span>
+<span class="fc" id="L157">            return false;</span>
         }
-<span class="fc" id="L160">        return true;</span>
+<span class="fc" id="L159">        return true;</span>
     }
 
     /**
@@ -168,49 +167,56 @@ public class BattleShipBoard&lt;T&gt; implements Board&lt;T&gt; {
      * @return
      */
     public Ship&lt;T&gt; removeShip(Coordinate where) throws IllegalArgumentException {
-<span class="nc bnc" id="L171" title="All 2 branches missed.">        if (!isValid(where)) {</span>
-<span class="nc" id="L172">            throw new IllegalArgumentException(&quot;The coordinate is not on the board!&quot;);</span>
+<span class="pc bpc" id="L170" title="1 of 2 branches missed.">        if (!isValid(where)) {</span>
+<span class="nc" id="L171">            throw new IllegalArgumentException(&quot;The coordinate is not on the board!&quot;);</span>
         }
-<span class="nc" id="L174">        Ship&lt;T&gt; ship = getShipAtCoordinate(where);</span>
-<span class="nc bnc" id="L175" title="All 2 branches missed.">        if (ship == null) {</span>
-<span class="nc" id="L176">            throw new IllegalArgumentException();</span>
+<span class="fc" id="L173">        Ship&lt;T&gt; ship = getShipAtCoordinate(where);</span>
+<span class="pc bpc" id="L174" title="1 of 2 branches missed.">        if (ship == null) {</span>
+<span class="nc" id="L175">            throw new IllegalArgumentException(&quot;The ship is not valid&quot;);</span>
         }
-<span class="nc" id="L178">        myShips.remove(ship);</span>
-<span class="nc" id="L179">        return ship;</span>
+<span class="fc" id="L177">        myShips.remove(ship);</span>
+<span class="fc" id="L178">        return ship;</span>
     }
 
     /**
      * Check if the place has ship;
      * 
-     * @param where
+     * @param where the place being get
      * @return null if the place is not a ship
      */
     public Ship&lt;T&gt; getShipAtCoordinate(Coordinate where) {
-<span class="nc bnc" id="L189" title="All 2 branches missed.">        for (Ship&lt;T&gt; ship : myShips) {</span>
-<span class="nc bnc" id="L190" title="All 2 branches missed.">            if (ship.occupiesCoordinates(where)) {</span>
-<span class="nc" id="L191">                return ship;</span>
+<span class="fc bfc" id="L188" title="All 2 branches covered.">        for (Ship&lt;T&gt; ship : myShips) {</span>
+<span class="fc bfc" id="L189" title="All 2 branches covered.">            if (ship.occupiesCoordinates(where)) {</span>
+<span class="fc" id="L190">                return ship;</span>
             }
-<span class="nc" id="L193">        }</span>
-<span class="nc" id="L194">        return null;</span>
+<span class="fc" id="L192">        }</span>
+<span class="fc" id="L193">        return null;</span>
     }
 
-    public HashMap&lt;Ship&lt;T&gt;, Integer&gt; sonar(Coordinate where) throws IllegalArgumentException {
-<span class="nc bnc" id="L198" title="All 2 branches missed.">        if (!isValid(where)) {</span>
-<span class="nc" id="L199">            throw new IllegalArgumentException(&quot;The coordinate is not on the board!&quot;);</span>
+    /**
+     * Do the sonar scan of the given coordinate
+     * @param where the place being scanned
+     * @return the map of ship's collection of name and count
+     */
+    public HashMap&lt;String, Integer&gt; sonar(Coordinate where) throws IllegalArgumentException {
+<span class="pc bpc" id="L202" title="1 of 2 branches missed.">        if (!isValid(where)) {</span>
+<span class="nc" id="L203">            throw new IllegalArgumentException(&quot;The coordinate is not on the board!&quot;);</span>
         }
-<span class="nc" id="L201">        HashMap&lt;Ship&lt;T&gt;,Integer&gt; map = new HashMap&lt;&gt;();</span>
-<span class="nc bnc" id="L202" title="All 2 branches missed.">        for (int i = -3; i &lt; 4; i++) {</span>
-<span class="nc bnc" id="L203" title="All 2 branches missed.">            for (int j = -3; j &lt; 4; j++) {</span>
-<span class="nc" id="L204">                Coordinate detectPoint = new Coordinate(where.getRow()+i,where.getColumn()+j);</span>
-<span class="nc" id="L205">                int bias = Math.abs(i)+Math.abs(j);</span>
-<span class="nc bnc" id="L206" title="All 4 branches missed.">                if (isValid(detectPoint)&amp;&amp;bias&lt;=3) {</span>
-<span class="nc" id="L207">                    Ship&lt;T&gt; ship = getShipAtCoordinate(detectPoint);</span>
-<span class="nc" id="L208">                    Integer currentCount = map.get(ship);</span>
-<span class="nc" id="L209">                    map.put(ship,currentCount+1);</span>
+<span class="fc" id="L205">        HashMap&lt;String, Integer&gt; map = new HashMap&lt;&gt;();</span>
+<span class="fc bfc" id="L206" title="All 2 branches covered.">        for (int i = -3; i &lt; 4; i++) {</span>
+<span class="fc bfc" id="L207" title="All 2 branches covered.">            for (int j = -3; j &lt; 4; j++) {</span>
+<span class="fc" id="L208">                Coordinate detectPoint = new Coordinate(where.getRow() + i, where.getColumn() + j);</span>
+<span class="fc" id="L209">                int bias = Math.abs(i) + Math.abs(j);</span>
+<span class="fc bfc" id="L210" title="All 4 branches covered.">                if (isValid(detectPoint) &amp;&amp; bias &lt;= 3) {</span>
+<span class="fc" id="L211">                    Ship&lt;T&gt; ship = getShipAtCoordinate(detectPoint);</span>
+<span class="fc bfc" id="L212" title="All 2 branches covered.">                    if (ship != null) {</span>
+<span class="fc" id="L213">                        Integer currentCount = map.getOrDefault(ship.getName(),0);</span>
+<span class="fc" id="L214">                        map.put(ship.getName(), currentCount + 1);</span>
+                    }
                 }
             }
         }
-<span class="nc" id="L213">        return map;</span>
+<span class="fc" id="L219">        return map;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

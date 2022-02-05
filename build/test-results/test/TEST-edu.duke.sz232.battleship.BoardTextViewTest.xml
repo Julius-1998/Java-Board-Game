@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.duke.sz232.battleship.BoardTextViewTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2022-02-04T22:04:58" hostname="ubuntu" time="0.264">
+<testsuite name="edu.duke.sz232.battleship.BoardTextViewTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2022-02-05T05:43:14" hostname="ubuntu" time="0.06">
   <properties/>
-  <testcase name="test_dispaly_multiple_basic_ship_3by5()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.067"/>
-  <testcase name="test_fire_enemy_display()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.015"/>
-  <testcase name="test_display_my_board_with_enemy_board()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.072"/>
-  <testcase name="test_dispaly_single_basic_ship_3by5()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.003"/>
-  <testcase name="test_display_empty_2by2()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.062"/>
+  <testcase name="test_dispaly_multiple_basic_ship_3by5()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.014"/>
+  <testcase name="test_fire_enemy_display()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.003"/>
+  <testcase name="test_display_my_board_with_enemy_board()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.012"/>
+  <testcase name="test_dispaly_single_basic_ship_3by5()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.001"/>
+  <testcase name="test_display_empty_2by2()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.014"/>
   <testcase name="test_display_empty_3by2()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.002"/>
   <testcase name="test_display_empty_3by5()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.002"/>
   <system-out><![CDATA[myHeader                               enemyHeader

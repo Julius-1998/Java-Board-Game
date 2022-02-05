@@ -286,7 +286,7 @@ public class TextPlayer implements Player{
             }
         }
         for (Map.Entry<String,Integer> entry : map.entrySet()) {
-            out.println(entry.getKey()+"s occupy "+entry.getValue().toString()+"squares");
+            out.println(entry.getKey()+"s occupy "+entry.getValue().toString()+" squares");
         }
     }
     

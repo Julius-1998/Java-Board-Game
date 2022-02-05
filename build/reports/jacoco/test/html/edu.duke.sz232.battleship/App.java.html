@@ -4,38 +4,83 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
-import java.io.Reader;
 
 /**
  * App where the program starts
  */
-<span class="nc" id="L12">public class App {</span>
-   
-    static TextPlayer player1;
-    static TextPlayer player2;
+public class App {
+
+    static Player player1;
+    static Player player2;
+
     public static void main(String[] args) throws IOException {
-<span class="nc" id="L17">        Board&lt;Character&gt; b1 = new BattleShipBoard&lt;Character&gt;(10, 20,'X');</span>
-<span class="nc" id="L18">        Board&lt;Character&gt; b2 = new BattleShipBoard&lt;Character&gt;(10, 20,'X');</span>
-<span class="nc" id="L19">        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));</span>
-<span class="nc" id="L20">        V2ShipFactory factory = new V2ShipFactory();</span>
-<span class="nc" id="L21">        player1 = new TextPlayer(&quot;A&quot;, b1, input, System.out, factory);</span>
-<span class="nc" id="L22">        player2 = new TextPlayer(&quot;B&quot;, b2, input, System.out, factory);</span>
-<span class="nc" id="L23">        doPlacementPhase();</span>
-        //While neither of the players has won, continue
-        while(true){
-<span class="nc bnc" id="L26" title="All 2 branches missed.">            if(!player1.doAttackingPhase(player2.getBoardTextView(), b2, player2)){return;};</span>
-<span class="nc bnc" id="L27" title="All 2 branches missed.">            if(!player2.doAttackingPhase(player1.getBoardTextView(), b1, player1)){return;};</span>
+<span class="fc" id="L17">        Board&lt;Character&gt; b1 = new BattleShipBoard&lt;Character&gt;(10, 20, 'X');</span>
+<span class="fc" id="L18">        Board&lt;Character&gt; b2 = new BattleShipBoard&lt;Character&gt;(10, 20, 'X');</span>
+<span class="fc" id="L19">        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));</span>
+<span class="fc" id="L20">        V2ShipFactory factory = new V2ShipFactory();</span>
+<span class="fc" id="L21">        player1 = initPlayer(&quot;A&quot;, b1, input, System.out, factory);</span>
+<span class="fc" id="L22">        player2 = initPlayer(&quot;B&quot;, b2, input, System.out, factory);</span>
+<span class="fc" id="L23">        doPlacementPhase();</span>
+        // While neither of the players has won, continue
+        while (true) {
+<span class="fc bfc" id="L26" title="All 2 branches covered.">            if (!player1.doAttackingPhase(player2.getBoardTextView(), b2, player2)) {</span>
+<span class="fc" id="L27">                return;</span>
+            }
+
+<span class="pc bpc" id="L30" title="1 of 2 branches missed.">            if (!player2.doAttackingPhase(player1.getBoardTextView(), b1, player1)) {</span>
+<span class="nc" id="L31">                return;</span>
+            }
+
         }
     }
-    //When doing placementPhase, do then one by one
-    public static void doPlacementPhase()throws IOException{
-<span class="nc" id="L32">        player1.doPlacementPhase();</span>
-<span class="nc" id="L33">        player2.doPlacementPhase();</span>
-<span class="nc" id="L34">    }</span>
 
+    /**
+     * This function initialize a player as computer player or human player
+     * @param name the player's name
+     * @param theBoard the player's board
+     * @param inputSource the inputSource of player
+     * @param out  the output of player
+     * @param factory ship factory
+     * @return the constructed player
+     * @throws IOException
+     */
+    public static Player initPlayer(String name, Board&lt;Character&gt; theBoard, BufferedReader inputSource,
+            PrintStream out,
+            AbstractShipFactory&lt;Character&gt; factory) throws IOException {
+        while (true) {
+            try {
+<span class="fc" id="L52">                String prompt = &quot;Player &quot; + name + &quot; is a:\n&quot; +</span>
+                        &quot;1. human player\n&quot; +
+                        &quot;2. computer player\n&quot; +
+                        &quot;Please enter 1 or 2 to select&quot;;
+<span class="fc" id="L56">                out.println(prompt);</span>
+<span class="fc" id="L57">                String type = inputSource.readLine();</span>
+<span class="fc bfc" id="L58" title="All 2 branches covered.">                if (type.equals(&quot;1&quot;)) {</span>
+<span class="fc" id="L59">                    out.println(&quot;Generating textPlayer&quot;);</span>
+<span class="fc" id="L60">                    return new TextPlayer(name, theBoard, inputSource, out, factory);</span>
+<span class="pc bpc" id="L61" title="1 of 2 branches missed.">                } else if (type.equals(&quot;2&quot;)) {</span>
+<span class="fc" id="L62">                    out.println(&quot;Generating ComputerPlayer&quot;);</span>
+<span class="fc" id="L63">                    return new ComputerPlayer(name, theBoard, inputSource, out, factory);</span>
+                }
+<span class="nc bnc" id="L65" title="All 4 branches missed.">                if (!type.equals(&quot;1&quot;) || type.equals(&quot;2&quot;)) {</span>
+<span class="nc" id="L66">                    throw new IllegalArgumentException();</span>
+                }
+<span class="nc" id="L68">            } catch (Exception e) {</span>
+<span class="nc" id="L69">                e.printStackTrace();</span>
+<span class="nc" id="L70">            }</span>
+        }
+    }
 
-   
-   
+    // When doing placementPhase, do then one by one
+    public static void doPlacementPhase() throws IOException {
+<span class="fc" id="L76">        player1.doPlacementPhase();</span>
+<span class="fc" id="L77">        player2.doPlacementPhase();</span>
+<span class="fc" id="L78">    }</span>
+
+<span class="nc" id="L80">    public App(Player p1,Player p2){</span>
+<span class="nc" id="L81">        player1 = p1;</span>
+<span class="nc" id="L82">        player2 = p2;</span>
+<span class="nc" id="L83">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

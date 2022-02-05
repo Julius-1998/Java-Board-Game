@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-public class TextPlayer {
+public class TextPlayer implements Player{
     private final Board&lt;Character&gt; theBoard;
     private final BoardTextView view;
     private final BufferedReader inputReader;
@@ -39,10 +39,10 @@ public class TextPlayer {
 <span class="fc" id="L39">    }</span>
 
     protected void setupShipCreationMap() {
-<span class="pc" id="L42">        shipCreationFns.put(&quot;Submarine&quot;, (p) -&gt; shipFactory.makeSubmarine(p));</span>
-<span class="pc" id="L43">        shipCreationFns.put(&quot;Destroyer&quot;, (p) -&gt; shipFactory.makeDestroyer(p));</span>
-<span class="pc" id="L44">        shipCreationFns.put(&quot;Battleship&quot;, (p) -&gt; shipFactory.makeBattleship(p));</span>
-<span class="pc" id="L45">        shipCreationFns.put(&quot;Carrier&quot;, (p) -&gt; shipFactory.makeCarrier(p));</span>
+<span class="fc" id="L42">        shipCreationFns.put(&quot;Submarine&quot;, (p) -&gt; shipFactory.makeSubmarine(p));</span>
+<span class="fc" id="L43">        shipCreationFns.put(&quot;Destroyer&quot;, (p) -&gt; shipFactory.makeDestroyer(p));</span>
+<span class="fc" id="L44">        shipCreationFns.put(&quot;Battleship&quot;, (p) -&gt; shipFactory.makeBattleship(p));</span>
+<span class="fc" id="L45">        shipCreationFns.put(&quot;Carrier&quot;, (p) -&gt; shipFactory.makeCarrier(p));</span>
 
 <span class="fc" id="L47">    }</span>
 
@@ -78,24 +78,24 @@ public class TextPlayer {
      * @throws IOException
      */
     public Coordinate readCoordinate(String prompt) throws IOException {
-<span class="nc" id="L81">        out.println(prompt);</span>
-<span class="nc" id="L82">        String s = inputReader.readLine();</span>
-<span class="nc bnc" id="L83" title="All 2 branches missed.">        if (s == null) {</span>
+<span class="fc" id="L81">        out.println(prompt);</span>
+<span class="fc" id="L82">        String s = inputReader.readLine();</span>
+<span class="pc bpc" id="L83" title="1 of 2 branches missed.">        if (s == null) {</span>
 <span class="nc" id="L84">            throw new EOFException();</span>
         }
-<span class="nc" id="L86">        return new Coordinate(s);</span>
+<span class="fc" id="L86">        return new Coordinate(s);</span>
     }
 
     public char readChoice(String prompt) throws IOException{
-<span class="nc" id="L90">        out.println(prompt);</span>
-<span class="nc" id="L91">        String s= inputReader.readLine();</span>
-<span class="nc bnc" id="L92" title="All 2 branches missed.">        if (s == null) {</span>
+<span class="fc" id="L90">        out.println(prompt);</span>
+<span class="fc" id="L91">        String s= inputReader.readLine();</span>
+<span class="pc bpc" id="L92" title="1 of 2 branches missed.">        if (s == null) {</span>
 <span class="nc" id="L93">            throw new EOFException();</span>
         }
-<span class="nc bnc" id="L95" title="All 8 branches missed.">        if (s.length()!=1||(s.charAt(0)!='F'||s.charAt(0)!='M'||s.charAt(0)!='S')){</span>
-<span class="nc" id="L96">            throw new IllegalArgumentException();</span>
+<span class="pc bpc" id="L95" title="1 of 8 branches missed.">        if (s.length()!=1||(s.charAt(0)!='F'&amp;&amp;s.charAt(0)!='M'&amp;&amp;s.charAt(0)!='S')){</span>
+<span class="fc" id="L96">            throw new IllegalArgumentException();</span>
         }
-<span class="nc" id="L98">        return s.charAt(0);</span>
+<span class="fc" id="L98">        return s.charAt(0);</span>
     }
 
     /**
@@ -111,15 +111,15 @@ public class TextPlayer {
 <span class="fc" id="L111">                Placement p = readPlacement(&quot;Player &quot; + name + &quot; where do you want to place a &quot; + shipName + &quot;?&quot;);</span>
 <span class="fc" id="L112">                Ship&lt;Character&gt; s = createFn.apply(p);</span>
 <span class="fc" id="L113">                String err = theBoard.tryAddShip(s);</span>
-<span class="pc bpc" id="L114" title="1 of 2 branches missed.">                if (err != null) {</span>
-<span class="nc" id="L115">                    out.println(err);</span>
+<span class="fc bfc" id="L114" title="All 2 branches covered.">                if (err != null) {</span>
+<span class="fc" id="L115">                    out.println(err);</span>
                 } else {
 <span class="fc" id="L117">                    out.print(view.displayMyOwnBoard());</span>
 <span class="fc" id="L118">                    break;</span>
                 }
-<span class="nc" id="L120">            } catch (IllegalArgumentException e) {</span>
-<span class="nc" id="L121">                out.println(&quot;Invalid placement String&quot;);</span>
-<span class="nc" id="L122">            }</span>
+<span class="fc" id="L120">            } catch (IllegalArgumentException e) {</span>
+<span class="fc" id="L121">                out.println(&quot;Invalid placement String&quot;);</span>
+<span class="fc" id="L122">            }</span>
         }
 <span class="fc" id="L124">    }</span>
 
@@ -138,8 +138,8 @@ public class TextPlayer {
      * @throws IOException
      */
     public void doPlacementPhase() throws IOException {
-<span class="nc" id="L141">        out.print(view.displayMyOwnBoard());</span>
-<span class="nc" id="L142">        out.print(</span>
+<span class="fc" id="L141">        out.print(view.displayMyOwnBoard());</span>
+<span class="fc" id="L142">        out.print(</span>
                 &quot;--------------------------------------------------------------------------------\n&quot; +
                         &quot;Player &quot; + name + &quot;: you are going to place the following ships (which are all\n&quot; +
                         &quot;rectangular). For each ship, type the coordinate of the upper left\n&quot; +
@@ -152,112 +152,143 @@ public class TextPlayer {
                         &quot;3 \&quot;Battleships\&quot; that are 1x4\n&quot; +
                         &quot;2 \&quot;Carriers\&quot; that are 1x6\n&quot; +
                         &quot;--------------------------------------------------------------------------------\n&quot;);
-<span class="nc bnc" id="L155" title="All 2 branches missed.">        for (String shipName : shipsToPlace) {</span>
-<span class="nc" id="L156">            Function&lt;Placement, Ship&lt;Character&gt;&gt; f = shipCreationFns.get(shipName);</span>
-<span class="nc" id="L157">            doOnePlacement(shipName, f);</span>
-<span class="nc" id="L158">        }</span>
+<span class="fc bfc" id="L155" title="All 2 branches covered.">        for (String shipName : shipsToPlace) {</span>
+<span class="fc" id="L156">            Function&lt;Placement, Ship&lt;Character&gt;&gt; f = shipCreationFns.get(shipName);</span>
+<span class="fc" id="L157">            doOnePlacement(shipName, f);</span>
+<span class="fc" id="L158">        }</span>
 
-<span class="nc" id="L160">    }</span>
+<span class="fc" id="L160">    }</span>
 
-    public boolean doAttackingPhase(BoardTextView enemyView, Board&lt;Character&gt; enemyBoard, TextPlayer enemyPlayer)
+    public boolean doAttackingPhase(BoardTextView enemyView, Board&lt;Character&gt; enemyBoard, Player enemyPlayer)
             throws IOException {
-<span class="nc" id="L164">        playOneTurn(enemyView, enemyBoard);</span>
-<span class="nc bnc" id="L165" title="All 2 branches missed.">        if (enemyPlayer.hasLost()) {</span>
-<span class="nc" id="L166">            out.println(&quot;Player &quot; + name + &quot; has won!&quot;);</span>
-<span class="nc" id="L167">            return false;</span>
+<span class="fc" id="L164">        playOneTurn(enemyView, enemyBoard);</span>
+<span class="fc bfc" id="L165" title="All 2 branches covered.">        if (enemyPlayer.hasLost()) {</span>
+<span class="fc" id="L166">            out.println(&quot;Player &quot; + name + &quot; has won!&quot;);</span>
+<span class="fc" id="L167">            return false;</span>
         }
-<span class="nc" id="L169">        return true;</span>
+<span class="fc" id="L169">        return true;</span>
     }
 
     /**
      * A player loses when all ships on the board is sunk
      * 
-     * @return
+     * @return true if the player's have all sunk
      */
     public boolean hasLost() {
-<span class="nc" id="L178">        return theBoard.hasAllSunk();</span>
+<span class="fc" id="L178">        return theBoard.hasAllSunk();</span>
     }
 
+    /**
+     * The player play one turn
+     * @param enemyView enemy's board view
+     * @param enemyBoard enemy's board
+     * @throws IOException 
+     */
     public void playOneTurn(BoardTextView enemyView, Board&lt;Character&gt; enemyBoard) throws IOException {
-<span class="nc" id="L182">        String myHeader = &quot;Your ocean&quot;;</span>
-<span class="nc" id="L183">        String enemyHeader = &quot;Enemy's ocean&quot;;</span>
-<span class="nc" id="L184">        out.print(view.displayMyBoardWithEnemyNextToIt(enemyView, myHeader, enemyHeader));</span>
-        //out.print(promptAttack(enemyBoard));
-<span class="nc" id="L186">        promptChoice(enemyBoard);</span>
-<span class="nc" id="L187">    }</span>
-
+<span class="fc" id="L188">        String myHeader = &quot;Your ocean&quot;;</span>
+<span class="fc" id="L189">        String enemyHeader = &quot;Enemy's ocean&quot;;</span>
+<span class="fc" id="L190">        out.print(view.displayMyBoardWithEnemyNextToIt(enemyView, myHeader, enemyHeader));</span>
+<span class="fc" id="L191">        promptChoice(enemyBoard);</span>
+<span class="fc" id="L192">    }</span>
+    /**
+     * Print the choice and read the choice
+     * @param enemyBoard    enemy's board
+     */
     public void promptChoice(Board&lt;Character&gt; enemyBoard){
-<span class="nc" id="L190">        String prompt = </span>
+<span class="fc" id="L198">        String prompt = </span>
         &quot;Possible actions for Player &quot;+name+&quot;:\n&quot;+
         &quot;F Fire at a square\n&quot;+
-        &quot;M Move a ship to another square (2 remaining)\n&quot;+
-        &quot;S Sonar scan (1 remaining)&quot;;
+        &quot;M Move a ship to another square (&quot;+moveUsage+&quot; remaining)\n&quot;+
+        &quot;S Sonar scan (&quot;+sonarUsage+&quot; remaining)&quot;;
         while(true){
             try{
-<span class="nc" id="L197">                char c = readChoice(prompt);</span>
-<span class="nc bnc" id="L198" title="All 4 branches missed.">                switch (c) {</span>
-                    case 'm':
-<span class="nc" id="L200">                        out.println(&quot;fake perfomance of m&quot;);</span>
-<span class="nc" id="L201">                        break;</span>
-                    case 's':
-<span class="nc" id="L203">                        out.println(&quot;fake performance of s&quot;);</span>
-<span class="nc" id="L204">                        break;</span>
-                    case 'f':
-<span class="nc" id="L206">                        out.println(promptAttack(enemyBoard));</span>
+<span class="fc" id="L205">                char c = readChoice(prompt);</span>
+<span class="pc bpc" id="L206" title="1 of 4 branches missed.">                switch (c) {</span>
+                    case 'M':
+<span class="fc" id="L208">                        doOneMovement(); </span>
+<span class="fc" id="L209">                    break;</span>
+                    case 'S':
+<span class="fc" id="L211">                        doSonarScan(enemyBoard);    </span>
+<span class="fc" id="L212">                    break;</span>
+                    case 'F':
+<span class="fc" id="L214">                        out.println(promptAttack(enemyBoard));</span>
                 }
-<span class="nc" id="L208">                return;</span>
-<span class="nc" id="L209">            }catch(Exception e){</span>
-<span class="nc" id="L210">                out.println(&quot;Invalid input or choice have used up!&quot;);</span>
-<span class="nc" id="L211">            }</span>
+<span class="fc" id="L216">                return;</span>
+<span class="fc" id="L217">            }catch(Exception e){</span>
+<span class="fc" id="L218">                out.println(&quot;Invalid input or choice have used up!&quot;);</span>
+<span class="fc" id="L219">            }</span>
         }
     }
-    
+    /**
+     * Attack on enemy's board
+     * @param enemyBoard
+     * @return The resulat of attack
+     * @throws IOException
+     */
     public String promptAttack(Board&lt;Character&gt; enemyBoard) throws IOException {
-<span class="nc" id="L216">        String prompt = &quot;Player &quot; + name + &quot;,Please enter your coordinate to attack:&quot;;</span>
+<span class="fc" id="L229">        String prompt = &quot;Player &quot; + name + &quot;,Please enter your coordinate to attack:&quot;;</span>
         while (true) {
             try {
-<span class="nc" id="L219">                Coordinate c = readCoordinate(prompt);</span>
-<span class="nc" id="L220">                Ship&lt;Character&gt; s = enemyBoard.fireAt(c);</span>
-<span class="nc bnc" id="L221" title="All 2 branches missed.">                if (s == null) {</span>
-<span class="nc" id="L222">                    return &quot;You missed!\n&quot;;</span>
+<span class="fc" id="L232">                Coordinate c = readCoordinate(prompt);</span>
+<span class="fc" id="L233">                Ship&lt;Character&gt; s = enemyBoard.fireAt(c);</span>
+<span class="fc bfc" id="L234" title="All 2 branches covered.">                if (s == null) {</span>
+<span class="fc" id="L235">                    return &quot;You missed!\n&quot;;</span>
                 }
-<span class="nc" id="L224">                return &quot;You hit a &quot; + s.getName() + &quot;!\n&quot;;</span>
-<span class="nc" id="L225">            } catch (IllegalArgumentException e) {</span>
-<span class="nc" id="L226">                out.println(&quot;Invalid input coordinate!&quot;);</span>
-<span class="nc" id="L227">            }</span>
+<span class="fc" id="L237">                return &quot;You hit a &quot; + s.getName() + &quot;!\n&quot;;</span>
+<span class="nc" id="L238">            } catch (IllegalArgumentException e) {</span>
+<span class="nc" id="L239">                out.println(&quot;Invalid input coordinate!&quot;);</span>
+<span class="nc" id="L240">            }</span>
         }
     }
-
+    /**
+     * Make one movement
+     * @throws IOException
+     */
     public void doOneMovement() throws IOException {
+<span class="pc bpc" id="L248" title="1 of 2 branches missed.">        if(moveUsage==0){</span>
+<span class="nc" id="L249">            throw new IllegalArgumentException();</span>
+        }else{
+<span class="fc" id="L251">            moveUsage--;</span>
+        }
         Ship&lt;Character&gt; s;
         while (true) {
             try {
-<span class="nc" id="L235">                Coordinate c = readCoordinate(&quot;Please Select the coordinate of ship to move&quot;);</span>
-<span class="nc" id="L236">                s = theBoard.removeShip(c);</span>
-<span class="nc" id="L237">                break;</span>
-<span class="nc" id="L238">            } catch (IllegalArgumentException e) {</span>
-<span class="nc" id="L239">                out.print(&quot;Invalid input coordinate!&quot;);</span>
-<span class="nc" id="L240">            }</span>
+<span class="fc" id="L256">                Coordinate c = readCoordinate(&quot;Please Select the coordinate of ship to move&quot;);</span>
+<span class="fc" id="L257">                s = theBoard.removeShip(c);</span>
+<span class="fc" id="L258">                break;</span>
+<span class="nc" id="L259">            } catch (IllegalArgumentException e) {</span>
+<span class="nc" id="L260">                out.print(&quot;Invalid input coordinate!&quot;);</span>
+<span class="nc" id="L261">            }</span>
         }
-<span class="nc" id="L242">        Function&lt;Placement, Ship&lt;Character&gt;&gt; f = shipCreationFns.get(s.getName());</span>
-<span class="nc" id="L243">        doOnePlacement(s.getName(),f);</span>
-<span class="nc" id="L244">    }</span>
+<span class="fc" id="L263">        Function&lt;Placement, Ship&lt;Character&gt;&gt; f = shipCreationFns.get(s.getName());</span>
+<span class="fc" id="L264">        doOnePlacement(s.getName(),f);</span>
+<span class="fc" id="L265">    }</span>
 
+    /**
+     * Do sonar scan
+     * @param enemyBoard sonar scan on enemy's board
+     * @throws IOException
+     */
     public void doSonarScan(Board&lt;Character&gt; enemyBoard) throws IOException{
-        HashMap&lt;Ship&lt;Character&gt;,Integer&gt; map;
+<span class="pc bpc" id="L273" title="1 of 2 branches missed.">        if(sonarUsage==0){</span>
+<span class="nc" id="L274">            throw new IllegalArgumentException();</span>
+        }else{
+<span class="fc" id="L276">            sonarUsage--;</span>
+        }
+        HashMap&lt;String,Integer&gt; map;
         while (true) {
             try {
-<span class="nc" id="L250">                Coordinate c = readCoordinate(&quot;Please Select the coordinate to scan&quot;);</span>
-<span class="nc" id="L251">                map = enemyBoard.sonar(c);</span>
-<span class="nc" id="L252">                break;</span>
-<span class="nc" id="L253">            } catch (IllegalArgumentException e) {</span>
-<span class="nc" id="L254">                out.print(&quot;Invalid input coordinate!&quot;);</span>
-<span class="nc" id="L255">            }</span>
+<span class="fc" id="L281">                Coordinate c = readCoordinate(&quot;Please Select the coordinate to scan&quot;);</span>
+<span class="fc" id="L282">                map = enemyBoard.sonar(c);</span>
+<span class="fc" id="L283">                break;</span>
+<span class="nc" id="L284">            } catch (IllegalArgumentException e) {</span>
+<span class="nc" id="L285">                out.print(&quot;Invalid input coordinate!&quot;);</span>
+<span class="nc" id="L286">            }</span>
         }
-<span class="nc bnc" id="L257" title="All 2 branches missed.">        for (Map.Entry&lt;Ship&lt;Character&gt;,Integer&gt; entry : map.entrySet()) {</span>
-<span class="nc" id="L258">            out.println(entry.getKey().getName()+&quot;s occupy &quot;+entry.getValue().toString()+&quot;squares&quot;);</span>
-<span class="nc" id="L259">        }</span>
-<span class="nc" id="L260">    }</span>
+<span class="fc bfc" id="L288" title="All 2 branches covered.">        for (Map.Entry&lt;String,Integer&gt; entry : map.entrySet()) {</span>
+<span class="fc" id="L289">            out.println(entry.getKey()+&quot;s occupy &quot;+entry.getValue().toString()+&quot; squares&quot;);</span>
+<span class="fc" id="L290">        }</span>
+<span class="fc" id="L291">    }</span>
     
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
