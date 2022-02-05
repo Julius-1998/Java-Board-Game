@@ -9,7 +9,7 @@ import java.io.Reader;
 /**
  * App where the program starts
  */
-<span class="nc" id="L12">public class App {</span>
+public class App {
    
     static TextPlayer player1;
     static TextPlayer player2;
@@ -21,15 +21,22 @@ import java.io.Reader;
 <span class="fc" id="L21">        player1 = new TextPlayer(&quot;A&quot;, b1, input, System.out, factory);</span>
 <span class="fc" id="L22">        player2 = new TextPlayer(&quot;B&quot;, b2, input, System.out, factory);</span>
 <span class="fc" id="L23">        doPlacementPhase();</span>
+        //While neither of the players has won, continue
         while(true){
-<span class="fc bfc" id="L25" title="All 2 branches covered.">            if(!player1.doAttackingPhase(player2.getBoardTextView(), b2, player2)){return;};</span>
-<span class="pc bpc" id="L26" title="1 of 2 branches missed.">            if(!player2.doAttackingPhase(player1.getBoardTextView(), b1, player1)){return;};</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">            if(!player1.doAttackingPhase(player2.getBoardTextView(), b2, player2)){return;};</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">            if(!player2.doAttackingPhase(player1.getBoardTextView(), b1, player1)){return;};</span>
         }
     }
+    //When doing placementPhase, do then one by one
     public static void doPlacementPhase()throws IOException{
-<span class="fc" id="L30">        player1.doPlacementPhase();</span>
-<span class="fc" id="L31">        player2.doPlacementPhase();</span>
-<span class="fc" id="L32">    }</span>
+<span class="fc" id="L32">        player1.doPlacementPhase();</span>
+<span class="fc" id="L33">        player2.doPlacementPhase();</span>
+<span class="fc" id="L34">    }</span>
+
+<span class="fc" id="L36">    public App(TextPlayer p1,TextPlayer p2){</span>
+<span class="fc" id="L37">        player1 = p1;</span>
+<span class="fc" id="L38">        player2 = p2;</span>
+<span class="fc" id="L39">    }</span>
 
 
    

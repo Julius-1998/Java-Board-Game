@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.duke.sz232.battleship.V1ShipFactoryTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2022-02-04T14:58:06" hostname="ubuntu" time="0.007">
+<testsuite name="edu.duke.sz232.battleship.V1ShipFactoryTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2022-02-05T05:06:56" hostname="ubuntu" time="0.008">
   <properties/>
   <testcase name="testMakeSubmarine()" classname="edu.duke.sz232.battleship.V1ShipFactoryTest" time="0.001"/>
   <testcase name="testMakeBattleship()" classname="edu.duke.sz232.battleship.V1ShipFactoryTest" time="0.001"/>
-  <testcase name="testMakeCarrier()" classname="edu.duke.sz232.battleship.V1ShipFactoryTest" time="0.0"/>
-  <testcase name="testMakeDestroyer()" classname="edu.duke.sz232.battleship.V1ShipFactoryTest" time="0.004"/>
+  <testcase name="testMakeCarrier()" classname="edu.duke.sz232.battleship.V1ShipFactoryTest" time="0.001"/>
+  <testcase name="testMakeDestroyer()" classname="edu.duke.sz232.battleship.V1ShipFactoryTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

@@ -33,6 +33,11 @@ public class App {
         player2.doPlacementPhase();
     }
 
+    public App(TextPlayer p1,TextPlayer p2){
+        player1 = p1;
+        player2 = p2;
+    }
+
 
    
    

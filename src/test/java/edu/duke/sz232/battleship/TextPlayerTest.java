@@ -33,7 +33,16 @@ public class TextPlayerTest {
             bytes.reset(); // clear out bytes for next time around
         }
     }
-
+    @Test
+    void test_read_null() throws IOException {
+        StringReader sr = new StringReader("");
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(bytes, true);
+        Board<Character> b = new BattleShipBoard<Character>(10, 20,'X');
+        TextPlayer player = new TextPlayer("A", b, new BufferedReader(sr), ps, new V1ShipFactory());
+        String prompt = "Please enter a location for a ship:";
+        assertThrows(EOFException.class,()-> player.readCoordinate(prompt));
+    }
 
     @Test
     void test_do_one_placement() throws IOException {
@@ -45,7 +54,7 @@ public class TextPlayerTest {
         assertEquals(prompt + player.getBoardTextView().displayMyOwnBoard(), bytes.toString());
 
     }
-
+    
     @Test
     void test_read_EOF() throws IOException {
         StringReader sr = new StringReader("");

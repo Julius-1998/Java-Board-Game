@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.duke.sz232.battleship.BoardTextViewTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2022-02-04T14:58:05" hostname="ubuntu" time="0.034">
+<testsuite name="edu.duke.sz232.battleship.BoardTextViewTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2022-02-05T05:06:56" hostname="ubuntu" time="0.047">
   <properties/>
-  <testcase name="test_dispaly_multiple_basic_ship_3by5()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.007"/>
-  <testcase name="test_fire_enemy_display()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.001"/>
-  <testcase name="test_display_my_board_with_enemy_board()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.012"/>
-  <testcase name="test_dispaly_single_basic_ship_3by5()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.001"/>
-  <testcase name="test_display_empty_2by2()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.006"/>
+  <testcase name="test_dispaly_multiple_basic_ship_3by5()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.005"/>
+  <testcase name="test_fire_enemy_display()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.002"/>
+  <testcase name="test_display_my_board_with_enemy_board()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.024"/>
+  <testcase name="test_dispaly_single_basic_ship_3by5()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.0"/>
+  <testcase name="test_display_empty_2by2()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.009"/>
   <testcase name="test_display_empty_3by2()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.001"/>
-  <testcase name="test_display_empty_3by5()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.0"/>
+  <testcase name="test_display_empty_3by5()" classname="edu.duke.sz232.battleship.BoardTextViewTest" time="0.001"/>
   <system-out><![CDATA[myHeader                               enemyHeader
   0|1|2|3|4|5|6|7|8|9                    0|1|2|3|4|5|6|7|8|9
 A  | | | | | | | | |  A                A  | | | | | | | | |  A

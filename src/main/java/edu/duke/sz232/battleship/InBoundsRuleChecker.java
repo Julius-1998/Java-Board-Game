@@ -26,12 +26,6 @@ public class InBoundsRuleChecker<T> extends PlacementRuleChecker<T> {
             if (r > theBoard.getHeight() - 1) {
                 return "That placement is invalid: the ship goes off the bottom of the board.";
             }
-            if (c < 0) {
-                return "That placement is invalid: the ship goes off the left of the board.";
-            }
-            if (r < 0) {
-                return "That placement is invalid: the ship goes off the top of the board.";
-            }
         }
         return null;
     }

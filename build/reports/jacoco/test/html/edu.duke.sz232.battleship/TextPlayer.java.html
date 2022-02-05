@@ -76,8 +76,8 @@ public class TextPlayer {
     public Coordinate readCoordinate(String prompt) throws IOException {
 <span class="fc" id="L77">        out.println(prompt);</span>
 <span class="fc" id="L78">        String s = inputReader.readLine();</span>
-<span class="pc bpc" id="L79" title="1 of 2 branches missed.">        if (s == null) {</span>
-<span class="nc" id="L80">            throw new EOFException();</span>
+<span class="fc bfc" id="L79" title="All 2 branches covered.">        if (s == null) {</span>
+<span class="fc" id="L80">            throw new EOFException();</span>
         }
 <span class="fc" id="L82">        return new Coordinate(s);</span>
     }
