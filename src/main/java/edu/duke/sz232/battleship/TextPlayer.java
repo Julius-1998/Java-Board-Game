@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-public class TextPlayer {
+public class TextPlayer implements Player{
     private final Board<Character> theBoard;
     private final BoardTextView view;
     private final BufferedReader inputReader;
@@ -159,7 +159,7 @@ public class TextPlayer {
 
     }
 
-    public boolean doAttackingPhase(BoardTextView enemyView, Board<Character> enemyBoard, TextPlayer enemyPlayer)
+    public boolean doAttackingPhase(BoardTextView enemyView, Board<Character> enemyBoard, Player enemyPlayer)
             throws IOException {
         playOneTurn(enemyView, enemyBoard);
         if (enemyPlayer.hasLost()) {
@@ -172,20 +172,28 @@ public class TextPlayer {
     /**
      * A player loses when all ships on the board is sunk
      * 
-     * @return
+     * @return true if the player's have all sunk
      */
     public boolean hasLost() {
         return theBoard.hasAllSunk();
     }
 
+    /**
+     * The player play one turn
+     * @param enemyView enemy's board view
+     * @param enemyBoard enemy's board
+     * @throws IOException 
+     */
     public void playOneTurn(BoardTextView enemyView, Board<Character> enemyBoard) throws IOException {
         String myHeader = "Your ocean";
         String enemyHeader = "Enemy's ocean";
         out.print(view.displayMyBoardWithEnemyNextToIt(enemyView, myHeader, enemyHeader));
-        //out.print(promptAttack(enemyBoard));
         promptChoice(enemyBoard);
     }
-
+    /**
+     * Print the choice and read the choice
+     * @param enemyBoard    enemy's board
+     */
     public void promptChoice(Board<Character> enemyBoard){
         String prompt = 
         "Possible actions for Player "+name+":\n"+
@@ -198,12 +206,9 @@ public class TextPlayer {
                 switch (c) {
                     case 'M':
                         doOneMovement(); 
-                        out.println("Fake m");
                     break;
                     case 'S':
-                        doSonarScan(enemyBoard);  
-                        out.println("Fake s");
-  
+                        doSonarScan(enemyBoard);    
                     break;
                     case 'F':
                         out.println(promptAttack(enemyBoard));
@@ -214,7 +219,12 @@ public class TextPlayer {
             }
         }
     }
-    
+    /**
+     * Attack on enemy's board
+     * @param enemyBoard
+     * @return The resulat of attack
+     * @throws IOException
+     */
     public String promptAttack(Board<Character> enemyBoard) throws IOException {
         String prompt = "Player " + name + ",Please enter your coordinate to attack:";
         while (true) {
@@ -230,7 +240,10 @@ public class TextPlayer {
             }
         }
     }
-
+    /**
+     * Make one movement
+     * @throws IOException
+     */
     public void doOneMovement() throws IOException {
         if(moveUsage==0){
             throw new IllegalArgumentException();
@@ -251,6 +264,11 @@ public class TextPlayer {
         doOnePlacement(s.getName(),f);
     }
 
+    /**
+     * Do sonar scan
+     * @param enemyBoard sonar scan on enemy's board
+     * @throws IOException
+     */
     public void doSonarScan(Board<Character> enemyBoard) throws IOException{
         if(sonarUsage==0){
             throw new IllegalArgumentException();
