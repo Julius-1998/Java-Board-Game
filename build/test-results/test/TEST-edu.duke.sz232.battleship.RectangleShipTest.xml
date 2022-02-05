@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.duke.sz232.battleship.RectangleShipTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2022-02-05T05:06:56" hostname="ubuntu" time="0.02">
+<testsuite name="edu.duke.sz232.battleship.RectangleShipTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2022-02-05T18:49:52" hostname="ubuntu" time="0.045">
   <properties/>
-  <testcase name="testMakeCoords()" classname="edu.duke.sz232.battleship.RectangleShipTest" time="0.004"/>
-  <testcase name="testCheckCoordinateInThisShip()" classname="edu.duke.sz232.battleship.RectangleShipTest" time="0.006"/>
+  <testcase name="testMakeCoords()" classname="edu.duke.sz232.battleship.RectangleShipTest" time="0.002"/>
+  <testcase name="testCheckCoordinateInThisShip()" classname="edu.duke.sz232.battleship.RectangleShipTest" time="0.037"/>
   <testcase name="testRecordHitAt()" classname="edu.duke.sz232.battleship.RectangleShipTest" time="0.001"/>
   <testcase name="testIsSunk()" classname="edu.duke.sz232.battleship.RectangleShipTest" time="0.001"/>
   <testcase name="testIsHitAt()" classname="edu.duke.sz232.battleship.RectangleShipTest" time="0.001"/>

@@ -10,14 +10,14 @@ public class CoordinateTest {
     @Test
     public void test_column_and_rows() {
         Coordinate coordinate = new Coordinate(3, 5);
-        assertEquals(3, coordinate.getRow());
         assertEquals(5, coordinate.getColumn());
+        assertEquals(3, coordinate.getRow());
     }
-
     @Test
     public void test_equals() {
         Coordinate c1 = new Coordinate(1, 2);
         Coordinate c2 = new Coordinate(1, 2);
+
         Coordinate c3 = new Coordinate(1, 3);
         Coordinate c4 = new Coordinate(3, 2);
         assertEquals(c1, c1); // equals should be reflexsive

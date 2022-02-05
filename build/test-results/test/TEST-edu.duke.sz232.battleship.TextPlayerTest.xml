@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.duke.sz232.battleship.TextPlayerTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2022-02-05T05:06:56" hostname="ubuntu" time="0.016">
+<testsuite name="edu.duke.sz232.battleship.TextPlayerTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2022-02-05T18:49:52" hostname="ubuntu" time="0.031">
   <properties/>
-  <testcase name="test_read_EOF()" classname="edu.duke.sz232.battleship.TextPlayerTest" time="0.001"/>
-  <testcase name="test_read_null()" classname="edu.duke.sz232.battleship.TextPlayerTest" time="0.001"/>
-  <testcase name="test_do_one_placement()" classname="edu.duke.sz232.battleship.TextPlayerTest" time="0.01"/>
+  <testcase name="test_read_EOF()" classname="edu.duke.sz232.battleship.TextPlayerTest" time="0.003"/>
+  <testcase name="test_read_null()" classname="edu.duke.sz232.battleship.TextPlayerTest" time="0.004"/>
+  <testcase name="test_do_one_placement()" classname="edu.duke.sz232.battleship.TextPlayerTest" time="0.013"/>
   <testcase name="test_read_placement()" classname="edu.duke.sz232.battleship.TextPlayerTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

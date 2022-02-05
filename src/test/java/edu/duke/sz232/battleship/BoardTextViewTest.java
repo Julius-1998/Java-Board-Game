@@ -137,7 +137,7 @@ public class BoardTextViewTest {
         Board<Character> enemyBoard = new BattleShipBoard<Character>(10, 20,'X');
         BoardTextView myView = new BoardTextView(myBoard);
         BoardTextView enemyView = new BoardTextView(enemyBoard);
-        System.out.print(myView.displayMyBoardWithEnemyNextToIt(enemyView, "myHeader", "enemyHeader"));
+        //System.out.print(myView.displayMyBoardWithEnemyNextToIt(enemyView, "myHeader", "enemyHeader"));
         
     }
 }
