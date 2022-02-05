@@ -26,14 +26,9 @@ public class InBoundsRuleChecker&lt;T&gt; extends PlacementRuleChecker&lt;T&gt; 
 <span class="fc bfc" id="L26" title="All 2 branches covered.">            if (r &gt; theBoard.getHeight() - 1) {</span>
 <span class="fc" id="L27">                return &quot;That placement is invalid: the ship goes off the bottom of the board.&quot;;</span>
             }
-<span class="pc bpc" id="L29" title="1 of 2 branches missed.">            if (c &lt; 0) {</span>
-<span class="nc" id="L30">                return &quot;That placement is invalid: the ship goes off the left of the board.&quot;;</span>
-            }
-<span class="pc bpc" id="L32" title="1 of 2 branches missed.">            if (r &lt; 0) {</span>
-<span class="nc" id="L33">                return &quot;That placement is invalid: the ship goes off the top of the board.&quot;;</span>
-            }
-<span class="fc" id="L35">        }</span>
-<span class="fc" id="L36">        return null;</span>
+            
+<span class="fc" id="L30">        }</span>
+<span class="fc" id="L31">        return null;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

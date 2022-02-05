@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.duke.sz232.battleship.NoCollisionRuleCheckerTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-02-05T05:43:15" hostname="ubuntu" time="0.015">
+<testsuite name="edu.duke.sz232.battleship.NoCollisionRuleCheckerTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-02-05T05:51:07" hostname="ubuntu" time="0.003">
   <properties/>
-  <testcase name="testNoCollisionRuleChecker()" classname="edu.duke.sz232.battleship.NoCollisionRuleCheckerTest" time="0.013"/>
+  <testcase name="testNoCollisionRuleChecker()" classname="edu.duke.sz232.battleship.NoCollisionRuleCheckerTest" time="0.001"/>
   <testcase name="testMultipleRuleChecker()" classname="edu.duke.sz232.battleship.NoCollisionRuleCheckerTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

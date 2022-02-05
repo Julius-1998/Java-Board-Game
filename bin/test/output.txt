@@ -648,9 +648,9 @@ F Fire at a square
 M Move a ship to another square (1 remaining)
 S Sonar scan (1 remaining)
 Please Select the coordinate to scan
-Submarines occupy 4squares
-Destroyers occupy 3squares
-Battleships occupy 1squares
+Submarines occupy 4 squares
+Destroyers occupy 3 squares
+Battleships occupy 1 squares
 Computer is attacking
 Computer's ocean                       Enemy's ocean
   0|1|2|3|4|5|6|7|8|9                    0|1|2|3|4|5|6|7|8|9
