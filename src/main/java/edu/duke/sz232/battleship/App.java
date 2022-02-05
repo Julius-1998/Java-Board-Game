@@ -34,6 +34,16 @@ public class App {
         }
     }
 
+    /**
+     * This function initialize a player as computer player or human player
+     * @param name the player's name
+     * @param theBoard the player's board
+     * @param inputSource the inputSource of player
+     * @param out  the output of player
+     * @param factory ship factory
+     * @return the constructed player
+     * @throws IOException
+     */
     public static Player initPlayer(String name, Board<Character> theBoard, BufferedReader inputSource,
             PrintStream out,
             AbstractShipFactory<Character> factory) throws IOException {
@@ -42,8 +52,8 @@ public class App {
                 String prompt = "Player " + name + " is a:\n" +
                         "1. human player\n" +
                         "2. computer player\n" +
-                        "Please enter 1 or 2 to select\n";
-                System.out.println(prompt);
+                        "Please enter 1 or 2 to select";
+                out.println(prompt);
                 String type = inputSource.readLine();
                 if (type.equals("1")) {
                     out.println("Generating textPlayer");
