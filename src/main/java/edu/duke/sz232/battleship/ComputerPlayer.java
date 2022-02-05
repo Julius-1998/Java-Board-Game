@@ -11,6 +11,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+ * This class is the computer player
+ */
 class ComputerPlayer implements Player {
     private final Board<Character> theBoard;
     private final BoardTextView view;
@@ -26,6 +29,15 @@ class ComputerPlayer implements Player {
     List<Placement> placements;
     List<Coordinate> coordinates;
 
+    /**
+     * Construct the computer player
+     * 
+     * @param name        name of the player
+     * @param theBoard    board
+     * @param inputSource not used
+     * @param out         output to the screen
+     * @param factory     shipfactory
+     */
     public ComputerPlayer(String name, Board<Character> theBoard, BufferedReader inputSource, PrintStream out,
             AbstractShipFactory<Character> factory) {
         this.theBoard = theBoard;
@@ -44,6 +56,11 @@ class ComputerPlayer implements Player {
         this.coordinates = setCoordinates();
     }
 
+    /**
+     * Generate the set of placements of ships
+     * 
+     * @return set of placements
+     */
     public List<Placement> setPlacements() {
         List<Placement> placements = new LinkedList<>();
         placements.add(new Placement("a0v"));
@@ -59,6 +76,11 @@ class ComputerPlayer implements Player {
         return placements;
     }
 
+    /**
+     * Generate the set of coordinates to attack
+     * 
+     * @return set of coordinates
+     */
     public List<Coordinate> setCoordinates() {
         List<Coordinate> coordinates = new LinkedList<>();
         for (int i = 0; i < theBoard.getHeight(); i++) {
@@ -86,6 +108,10 @@ class ComputerPlayer implements Player {
 
     }
 
+    /**
+     * Do the placement phase
+     * Use the placement from generated placements
+     */
     @Override
     public void doPlacementPhase() throws IOException {
         out.print(view.displayMyOwnBoard());
@@ -108,6 +134,12 @@ class ComputerPlayer implements Player {
         }
     }
 
+    /**
+     * Do one placement
+     * @param shipName the name of the ship
+     * @param createFn the createfn of the ship
+     * @throws IOException
+     */
     public void doOnePlacement(String shipName, Function<Placement, Ship<Character>> createFn) throws IOException {
         while (true) {
             try {
@@ -127,6 +159,9 @@ class ComputerPlayer implements Player {
         }
     }
 
+    /**
+     * Perform the attacking phase
+     */
     @Override
     public boolean doAttackingPhase(BoardTextView enemyView, Board<Character> enemyBoard, Player enemyPlayer)
             throws IOException {
@@ -139,6 +174,12 @@ class ComputerPlayer implements Player {
         return true;
     }
 
+    /**
+     * play one turn but only do the attack phase
+     * @param enemyView
+     * @param enemyBoard
+     * @throws IOException
+     */
     public void playOneTurn(BoardTextView enemyView, Board<Character> enemyBoard) throws IOException {
         String myHeader = "Computer's ocean";
         String enemyHeader = "Enemy's ocean";
@@ -146,6 +187,11 @@ class ComputerPlayer implements Player {
         out.print(promptAttack(enemyBoard));
     }
 
+    /**
+     * Perform the action of attack
+     * @param enemyBoard
+     * @return
+     */
     public String promptAttack(Board<Character> enemyBoard) {
         Coordinate c = coordinates.remove(0);
         Ship<Character> s = enemyBoard.fireAt(c);

@@ -10,6 +10,14 @@ public class IrregularShip<T> extends BasicShip<T> {
         return this.name;
     }
 
+    /**
+     * generate irregular ship
+     * @param name the name of the ship
+     * @param upperLeft the upperleft corner of the ship
+     * @param orientation the orientation of ship, ULDR
+     * @param myDisplayInfo the displayInfo of ship
+     * @param enemyDisplayInfo the enemy's info of ship
+     */
     public IrregularShip(String name, Coordinate upperLeft, char orientation, 
     ShipDisplayInfo<T> myDisplayInfo, ShipDisplayInfo<T> enemyDisplayInfo) {      
         super(makeCoords(upperLeft, name, orientation), myDisplayInfo, enemyDisplayInfo);

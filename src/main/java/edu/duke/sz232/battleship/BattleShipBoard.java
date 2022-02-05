@@ -181,7 +181,7 @@ public class BattleShipBoard<T> implements Board<T> {
     /**
      * Check if the place has ship;
      * 
-     * @param where
+     * @param where the place being get
      * @return null if the place is not a ship
      */
     public Ship<T> getShipAtCoordinate(Coordinate where) {
@@ -193,6 +193,11 @@ public class BattleShipBoard<T> implements Board<T> {
         return null;
     }
 
+    /**
+     * Do the sonar scan of the given coordinate
+     * @param where the place being scanned
+     * @return the map of ship's collection of name and count
+     */
     public HashMap<String, Integer> sonar(Coordinate where) throws IllegalArgumentException {
         if (!isValid(where)) {
             throw new IllegalArgumentException("The coordinate is not on the board!");
