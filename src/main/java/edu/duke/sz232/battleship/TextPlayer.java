@@ -47,9 +47,9 @@ public class TextPlayer implements Player{
     }
 
     protected void setupShipCreationList() {
-        // shipsToPlace.addAll(Collections.nCopies(2, "Submarine"));
-        // shipsToPlace.addAll(Collections.nCopies(3, "Destroyer"));
-        // shipsToPlace.addAll(Collections.nCopies(3, "Battleship"));
+        shipsToPlace.addAll(Collections.nCopies(2, "Submarine"));
+        shipsToPlace.addAll(Collections.nCopies(3, "Destroyer"));
+        shipsToPlace.addAll(Collections.nCopies(3, "Battleship"));
         shipsToPlace.addAll(Collections.nCopies(2, "Carrier"));
 
     }
