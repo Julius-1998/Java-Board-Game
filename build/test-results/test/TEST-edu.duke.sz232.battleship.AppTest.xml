@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.duke.sz232.battleship.AppTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-02-05T05:51:06" hostname="ubuntu" time="0.632">
+<testsuite name="edu.duke.sz232.battleship.AppTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2022-02-06T01:32:10" hostname="ubuntu" time="0.504">
   <properties/>
-  <testcase name="test_main()" classname="edu.duke.sz232.battleship.AppTest" time="0.43"/>
-  <testcase name="test_Computer_player()" classname="edu.duke.sz232.battleship.AppTest" time="0.2"/>
+  <testcase name="test_lose()" classname="edu.duke.sz232.battleship.AppTest" time="0.266"/>
+  <testcase name="test_main()" classname="edu.duke.sz232.battleship.AppTest" time="0.101"/>
+  <testcase name="test_not_valid_input()" classname="edu.duke.sz232.battleship.AppTest" time="0.073"/>
+  <testcase name="test_Computer_player()" classname="edu.duke.sz232.battleship.AppTest" time="0.058"/>
+  <testcase name="test_app_init()" classname="edu.duke.sz232.battleship.AppTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

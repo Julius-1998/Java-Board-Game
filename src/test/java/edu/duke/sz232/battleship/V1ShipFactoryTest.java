@@ -1,6 +1,7 @@
 package edu.duke.sz232.battleship;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -49,6 +50,12 @@ public class V1ShipFactoryTest {
             assertEquals(expectedLetter, testShip.getDisplayInfoAt(coordinate,true));
         }
         assertEquals(expectedName, testShip.getName());
+    }
+
+    @Test
+    void test_out_of_boundary(){
+        V1ShipFactory factory = new V1ShipFactory();
+        assertThrows(IllegalArgumentException.class, ()->factory.createRectangleShip(new Placement(new Coordinate("A0"), 'x'), 10, 10, 'l', "test"));
     }
 
   

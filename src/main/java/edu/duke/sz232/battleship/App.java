@@ -36,11 +36,12 @@ public class App {
 
     /**
      * This function initialize a player as computer player or human player
-     * @param name the player's name
-     * @param theBoard the player's board
+     * 
+     * @param name        the player's name
+     * @param theBoard    the player's board
      * @param inputSource the inputSource of player
-     * @param out  the output of player
-     * @param factory ship factory
+     * @param out         the output of player
+     * @param factory     ship factory
      * @return the constructed player
      * @throws IOException
      */
@@ -61,12 +62,11 @@ public class App {
                 } else if (type.equals("2")) {
                     out.println("Generating ComputerPlayer");
                     return new ComputerPlayer(name, theBoard, inputSource, out, factory);
-                }
-                if (!type.equals("1") || type.equals("2")) {
+                } else {
                     throw new IllegalArgumentException();
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                out.println("Please enter a valid choice");
             }
         }
     }
@@ -77,7 +77,7 @@ public class App {
         player2.doPlacementPhase();
     }
 
-    public App(Player p1,Player p2){
+    public App(Player p1, Player p2) {
         player1 = p1;
         player2 = p2;
     }

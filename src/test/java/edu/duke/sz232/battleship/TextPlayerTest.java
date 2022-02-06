@@ -41,12 +41,11 @@ public class TextPlayerTest {
         LinkedList<Ship<Character>> shipList = new LinkedList<>();
         V2ShipFactory v2ShipFactory = new V2ShipFactory();
         Ship<Character> s1 = v2ShipFactory.createIrregularShip(new Placement("A0l"), 'c', "Carrier");
-        Ship<Character> s2 = v2ShipFactory.createRectangleShip(new Placement("c0v"), 1,2,'s', "Submarines");
+        Ship<Character> s2 = v2ShipFactory.createRectangleShip(new Placement("c0v"), 1, 2, 's', "Submarines");
 
         shipList.add(s1);
         shipList.add(s2);
-        String expectedBody = 
-                "A  | |c|c|c A\n" +
+        String expectedBody = "A  | |c|c|c A\n" +
                 "B c|c|c|c|  B\n" +
                 "C s| | | |  C\n" +
                 "D s| | | |  D\n" +
@@ -67,9 +66,9 @@ public class TextPlayerTest {
         try {
             player.doSonarScan(b1);
         } catch (IOException e) {
-        
+
         }
-        
+
     }
 
     @Test
@@ -97,7 +96,52 @@ public class TextPlayerTest {
         expected[2] = new Placement(new Coordinate(0, 4), 'V');
         for (int i = 0; i < expected.length; i++) {
             assertThrows(EOFException.class, () -> player.readPlacement(prompt));
+            assertThrows(EOFException.class, () -> player.readChoice(prompt));
+            assertThrows(EOFException.class, () -> player.readCoordinate(prompt));
         }
+    }
+
+    @Test
+    void test_read_choice() throws IOException {
+        StringReader sr1 = new StringReader("FM");
+        StringReader sr2 = new StringReader("a");
+        StringReader sr3 = new StringReader("b");
+        StringReader sr4 = new StringReader("c");
+
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(bytes, true);
+        Board<Character> b = new BattleShipBoard<Character>(10, 20, 'X');
+        TextPlayer player1 = new TextPlayer("A", b, new BufferedReader(sr1), ps, new V1ShipFactory());
+        TextPlayer player2 = new TextPlayer("A", b, new BufferedReader(sr2), ps, new V1ShipFactory());
+        TextPlayer player3 = new TextPlayer("A", b, new BufferedReader(sr3), ps, new V1ShipFactory());
+        TextPlayer player4 = new TextPlayer("A", b, new BufferedReader(sr4), ps, new V1ShipFactory());
+
+        String prompt = "Please enter a location for a ship:";
+        assertThrows(IllegalArgumentException.class, () -> player1.readChoice(prompt));
+        assertThrows(IllegalArgumentException.class, () -> player2.readChoice(prompt));
+        assertThrows(IllegalArgumentException.class, () -> player3.readChoice(prompt));
+        assertThrows(IllegalArgumentException.class, () -> player4.readChoice(prompt));
+
+    }
+
+    @Test
+    public void test_attack() throws IOException {
+        StringReader sr1 = new StringReader("FM\nA1\n");
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(bytes, true);
+        Board<Character> b = new BattleShipBoard<Character>(10, 20, 'X');
+        TextPlayer player1 = new TextPlayer("A", b, new BufferedReader(sr1), ps, new V1ShipFactory());
+        player1.promptAttack(new BattleShipBoard<Character>(10, 20, 'X'));
+    }
+
+    @Test
+    public void test_sonar() throws IOException {
+        StringReader sr1 = new StringReader("FM\nA1\n");
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(bytes, true);
+        Board<Character> b = new BattleShipBoard<Character>(10, 20, 'X');
+        TextPlayer player1 = new TextPlayer("A", b, new BufferedReader(sr1), ps, new V1ShipFactory());
+        player1.doSonarScan(new BattleShipBoard<Character>(10, 20, 'X'));
     }
 
     private TextPlayer createTextPlayer(int w, int h, String inputData, ByteArrayOutputStream bytes) {

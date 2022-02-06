@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-public class TextPlayer implements Player{
+public class TextPlayer implements Player {
     private final Board<Character> theBoard;
     private final BoardTextView view;
     private final BufferedReader inputReader;
@@ -21,7 +21,8 @@ public class TextPlayer implements Player{
     final ArrayList<String> shipsToPlace;
     final HashMap<String, Function<Placement, Ship<Character>>> shipCreationFns;
     int sonarUsage;
-    int moveUsage; 
+    int moveUsage;
+
     public TextPlayer(String name, Board<Character> theBoard, BufferedReader inputSource, PrintStream out,
             AbstractShipFactory<Character> factory) {
         this.theBoard = theBoard;
@@ -86,13 +87,13 @@ public class TextPlayer implements Player{
         return new Coordinate(s);
     }
 
-    public char readChoice(String prompt) throws IOException{
+    public char readChoice(String prompt) throws IOException {
         out.println(prompt);
-        String s= inputReader.readLine();
+        String s = inputReader.readLine();
         if (s == null) {
             throw new EOFException();
         }
-        if (s.length()!=1||(s.charAt(0)!='F'&&s.charAt(0)!='M'&&s.charAt(0)!='S')){
+        if (s.length() != 1 || (s.charAt(0) != 'F' && s.charAt(0) != 'M' && s.charAt(0) != 'S')) {
             throw new IllegalArgumentException();
         }
         return s.charAt(0);
@@ -180,9 +181,10 @@ public class TextPlayer implements Player{
 
     /**
      * The player play one turn
-     * @param enemyView enemy's board view
+     * 
+     * @param enemyView  enemy's board view
      * @param enemyBoard enemy's board
-     * @throws IOException 
+     * @throws IOException
      */
     public void playOneTurn(BoardTextView enemyView, Board<Character> enemyBoard) throws IOException {
         String myHeader = "Your ocean";
@@ -190,37 +192,37 @@ public class TextPlayer implements Player{
         out.print(view.displayMyBoardWithEnemyNextToIt(enemyView, myHeader, enemyHeader));
         promptChoice(enemyBoard);
     }
+
     /**
      * Print the choice and read the choice
-     * @param enemyBoard    enemy's board
+     * 
+     * @param enemyBoard enemy's board
      */
-    public void promptChoice(Board<Character> enemyBoard){
-        String prompt = 
-        "Possible actions for Player "+name+":\n"+
-        "F Fire at a square\n"+
-        "M Move a ship to another square ("+moveUsage+" remaining)\n"+
-        "S Sonar scan ("+sonarUsage+" remaining)";
-        while(true){
-            try{
+    public void promptChoice(Board<Character> enemyBoard) {
+        String prompt = "Possible actions for Player " + name + ":\n" +
+                "F Fire at a square\n" +
+                "M Move a ship to another square (" + moveUsage + " remaining)\n" +
+                "S Sonar scan (" + sonarUsage + " remaining)";
+        while (true) {
+            try {
                 char c = readChoice(prompt);
-                switch (c) {
-                    case 'M':
-                        doOneMovement(); 
-                    break;
-                    case 'S':
-                        doSonarScan(enemyBoard);    
-                    break;
-                    case 'F':
-                        out.println(promptAttack(enemyBoard));
+                if (c == 'M') {
+                    doOneMovement();
+                } else if (c == 'S') {
+                    doSonarScan(enemyBoard);
+                } else {
+                    out.println(promptAttack(enemyBoard));
                 }
                 return;
-            }catch(Exception e){
+            } catch (Exception e) {
                 out.println("Invalid input or choice have used up!");
             }
         }
     }
+
     /**
      * Attack on enemy's board
+     * 
      * @param enemyBoard
      * @return The resulat of attack
      * @throws IOException
@@ -240,14 +242,16 @@ public class TextPlayer implements Player{
             }
         }
     }
+
     /**
      * Make one movement
+     * 
      * @throws IOException
      */
     public void doOneMovement() throws IOException {
-        if(moveUsage==0){
+        if (moveUsage == 0) {
             throw new IllegalArgumentException();
-        }else{
+        } else {
             moveUsage--;
         }
         Ship<Character> s;
@@ -261,21 +265,22 @@ public class TextPlayer implements Player{
             }
         }
         Function<Placement, Ship<Character>> f = shipCreationFns.get(s.getName());
-        doOnePlacement(s.getName(),f);
+        doOnePlacement(s.getName(), f);
     }
 
     /**
      * Do sonar scan
+     * 
      * @param enemyBoard sonar scan on enemy's board
      * @throws IOException
      */
-    public void doSonarScan(Board<Character> enemyBoard) throws IOException{
-        if(sonarUsage==0){
+    public void doSonarScan(Board<Character> enemyBoard) throws IOException {
+        if (sonarUsage == 0) {
             throw new IllegalArgumentException();
-        }else{
+        } else {
             sonarUsage--;
         }
-        HashMap<String,Integer> map;
+        HashMap<String, Integer> map;
         while (true) {
             try {
                 Coordinate c = readCoordinate("Please Select the coordinate to scan");
@@ -285,9 +290,9 @@ public class TextPlayer implements Player{
                 out.print("Invalid input coordinate!");
             }
         }
-        for (Map.Entry<String,Integer> entry : map.entrySet()) {
-            out.println(entry.getKey()+"s occupy "+entry.getValue().toString()+" squares");
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            out.println(entry.getKey() + "s occupy " + entry.getValue().toString() + " squares");
         }
     }
-    
+
 }

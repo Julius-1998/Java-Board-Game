@@ -102,5 +102,20 @@ public class BattleShipBoardTest {
     }
   }
 
+
+  @Test
+  public void test_remove_ship(){
+    BattleShipBoard<Character> b1 = new BattleShipBoard<>(20, 9,'X');
+    V1ShipFactory shipFactory = new V1ShipFactory();
+    Ship<Character> s1 = shipFactory.makeSubmarine(new Placement("A4V"));
+    b1.tryAddShip(s1);
+    Coordinate c1 = new Coordinate("A9");
+    assertThrows(IllegalArgumentException.class, ()->b1.removeShip(c1));
+    assertThrows(IllegalArgumentException.class, ()->b1.sonar(c1));
+
+    Coordinate c2 = new Coordinate("A8");
+    assertThrows(IllegalArgumentException.class, ()->b1.removeShip(c2));
+
+  }
 }
 

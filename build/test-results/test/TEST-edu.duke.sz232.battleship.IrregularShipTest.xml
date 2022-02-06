@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.duke.sz232.battleship.IrregularShipTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-02-05T05:51:07" hostname="ubuntu" time="0.029">
+<testsuite name="edu.duke.sz232.battleship.IrregularShipTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-02-06T01:32:10" hostname="ubuntu" time="0.013">
   <properties/>
-  <testcase name="place_battleship_test_right()" classname="edu.duke.sz232.battleship.IrregularShipTest" time="0.001"/>
+  <testcase name="place_battleship_test_right()" classname="edu.duke.sz232.battleship.IrregularShipTest" time="0.002"/>
   <testcase name="place_carrier_test_right()" classname="edu.duke.sz232.battleship.IrregularShipTest" time="0.001"/>
-  <testcase name="place_carrier_test_up()" classname="edu.duke.sz232.battleship.IrregularShipTest" time="0.001"/>
-  <testcase name="place_battleship_test_down()" classname="edu.duke.sz232.battleship.IrregularShipTest" time="0.0"/>
-  <testcase name="place_battleship_test_left()" classname="edu.duke.sz232.battleship.IrregularShipTest" time="0.0"/>
+  <testcase name="place_carrier_test_up()" classname="edu.duke.sz232.battleship.IrregularShipTest" time="0.0"/>
+  <testcase name="place_battleship_test_down()" classname="edu.duke.sz232.battleship.IrregularShipTest" time="0.001"/>
+  <testcase name="place_battleship_test_left()" classname="edu.duke.sz232.battleship.IrregularShipTest" time="0.001"/>
   <testcase name="place_carrier_test_down()" classname="edu.duke.sz232.battleship.IrregularShipTest" time="0.001"/>
-  <testcase name="place_carrier_test_left()" classname="edu.duke.sz232.battleship.IrregularShipTest" time="0.002"/>
+  <testcase name="place_carrier_test_left()" classname="edu.duke.sz232.battleship.IrregularShipTest" time="0.001"/>
   <testcase name="place_battleship_test_up()" classname="edu.duke.sz232.battleship.IrregularShipTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

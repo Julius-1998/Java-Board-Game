@@ -136,26 +136,19 @@ class ComputerPlayer implements Player {
 
     /**
      * Do one placement
+     * 
      * @param shipName the name of the ship
      * @param createFn the createfn of the ship
      * @throws IOException
      */
     public void doOnePlacement(String shipName, Function<Placement, Ship<Character>> createFn) throws IOException {
         while (true) {
-            try {
-                out.println("Player " + name + " where do you want to place a " + shipName + "?");
-                Placement p = placements.remove(0);
-                Ship<Character> s = createFn.apply(p);
-                String err = theBoard.tryAddShip(s);
-                if (err != null) {
-                    out.println(err);
-                } else {
-                    out.print(view.displayMyOwnBoard());
-                    break;
-                }
-            } catch (IllegalArgumentException e) {
-                out.println("Invalid placement String");
-            }
+            out.println("Player " + name + " where do you want to place a " + shipName + "?");
+            Placement p = placements.remove(0);
+            Ship<Character> s = createFn.apply(p);
+            theBoard.tryAddShip(s);
+            out.print(view.displayMyOwnBoard());
+            break;
         }
     }
 
@@ -176,6 +169,7 @@ class ComputerPlayer implements Player {
 
     /**
      * play one turn but only do the attack phase
+     * 
      * @param enemyView
      * @param enemyBoard
      * @throws IOException
@@ -189,6 +183,7 @@ class ComputerPlayer implements Player {
 
     /**
      * Perform the action of attack
+     * 
      * @param enemyBoard
      * @return
      */

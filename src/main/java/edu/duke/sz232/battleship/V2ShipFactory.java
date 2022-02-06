@@ -31,9 +31,6 @@ public class V2ShipFactory implements AbstractShipFactory<Character> {
      */
     protected Ship<Character> createIrregularShip(Placement where, char letter, String name) {
         char c = where.getOrientation();
-        if (c != 'U' && c != 'R' && c != 'D' && c != 'L'){
-            throw new IllegalArgumentException();
-        } 
         return new IrregularShip<Character>(name, where.getWhere(),c, letter, 'x');
 
     }
@@ -49,9 +46,6 @@ public class V2ShipFactory implements AbstractShipFactory<Character> {
      */
     protected Ship<Character> createRectangleShip(Placement where, int w, int h, char letter, String name) {
         char c = where.getOrientation();
-        if (c != 'H' && c != 'V') {
-            throw new IllegalArgumentException();
-        } 
         if (c == 'H') {
             int temp = h;
             h = w;
